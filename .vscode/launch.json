@@ -1,0 +1,11 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "debug-ex",
+      "request": "launch",
+      "type": "dart",
+      "args": ["--debug"]
+    }
+  ]
+}

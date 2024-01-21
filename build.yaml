@@ -1,0 +1,12 @@
+targets:
+  $default:
+    builders:
+      freezed:
+        generate_for:
+          include:
+            - lib/model/dto/*.dart
+            - lib/model/dto/**/*.dart
+            - lib/model/entities/*.dart
+            - lib/model/entities/**/*.dart
+          exclude:
+            - example/**
