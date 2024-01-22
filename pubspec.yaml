@@ -29,6 +29,10 @@ dependencies:
 
   uuid: ^4.3.2
 
+  # animation
+  align_positioned: ^4.0.0
+  matrix4_transform: ^3.0.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

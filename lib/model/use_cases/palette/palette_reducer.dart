@@ -23,7 +23,7 @@ StoryEditorReducer get reducer => (PaletteState state, PaletteAction action) {
       } else if (action is MoveRenderItem) {
         if (state.isShowingHistory) {
           // 履歴の表示中にアイテムを移動する場合
-          final updatedRenderItems = state.showRenderItems
+          final updatedRenderItems = state.renderItems
               .map(
                 (item) => item.uuid == action.renderItem.uuid
                     ? action.renderItem
@@ -42,10 +42,9 @@ StoryEditorReducer get reducer => (PaletteState state, PaletteAction action) {
             currentHistoryIndex: 0, // 最新の状態に戻る
           );
         } else {
-          // 履歴を表示していない場合の通常の処理
           return state.copyWith(
             historyRenderItems: [
-              state.latestRenderItems
+              state.historyRenderItems[state.currentHistoryIndex]
                   .map(
                     (item) => item.uuid == action.renderItem.uuid
                         ? action.renderItem
@@ -60,7 +59,7 @@ StoryEditorReducer get reducer => (PaletteState state, PaletteAction action) {
       } else if (action is RemoveRenderItem) {
         return state.copyWith(
           historyRenderItems: [
-            state.latestRenderItems
+            state.renderItems
                 .where((item) => item.uuid != action.renderItemId)
                 .toList(),
             ...state.historyRenderItems,
@@ -81,11 +80,10 @@ StoryEditorReducer get reducer => (PaletteState state, PaletteAction action) {
         }
       } else if (action is ResetAction) {
         return PaletteState(
-          historyRenderItems: [state.latestRenderItems],
+          historyRenderItems: [state.historyRenderItems.first],
           isEditingText: false,
           currentHistoryIndex: 0,
         );
       }
-
       return state;
     };

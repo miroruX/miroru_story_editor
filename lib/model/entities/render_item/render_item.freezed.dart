@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$RenderItem<T extends DecorationItem> {
-  String? get uuid => throw _privateConstructorUsedError;
+  String get uuid => throw _privateConstructorUsedError;
   Matrix4 get transform => throw _privateConstructorUsedError;
   T get data => throw _privateConstructorUsedError;
   int get order => throw _privateConstructorUsedError;
@@ -32,7 +32,7 @@ abstract class $RenderItemCopyWith<T extends DecorationItem, $Res> {
           RenderItem<T> value, $Res Function(RenderItem<T>) then) =
       _$RenderItemCopyWithImpl<T, $Res, RenderItem<T>>;
   @useResult
-  $Res call({String? uuid, Matrix4 transform, T data, int order});
+  $Res call({String uuid, Matrix4 transform, T data, int order});
 }
 
 /// @nodoc
@@ -48,16 +48,16 @@ class _$RenderItemCopyWithImpl<T extends DecorationItem, $Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? uuid = freezed,
+    Object? uuid = null,
     Object? transform = null,
     Object? data = null,
     Object? order = null,
   }) {
     return _then(_value.copyWith(
-      uuid: freezed == uuid
+      uuid: null == uuid
           ? _value.uuid
           : uuid // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       transform: null == transform
           ? _value.transform
           : transform // ignore: cast_nullable_to_non_nullable
@@ -82,7 +82,7 @@ abstract class _$$RenderItemImplCopyWith<T extends DecorationItem, $Res>
       __$$RenderItemImplCopyWithImpl<T, $Res>;
   @override
   @useResult
-  $Res call({String? uuid, Matrix4 transform, T data, int order});
+  $Res call({String uuid, Matrix4 transform, T data, int order});
 }
 
 /// @nodoc
@@ -96,16 +96,16 @@ class __$$RenderItemImplCopyWithImpl<T extends DecorationItem, $Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? uuid = freezed,
+    Object? uuid = null,
     Object? transform = null,
     Object? data = null,
     Object? order = null,
   }) {
     return _then(_$RenderItemImpl<T>(
-      uuid: freezed == uuid
+      uuid: null == uuid
           ? _value.uuid
           : uuid // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       transform: null == transform
           ? _value.transform
           : transform // ignore: cast_nullable_to_non_nullable
@@ -126,14 +126,14 @@ class __$$RenderItemImplCopyWithImpl<T extends DecorationItem, $Res>
 
 class _$RenderItemImpl<T extends DecorationItem> extends _RenderItem<T> {
   const _$RenderItemImpl(
-      {this.uuid,
+      {required this.uuid,
       required this.transform,
       required this.data,
       required this.order})
       : super._();
 
   @override
-  final String? uuid;
+  final String uuid;
   @override
   final Matrix4 transform;
   @override
@@ -171,14 +171,14 @@ class _$RenderItemImpl<T extends DecorationItem> extends _RenderItem<T> {
 
 abstract class _RenderItem<T extends DecorationItem> extends RenderItem<T> {
   const factory _RenderItem(
-      {final String? uuid,
+      {required final String uuid,
       required final Matrix4 transform,
       required final T data,
       required final int order}) = _$RenderItemImpl<T>;
   const _RenderItem._() : super._();
 
   @override
-  String? get uuid;
+  String get uuid;
   @override
   Matrix4 get transform;
   @override

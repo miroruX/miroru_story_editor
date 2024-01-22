@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:miroru_story_editor/extensions/context_extension.dart';
 import 'package:miroru_story_editor/model/dto/action_icon_button/action_icon_button_dto.dart';
 import 'package:miroru_story_editor/model/dto/leading_icon_button/leading_icon_button_dto.dart';
 import 'package:miroru_story_editor/model/entities/decorations/background_image/background_image.dart';
@@ -10,9 +9,10 @@ import 'package:miroru_story_editor/model/entities/palette_state/palette_state.d
 import 'package:miroru_story_editor/model/entities/render_item/render_item.dart';
 import 'package:miroru_story_editor/model/use_cases/palette/palette_actions.dart';
 import 'package:miroru_story_editor/model/use_cases/palette/palette_reducer.dart';
-import 'package:miroru_story_editor/presentation/custom_hooks/use_global_key.dart';
-import 'package:miroru_story_editor/presentation/views/background_image_view.dart';
+import 'package:miroru_story_editor/presentation/views/background_image/background_image_view.dart';
+import 'package:miroru_story_editor/presentation/views/decoration/common/decoration_view.dart';
 import 'package:miroru_story_editor/presentation/views/header_view.dart';
+import 'package:uuid/uuid.dart';
 
 class PaletteView extends HookWidget {
   const PaletteView({
@@ -28,8 +28,6 @@ class PaletteView extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final headerKey = useGlobalKey();
-
     final paletteReducer = useReducer<PaletteState, PaletteAction>(
       reducer,
       initialState: PaletteState(
@@ -40,6 +38,7 @@ class PaletteView extends HookWidget {
               data: DecorationBackgroundImage(
                 backgroundImageFile: backgroundImageFile,
               ),
+              uuid: const Uuid().v4(),
               order: 0,
             ),
           ]
@@ -56,30 +55,9 @@ class PaletteView extends HookWidget {
         color: Colors.white,
         child: Stack(
           children: [
-            if (paletteReducer.state.showRenderItems.isNotEmpty) ...[
-              BackgroundImageView(
-                onRenderChange: (m, t, s, r) {
-                  // 先に変更の通知を行う
-                  if (!paletteReducer.state.isShowingHistory) {
-                    context.showSnackBar('変更を保存しました。');
-                  }
-                  paletteReducer.dispatch(
-                    MoveRenderItem(
-                      RenderItem<DecorationBackgroundImage>(
-                        transform: m,
-                        data: DecorationBackgroundImage(
-                          backgroundImageFile: backgroundImageFile,
-                        ),
-                        order: 0,
-                      ),
-                    ),
-                  );
-                },
-                paletteState: paletteReducer.state,
-              ),
-            ],
+            BackgroundImageView(paletteReducer: paletteReducer),
+            DecorationWidget(paletteReducer: paletteReducer),
             Align(
-              key: headerKey,
               alignment: Alignment.topCenter,
               child: Padding(
                 padding: const EdgeInsets.symmetric(
