@@ -11,6 +11,7 @@ import 'package:miroru_story_editor/model/use_cases/palette/palette_actions.dart
 import 'package:miroru_story_editor/model/use_cases/palette/palette_reducer.dart';
 import 'package:miroru_story_editor/presentation/views/background_image/background_image_view.dart';
 import 'package:miroru_story_editor/presentation/views/decoration/common/decoration_view.dart';
+import 'package:miroru_story_editor/presentation/views/decoration/common/text_editing_view.dart';
 import 'package:miroru_story_editor/presentation/views/header_view.dart';
 import 'package:uuid/uuid.dart';
 
@@ -55,7 +56,17 @@ class PaletteView extends HookWidget {
           children: [
             BackgroundImageView(paletteReducer: paletteReducer),
             DecorationWidget(paletteReducer: paletteReducer),
-            if (!paletteReducer.state.isEditingText) ...[
+            if (paletteReducer.state.isEditingText) ...[
+              Positioned.fill(
+                child: Container(
+                  color: Colors.black.withOpacity(0.7),
+                ),
+              ),
+              TextEditingView(
+                paletteReducer: paletteReducer,
+              ),
+            ],
+            if (paletteReducer.state.isShowHeader) ...[
               Align(
                 alignment: Alignment.topCenter,
                 child: Padding(

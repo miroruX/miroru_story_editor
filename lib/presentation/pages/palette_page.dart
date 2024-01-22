@@ -42,6 +42,7 @@ class PalettePage extends HookWidget {
     );
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Column(
           children: [

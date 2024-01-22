@@ -99,13 +99,26 @@ ThemeData getInstagramThemeDark() {
       style: TextButton.styleFrom(
         textStyle: base.textTheme.bodyMedium?.copyWith(
           fontSize: 12,
-          fontWeight: FontWeight.normal,
+          fontWeight: FontWeight.bold,
           letterSpacing: 1.5,
-          decoration: TextDecoration.underline,
         ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
         ),
+      ),
+    ),
+    inputDecorationTheme: const InputDecorationTheme(
+      fillColor: Colors.black,
+      filled: true,
+      contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.all(Radius.circular(12)),
+        borderSide: BorderSide.none,
+      ),
+      hintStyle: TextStyle(
+        fontWeight: FontWeight.bold,
+        fontSize: 16,
+        letterSpacing: 10,
       ),
     ),
     pageTransitionsTheme: const PageTransitionsTheme(

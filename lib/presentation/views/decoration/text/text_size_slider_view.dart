@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-class FontSizeSliderView extends HookWidget {
-  const FontSizeSliderView({
+class TextSizeSliderView extends HookWidget {
+  const TextSizeSliderView({
     super.key,
     required this.onChangeFontSize,
   });
@@ -11,7 +11,7 @@ class FontSizeSliderView extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final sliderValue = useState<double>(50);
+    final sliderValue = useState<double>(30);
     return ConstrainedBox(
       constraints: const BoxConstraints(
         maxWidth: 50,
@@ -27,7 +27,8 @@ class FontSizeSliderView extends HookWidget {
             ),
           ),
           child: Slider(
-            max: 100,
+            max: 40,
+            min: 12,
             value: sliderValue.value,
             onChanged: (value) {
               sliderValue.value = value;

@@ -17,6 +17,7 @@ dependencies:
 
   # icon
   ionicons: ^0.2.2
+  font_awesome_flutter: ^10.6.0
 
   # font
   google_fonts: ^6.1.0
@@ -26,6 +27,8 @@ dependencies:
 
   # state management
   flutter_hooks: ^0.20.4
+
+  gap: any
 
   uuid: ^4.3.2
 

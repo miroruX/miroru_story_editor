@@ -60,7 +60,9 @@ class HeaderView extends HookWidget {
           ),
         ),
         IconButton(
-          onPressed: () {},
+          onPressed: () {
+            paletteReducer.dispatch(ChangeEditText(true));
+          },
           style: actionIconButton.style,
           icon: Icon(
             actionIconButton.font,
