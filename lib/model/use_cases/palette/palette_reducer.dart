@@ -6,9 +6,13 @@ import 'package:uuid/uuid.dart';
 typedef StoryEditorReducer = Reducer<PaletteState, PaletteAction>;
 
 StoryEditorReducer get reducer => (PaletteState state, PaletteAction action) {
-      if (action is IsEditText) {
+      if (action is ChangeEditText) {
         return state.copyWith(
           isEditingText: !state.isEditingText,
+        );
+      } else if (action is ChangeMovingItem) {
+        return state.copyWith(
+          isMovingItem: !state.isMovingItem,
         );
       } else if (action is AddRenderItem) {
         final uuid = const Uuid().v4();
@@ -81,8 +85,6 @@ StoryEditorReducer get reducer => (PaletteState state, PaletteAction action) {
       } else if (action is ResetAction) {
         return PaletteState(
           historyRenderItems: [state.historyRenderItems.first],
-          isEditingText: false,
-          currentHistoryIndex: 0,
         );
       }
       return state;

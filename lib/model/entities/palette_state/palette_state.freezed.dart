@@ -19,6 +19,7 @@ mixin _$PaletteState {
   List<List<RenderItem<DecorationItem>>> get historyRenderItems =>
       throw _privateConstructorUsedError;
   bool get isEditingText => throw _privateConstructorUsedError;
+  bool get isMovingItem => throw _privateConstructorUsedError;
   int get currentHistoryIndex => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -35,6 +36,7 @@ abstract class $PaletteStateCopyWith<$Res> {
   $Res call(
       {List<List<RenderItem<DecorationItem>>> historyRenderItems,
       bool isEditingText,
+      bool isMovingItem,
       int currentHistoryIndex});
 }
 
@@ -53,6 +55,7 @@ class _$PaletteStateCopyWithImpl<$Res, $Val extends PaletteState>
   $Res call({
     Object? historyRenderItems = null,
     Object? isEditingText = null,
+    Object? isMovingItem = null,
     Object? currentHistoryIndex = null,
   }) {
     return _then(_value.copyWith(
@@ -63,6 +66,10 @@ class _$PaletteStateCopyWithImpl<$Res, $Val extends PaletteState>
       isEditingText: null == isEditingText
           ? _value.isEditingText
           : isEditingText // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isMovingItem: null == isMovingItem
+          ? _value.isMovingItem
+          : isMovingItem // ignore: cast_nullable_to_non_nullable
               as bool,
       currentHistoryIndex: null == currentHistoryIndex
           ? _value.currentHistoryIndex
@@ -83,6 +90,7 @@ abstract class _$$PaletteStateImplCopyWith<$Res>
   $Res call(
       {List<List<RenderItem<DecorationItem>>> historyRenderItems,
       bool isEditingText,
+      bool isMovingItem,
       int currentHistoryIndex});
 }
 
@@ -99,6 +107,7 @@ class __$$PaletteStateImplCopyWithImpl<$Res>
   $Res call({
     Object? historyRenderItems = null,
     Object? isEditingText = null,
+    Object? isMovingItem = null,
     Object? currentHistoryIndex = null,
   }) {
     return _then(_$PaletteStateImpl(
@@ -109,6 +118,10 @@ class __$$PaletteStateImplCopyWithImpl<$Res>
       isEditingText: null == isEditingText
           ? _value.isEditingText
           : isEditingText // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isMovingItem: null == isMovingItem
+          ? _value.isMovingItem
+          : isMovingItem // ignore: cast_nullable_to_non_nullable
               as bool,
       currentHistoryIndex: null == currentHistoryIndex
           ? _value.currentHistoryIndex
@@ -123,8 +136,9 @@ class __$$PaletteStateImplCopyWithImpl<$Res>
 class _$PaletteStateImpl extends _PaletteState {
   const _$PaletteStateImpl(
       {required final List<List<RenderItem<DecorationItem>>> historyRenderItems,
-      required this.isEditingText,
-      required this.currentHistoryIndex})
+      this.isEditingText = false,
+      this.isMovingItem = false,
+      this.currentHistoryIndex = 0})
       : _historyRenderItems = historyRenderItems,
         super._();
 
@@ -138,13 +152,18 @@ class _$PaletteStateImpl extends _PaletteState {
   }
 
   @override
+  @JsonKey()
   final bool isEditingText;
   @override
+  @JsonKey()
+  final bool isMovingItem;
+  @override
+  @JsonKey()
   final int currentHistoryIndex;
 
   @override
   String toString() {
-    return 'PaletteState(historyRenderItems: $historyRenderItems, isEditingText: $isEditingText, currentHistoryIndex: $currentHistoryIndex)';
+    return 'PaletteState(historyRenderItems: $historyRenderItems, isEditingText: $isEditingText, isMovingItem: $isMovingItem, currentHistoryIndex: $currentHistoryIndex)';
   }
 
   @override
@@ -156,6 +175,8 @@ class _$PaletteStateImpl extends _PaletteState {
                 .equals(other._historyRenderItems, _historyRenderItems) &&
             (identical(other.isEditingText, isEditingText) ||
                 other.isEditingText == isEditingText) &&
+            (identical(other.isMovingItem, isMovingItem) ||
+                other.isMovingItem == isMovingItem) &&
             (identical(other.currentHistoryIndex, currentHistoryIndex) ||
                 other.currentHistoryIndex == currentHistoryIndex));
   }
@@ -165,6 +186,7 @@ class _$PaletteStateImpl extends _PaletteState {
       runtimeType,
       const DeepCollectionEquality().hash(_historyRenderItems),
       isEditingText,
+      isMovingItem,
       currentHistoryIndex);
 
   @JsonKey(ignore: true)
@@ -177,14 +199,17 @@ class _$PaletteStateImpl extends _PaletteState {
 abstract class _PaletteState extends PaletteState {
   const factory _PaletteState(
       {required final List<List<RenderItem<DecorationItem>>> historyRenderItems,
-      required final bool isEditingText,
-      required final int currentHistoryIndex}) = _$PaletteStateImpl;
+      final bool isEditingText,
+      final bool isMovingItem,
+      final int currentHistoryIndex}) = _$PaletteStateImpl;
   const _PaletteState._() : super._();
 
   @override
   List<List<RenderItem<DecorationItem>>> get historyRenderItems;
   @override
   bool get isEditingText;
+  @override
+  bool get isMovingItem;
   @override
   int get currentHistoryIndex;
   @override

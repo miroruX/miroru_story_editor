@@ -3,9 +3,14 @@ import 'package:miroru_story_editor/model/entities/render_item/render_item.dart'
 
 sealed class PaletteAction {}
 
-class IsEditText implements PaletteAction {
-  IsEditText(this.isEditingText);
+class ChangeEditText implements PaletteAction {
+  ChangeEditText(this.isEditingText);
   final bool isEditingText;
+}
+
+class ChangeMovingItem implements PaletteAction {
+  ChangeMovingItem(this.isMovingItem);
+  final bool isMovingItem;
 }
 
 class AddRenderItem implements PaletteAction {

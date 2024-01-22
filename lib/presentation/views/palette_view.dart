@@ -43,8 +43,6 @@ class PaletteView extends HookWidget {
             ),
           ]
         ],
-        isEditingText: false,
-        currentHistoryIndex: 0,
       ),
       initialAction: ResetAction(),
     );
@@ -57,20 +55,22 @@ class PaletteView extends HookWidget {
           children: [
             BackgroundImageView(paletteReducer: paletteReducer),
             DecorationWidget(paletteReducer: paletteReducer),
-            Align(
-              alignment: Alignment.topCenter,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 6,
-                  vertical: 6,
-                ),
-                child: HeaderView(
-                  actionIconButton: actionIconButton,
-                  leadingIconButton: leadingIconButton,
-                  paletteReducer: paletteReducer,
+            if (!paletteReducer.state.isEditingText) ...[
+              Align(
+                alignment: Alignment.topCenter,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 6,
+                    vertical: 6,
+                  ),
+                  child: HeaderView(
+                    actionIconButton: actionIconButton,
+                    leadingIconButton: leadingIconButton,
+                    paletteReducer: paletteReducer,
+                  ),
                 ),
               ),
-            ),
+            ],
           ],
         ),
       ),

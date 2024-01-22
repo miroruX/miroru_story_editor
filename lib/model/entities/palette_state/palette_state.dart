@@ -9,8 +9,9 @@ part 'palette_state.freezed.dart';
 class PaletteState with _$PaletteState {
   const factory PaletteState({
     required List<List<RenderItem>> historyRenderItems,
-    required bool isEditingText,
-    required int currentHistoryIndex,
+    @Default(false) bool isEditingText,
+    @Default(false) bool isMovingItem,
+    @Default(0) int currentHistoryIndex,
   }) = _PaletteState;
   const PaletteState._();
 
@@ -73,4 +74,7 @@ class PaletteState with _$PaletteState {
 
   /// 履歴を表示しているかどうか
   bool get isShowingHistory => currentHistoryIndex != 0;
+
+  /// ヘッダーを表示しているかどうか
+  bool get isShowHeader => !isEditingText && !isMovingItem;
 }
