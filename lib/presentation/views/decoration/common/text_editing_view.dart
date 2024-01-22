@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:miroru_story_editor/extensions/string_extension.dart';
 import 'package:miroru_story_editor/model/entities/decorations/text/decoration_text.dart';
 import 'package:miroru_story_editor/model/entities/palette_state/palette_state.dart';
 import 'package:miroru_story_editor/model/entities/render_item/render_item.dart';
+import 'package:miroru_story_editor/model/enums/font_type.dart';
 import 'package:miroru_story_editor/model/use_cases/palette/palette_actions.dart';
 import 'package:miroru_story_editor/presentation/views/decoration/text/text_size_slider_view.dart';
 import 'package:miroru_story_editor/presentation/views/decoration/text/text_tool_header_view.dart';
-import 'package:miroru_story_editor/presentation/views/decoration/text/font_list_selecteor_view.dart';
+import 'package:miroru_story_editor/presentation/widgets/decoration/text/font_list_selector_view.dart';
 import 'package:uuid/uuid.dart';
 
 class TextEditingView extends HookWidget {
@@ -19,12 +21,15 @@ class TextEditingView extends HookWidget {
     final textItem = useState<RenderItem<DecorationText>>(
       RenderItem<DecorationText>(
         transform: Matrix4.identity(),
-        data: const DecorationText(),
+        data: DecorationText(
+          fontFamily: FontType.roboto.name,
+        ),
         uuid: const Uuid().v4(),
         order: 0,
       ),
     );
 
+    // 関数の中は再度インスタンスを生成する必要がある
     final decorationText = textItem.value.data as DecorationText;
 
     return Scaffold(
@@ -49,9 +54,11 @@ class TextEditingView extends HookWidget {
                           'textItem.value.data is not DecorationText',
                         );
                       }
+                      final newDecorationText =
+                          textItem.value.data as DecorationText;
                       textItem.value = RenderItem<DecorationText>(
                         transform: textItem.value.transform,
-                        data: decorationText.copyWith(
+                        data: newDecorationText.copyWith(
                           fontSize: fontSize,
                         ),
                         uuid: textItem.value.uuid,
@@ -68,7 +75,7 @@ class TextEditingView extends HookWidget {
                             fontSize: decorationText.fontSize,
                           ),
                         ),
-                        style: TextStyle(
+                        style: decorationText.fontFamily.fontStyle.copyWith(
                           fontSize: decorationText.fontSize,
                         ),
                       ),
@@ -78,10 +85,30 @@ class TextEditingView extends HookWidget {
               ),
             ),
           ),
-          const Align(
+          Align(
             alignment: Alignment.bottomCenter,
-            child: FontListSelectorWidget(
-              onChangeFontName: print,
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: FontListSelectorWidget(
+                onChangeFontName: (fontName) {
+                  if (textItem.value.data is! DecorationText) {
+                    throw Exception(
+                      'textItem.value.data is not DecorationText',
+                    );
+                  }
+
+                  final newDecorationText =
+                      textItem.value.data as DecorationText;
+                  textItem.value = RenderItem<DecorationText>(
+                    transform: textItem.value.transform,
+                    data: newDecorationText.copyWith(
+                      fontFamily: fontName,
+                    ),
+                    uuid: textItem.value.uuid,
+                    order: textItem.value.order,
+                  );
+                },
+              ),
             ),
           ),
         ],

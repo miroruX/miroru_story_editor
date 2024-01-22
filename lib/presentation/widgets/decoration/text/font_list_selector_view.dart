@@ -4,7 +4,10 @@ import 'package:miroru_story_editor/extensions/context_extension.dart';
 import 'package:miroru_story_editor/model/enums/font_type.dart';
 
 class FontListSelectorWidget extends HookWidget {
-  const FontListSelectorWidget({super.key, required this.onChangeFontName});
+  const FontListSelectorWidget({
+    super.key,
+    required this.onChangeFontName,
+  });
 
   final void Function(String fontName) onChangeFontName;
 
