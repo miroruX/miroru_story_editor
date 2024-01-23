@@ -41,6 +41,16 @@ class TextToolHeaderView extends HookConsumerWidget {
           const Spacer(),
           TextButton(
             onPressed: () {
+              final data = renderItem.data as DecorationText;
+
+              if (!(data.text?.isNotEmpty ?? false)) {
+                ref.read(paletteStateProvider.notifier).changeEditingText(
+                      false,
+                    );
+
+                return;
+              }
+
               ref.read(paletteStateProvider.notifier).addRenderItem(
                     renderItem,
                   );

@@ -48,10 +48,6 @@ class PaletteState extends _$PaletteState {
       currentHistoryIndex: 0,
       isEditingText: false,
     );
-
-    print('addRenderItem: ${state.historyRenderItems.length}');
-
-    print('latest length: ${state.historyRenderItems[0].length}');
   }
 
   void moveRenderItem(RenderItem<DecorationItem> renderItem) {
