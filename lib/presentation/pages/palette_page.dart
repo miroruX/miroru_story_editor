@@ -3,14 +3,19 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:miroru_story_editor/model/dto/action_icon_button/action_icon_button_dto.dart';
 import 'package:miroru_story_editor/model/dto/back_confirm/story_back_confirm_dto.dart';
 import 'package:miroru_story_editor/model/dto/leading_icon_button/leading_icon_button_dto.dart';
 import 'package:miroru_story_editor/model/dto/next_icon_button/next_icon_button_dto.dart';
+import 'package:miroru_story_editor/model/entities/decorations/background_image/background_image.dart';
+import 'package:miroru_story_editor/model/entities/render_item/render_item.dart';
+import 'package:miroru_story_editor/model/use_cases/palette/palette_state.dart';
 import 'package:miroru_story_editor/presentation/views/footer_view.dart';
 import 'package:miroru_story_editor/presentation/views/palette_view.dart';
+import 'package:uuid/uuid.dart';
 
-class PalettePage extends HookWidget {
+class PalettePage extends HookConsumerWidget {
   const PalettePage({
     super.key,
     required this.backgroundImageFile,
@@ -26,9 +31,25 @@ class PalettePage extends HookWidget {
   final NextIconButtonDto nextIconButton;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     useEffect(
       () {
+        Future.microtask(
+          () => ref.read(paletteStateProvider.notifier).initHistoryRenderItem(
+            [
+              [
+                RenderItem<DecorationBackgroundImage>(
+                  transform: Matrix4.identity(),
+                  data: DecorationBackgroundImage(
+                    backgroundImageFile: backgroundImageFile,
+                  ),
+                  uuid: const Uuid().v4(),
+                  order: 0,
+                ),
+              ]
+            ],
+          ),
+        );
         SystemChrome.setSystemUIOverlayStyle(
           const SystemUiOverlayStyle(
             statusBarColor: Colors.white,
@@ -36,14 +57,15 @@ class PalettePage extends HookWidget {
             statusBarIconBrightness: Brightness.dark,
           ),
         );
+
         return null;
       },
       [],
     );
-
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SafeArea(
+        maintainBottomViewPadding: true,
         child: Column(
           children: [
             Expanded(

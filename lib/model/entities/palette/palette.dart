@@ -3,17 +3,17 @@ import 'package:miroru_story_editor/model/entities/decorations/background_image/
 import 'package:miroru_story_editor/model/entities/decorations/decoration_item.dart';
 import 'package:miroru_story_editor/model/entities/render_item/render_item.dart';
 
-part 'palette_state.freezed.dart';
+part 'palette.freezed.dart';
 
 @freezed
-class PaletteState with _$PaletteState {
-  const factory PaletteState({
+class Palette with _$Palette {
+  const factory Palette({
     required List<List<RenderItem>> historyRenderItems,
     @Default(false) bool isEditingText,
     @Default(false) bool isMovingItem,
     @Default(0) int currentHistoryIndex,
-  }) = _PaletteState;
-  const PaletteState._();
+  }) = _Palette;
+  const Palette._();
 
   /// 背景画像を含む全てのレンダリングされるアイテム
   List<RenderItem> get renderItems {
