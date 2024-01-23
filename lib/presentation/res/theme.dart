@@ -21,10 +21,16 @@ ThemeData getInstagramThemeDark() {
     ),
     tabBarTheme: TabBarTheme(
       labelColor: Colors.redAccent,
+      unselectedLabelColor: instagramColorScheme.onPrimary.withOpacity(0.5),
+      indicator: BoxDecoration(
+        borderRadius: BorderRadius.circular(100),
+        color: Colors.white,
+      ),
       splashFactory: NoSplash.splashFactory,
       overlayColor: MaterialStateProperty.all(Colors.transparent),
       dividerHeight: 0,
-      indicatorSize: TabBarIndicatorSize.label,
+      labelPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+      indicatorSize: TabBarIndicatorSize.tab,
       labelStyle: base.textTheme.bodyMedium?.copyWith(
         fontSize: 14,
         fontWeight: FontWeight.bold,

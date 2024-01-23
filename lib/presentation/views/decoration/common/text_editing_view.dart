@@ -1,24 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:miroru_story_editor/extensions/color_extension.dart';
 import 'package:miroru_story_editor/extensions/context_extension.dart';
 import 'package:miroru_story_editor/extensions/string_extension.dart';
 import 'package:miroru_story_editor/model/entities/decorations/text/decoration_text.dart';
 import 'package:miroru_story_editor/model/entities/render_item/render_item.dart';
 import 'package:miroru_story_editor/model/enums/font_type.dart';
+import 'package:miroru_story_editor/model/use_cases/palette/palette_state.dart';
 import 'package:miroru_story_editor/presentation/views/decoration/text/text_size_slider_view.dart';
 import 'package:miroru_story_editor/presentation/views/decoration/text/text_tool_header_view.dart';
 import 'package:miroru_story_editor/presentation/widgets/decoration/text/color_list_selector_view.dart';
 import 'package:miroru_story_editor/presentation/widgets/decoration/text/font_list_selector_view.dart';
 import 'package:uuid/uuid.dart';
 
-class TextEditingView extends HookWidget {
+class TextEditingView extends HookConsumerWidget {
   const TextEditingView({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final textItem = useState<RenderItem<DecorationText>>(
       RenderItem<DecorationText>(
         transform: Matrix4.identity(),
@@ -42,6 +44,18 @@ class TextEditingView extends HookWidget {
       behavior: HitTestBehavior.translucent,
       onTap: () {
         context.hideKeyboard();
+
+        final data = textItem.value.data as DecorationText;
+        if (!(data.text?.isNotEmpty ?? false)) {
+          ref.read(paletteStateProvider.notifier).changeEditingText(
+                false,
+              );
+
+          return;
+        }
+        ref.read(paletteStateProvider.notifier).addRenderItem(
+              textItem.value,
+            );
       },
       child: Scaffold(
         backgroundColor: Colors.transparent,
@@ -91,15 +105,12 @@ class TextEditingView extends HookWidget {
                     );
                   }
                   late final Color newBackgroundColor;
-                  late final Color newTextColor;
 
                   if (decorationText.backgroundColorCode.toColor ==
                       Colors.black) {
                     newBackgroundColor = Colors.white;
-                    newTextColor = Colors.black;
                   } else {
                     newBackgroundColor = Colors.black;
-                    newTextColor = Colors.white;
                   }
 
                   final newDecorationText =
@@ -108,7 +119,6 @@ class TextEditingView extends HookWidget {
                     transform: textItem.value.transform,
                     data: newDecorationText.copyWith(
                       backgroundColorCode: newBackgroundColor.hex,
-                      colorCode: newTextColor.hex,
                     ),
                     uuid: textItem.value.uuid,
                     order: textItem.value.order,
@@ -186,6 +196,7 @@ class TextEditingView extends HookWidget {
           padding: const EdgeInsets.only(bottom: 8),
           child: isColorEditing.value
               ? ColorListSelectorWidget(
+                  selectedColor: decorationText.colorCode.toColor,
                   onChangeColor: (color) {
                     if (textItem.value.data is! DecorationText) {
                       throw Exception(

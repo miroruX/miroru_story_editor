@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
-class CenterLineWidget extends StatelessWidget {
-  const CenterLineWidget({
+class CenterLineYWidget extends StatelessWidget {
+  const CenterLineYWidget({
     super.key,
-    required this.height,
+    required this.width,
     this.strokeWidth = 2,
   });
-  final double height;
+  final double width;
   final double strokeWidth;
   @override
   Widget build(BuildContext context) {
     return CustomPaint(
-      size: Size(strokeWidth, height),
+      size: Size(width, strokeWidth),
       painter: _CenterLinePainter(
         strokeWidth: strokeWidth,
       ),
@@ -23,7 +23,9 @@ class _CenterLinePainter extends CustomPainter {
   const _CenterLinePainter({
     required this.strokeWidth,
   });
+
   final double strokeWidth;
+
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
@@ -32,9 +34,8 @@ class _CenterLinePainter extends CustomPainter {
       ..style = PaintingStyle.stroke;
 
     final path = Path()
-      ..moveTo(size.width / 2, size.height)
-      ..lineTo(size.width / 2, 0)
-      ..close();
+      ..moveTo(0, size.height / 2) // 左端から開始
+      ..lineTo(size.width, size.height / 2); // 右端まで線を引く
 
     canvas.drawPath(path, paint); // パスを描画
   }

@@ -12,13 +12,13 @@ class RenderItemWidget extends HookWidget {
     required this.item,
     this.onPointerDown,
     required this.onPointerUp,
-    this.onPointerMove,
+    required this.onPointerMove,
   });
 
   final RenderItem item;
   final void Function(PointerDownEvent event)? onPointerDown;
   final void Function(PointerUpEvent event, Matrix4 matrix) onPointerUp;
-  final void Function(PointerMoveEvent event)? onPointerMove;
+  final void Function(PointerMoveEvent event, Matrix4 matrix) onPointerMove;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +44,7 @@ class RenderItemWidget extends HookWidget {
         child: Listener(
           onPointerDown: onPointerDown,
           onPointerUp: (event) => onPointerUp(event, matrixNotifier.value),
-          onPointerMove: onPointerMove,
+          onPointerMove: (event) => onPointerMove(event, matrixNotifier.value),
           child: BuildDecorationHandler(item: item.data),
         ),
       ),

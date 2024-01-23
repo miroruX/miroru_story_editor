@@ -19,8 +19,9 @@ class BackgroundBlurImageView extends HookConsumerWidget {
       return const SizedBox.shrink();
     }
 
-    final blurHashAsync =
-        ref.watch(fetchBlurHashProvider(file: data.backgroundImageFile!));
+    final blurHashAsync = ref.watch(
+      fetchBlurHashProvider(file: data.backgroundImageFile!),
+    );
 
     return blurHashAsync.maybeWhen(
       data: (blurHash) {
