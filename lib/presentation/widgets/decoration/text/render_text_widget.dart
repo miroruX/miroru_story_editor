@@ -21,6 +21,7 @@ class RenderTextWidget extends StatelessWidget {
             decorationText.text ?? '',
             style: decorationText.fontFamily!.fontStyle.copyWith(
               fontSize: decorationText.fontSize,
+              color: decorationText.colorCode.toColor,
             ),
           ),
         ),

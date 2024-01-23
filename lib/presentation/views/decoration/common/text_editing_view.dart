@@ -131,7 +131,8 @@ class TextEditingView extends HookWidget {
                       fillColor: decorationText.backgroundColorCode.toColor,
                       hintStyle: TextStyle(
                         fontSize: decorationText.fontSize,
-                        color: decorationText.colorCode.toColor,
+                        color:
+                            decorationText.colorCode.toColor.withOpacity(0.5),
                       ),
                     ),
                     maxLines: null,
