@@ -21,6 +21,7 @@ mixin _$DecorationText {
   String? get fontFamily => throw _privateConstructorUsedError;
   String? get colorCode => throw _privateConstructorUsedError;
   String? get backgroundColorCode => throw _privateConstructorUsedError;
+  String? get textAlign => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $DecorationTextCopyWith<DecorationText> get copyWith =>
@@ -38,7 +39,8 @@ abstract class $DecorationTextCopyWith<$Res> {
       double? fontSize,
       String? fontFamily,
       String? colorCode,
-      String? backgroundColorCode});
+      String? backgroundColorCode,
+      String? textAlign});
 }
 
 /// @nodoc
@@ -59,6 +61,7 @@ class _$DecorationTextCopyWithImpl<$Res, $Val extends DecorationText>
     Object? fontFamily = freezed,
     Object? colorCode = freezed,
     Object? backgroundColorCode = freezed,
+    Object? textAlign = freezed,
   }) {
     return _then(_value.copyWith(
       text: freezed == text
@@ -81,6 +84,10 @@ class _$DecorationTextCopyWithImpl<$Res, $Val extends DecorationText>
           ? _value.backgroundColorCode
           : backgroundColorCode // ignore: cast_nullable_to_non_nullable
               as String?,
+      textAlign: freezed == textAlign
+          ? _value.textAlign
+          : textAlign // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -98,7 +105,8 @@ abstract class _$$DecorationTextImplCopyWith<$Res>
       double? fontSize,
       String? fontFamily,
       String? colorCode,
-      String? backgroundColorCode});
+      String? backgroundColorCode,
+      String? textAlign});
 }
 
 /// @nodoc
@@ -117,6 +125,7 @@ class __$$DecorationTextImplCopyWithImpl<$Res>
     Object? fontFamily = freezed,
     Object? colorCode = freezed,
     Object? backgroundColorCode = freezed,
+    Object? textAlign = freezed,
   }) {
     return _then(_$DecorationTextImpl(
       text: freezed == text
@@ -139,6 +148,10 @@ class __$$DecorationTextImplCopyWithImpl<$Res>
           ? _value.backgroundColorCode
           : backgroundColorCode // ignore: cast_nullable_to_non_nullable
               as String?,
+      textAlign: freezed == textAlign
+          ? _value.textAlign
+          : textAlign // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -151,7 +164,8 @@ class _$DecorationTextImpl extends _DecorationText {
       this.fontSize,
       this.fontFamily,
       this.colorCode,
-      this.backgroundColorCode})
+      this.backgroundColorCode,
+      this.textAlign})
       : super._();
 
   @override
@@ -164,10 +178,12 @@ class _$DecorationTextImpl extends _DecorationText {
   final String? colorCode;
   @override
   final String? backgroundColorCode;
+  @override
+  final String? textAlign;
 
   @override
   String toString() {
-    return 'DecorationText(text: $text, fontSize: $fontSize, fontFamily: $fontFamily, colorCode: $colorCode, backgroundColorCode: $backgroundColorCode)';
+    return 'DecorationText(text: $text, fontSize: $fontSize, fontFamily: $fontFamily, colorCode: $colorCode, backgroundColorCode: $backgroundColorCode, textAlign: $textAlign)';
   }
 
   @override
@@ -183,12 +199,14 @@ class _$DecorationTextImpl extends _DecorationText {
             (identical(other.colorCode, colorCode) ||
                 other.colorCode == colorCode) &&
             (identical(other.backgroundColorCode, backgroundColorCode) ||
-                other.backgroundColorCode == backgroundColorCode));
+                other.backgroundColorCode == backgroundColorCode) &&
+            (identical(other.textAlign, textAlign) ||
+                other.textAlign == textAlign));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, text, fontSize, fontFamily, colorCode, backgroundColorCode);
+  int get hashCode => Object.hash(runtimeType, text, fontSize, fontFamily,
+      colorCode, backgroundColorCode, textAlign);
 
   @JsonKey(ignore: true)
   @override
@@ -204,7 +222,8 @@ abstract class _DecorationText extends DecorationText {
       final double? fontSize,
       final String? fontFamily,
       final String? colorCode,
-      final String? backgroundColorCode}) = _$DecorationTextImpl;
+      final String? backgroundColorCode,
+      final String? textAlign}) = _$DecorationTextImpl;
   const _DecorationText._() : super._();
 
   @override
@@ -217,6 +236,8 @@ abstract class _DecorationText extends DecorationText {
   String? get colorCode;
   @override
   String? get backgroundColorCode;
+  @override
+  String? get textAlign;
   @override
   @JsonKey(ignore: true)
   _$$DecorationTextImplCopyWith<_$DecorationTextImpl> get copyWith =>

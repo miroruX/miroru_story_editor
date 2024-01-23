@@ -11,6 +11,7 @@ class DecorationText with _$DecorationText implements DecorationItem {
     String? fontFamily,
     String? colorCode,
     String? backgroundColorCode,
+    String? textAlign,
   }) = _DecorationText;
   const DecorationText._();
 }

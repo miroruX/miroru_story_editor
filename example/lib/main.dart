@@ -28,7 +28,7 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('メインページ'),
+        title: const Text('miroru story editor'),
       ),
       body: Center(
         child: FilledButton(
@@ -61,7 +61,20 @@ class MyHomePage extends StatelessWidget {
               imageFile: File(file.path),
             );
           },
-          child: const Text('ストーリーエディタを開く'),
+          child: const Text('open miroru story editor'),
+        ),
+      ),
+      bottomNavigationBar: const SafeArea(
+        child: Padding(
+          padding: EdgeInsets.all(8),
+          child: Text(
+            'namba naoki',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+            textAlign: TextAlign.center,
+          ),
         ),
       ),
     );

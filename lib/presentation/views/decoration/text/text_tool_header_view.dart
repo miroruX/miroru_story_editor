@@ -12,10 +12,14 @@ class TextToolHeaderView extends HookConsumerWidget {
     super.key,
     required this.renderItem,
     required this.changeFillColor,
+    required this.changeTextAlign,
+    required this.onColor,
   });
 
   final RenderItem<DecorationText> renderItem;
   final VoidCallback changeFillColor;
+  final VoidCallback changeTextAlign;
+  final VoidCallback onColor;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -25,13 +29,13 @@ class TextToolHeaderView extends HookConsumerWidget {
         children: [
           const Spacer(flex: 4),
           IconButton(
-            onPressed: () {},
+            onPressed: changeTextAlign,
             icon: const Icon(
               FontAwesomeIcons.alignLeft,
             ),
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: onColor,
             icon: const ColorPickerIcon(),
           ),
           IconButton(
@@ -44,7 +48,6 @@ class TextToolHeaderView extends HookConsumerWidget {
           TextButton(
             onPressed: () {
               final data = renderItem.data as DecorationText;
-
               if (!(data.text?.isNotEmpty ?? false)) {
                 ref.read(paletteStateProvider.notifier).changeEditingText(
                       false,
@@ -52,7 +55,6 @@ class TextToolHeaderView extends HookConsumerWidget {
 
                 return;
               }
-
               ref.read(paletteStateProvider.notifier).addRenderItem(
                     renderItem,
                   );

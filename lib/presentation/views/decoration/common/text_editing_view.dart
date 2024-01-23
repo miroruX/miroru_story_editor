@@ -8,6 +8,7 @@ import 'package:miroru_story_editor/model/entities/render_item/render_item.dart'
 import 'package:miroru_story_editor/model/enums/font_type.dart';
 import 'package:miroru_story_editor/presentation/views/decoration/text/text_size_slider_view.dart';
 import 'package:miroru_story_editor/presentation/views/decoration/text/text_tool_header_view.dart';
+import 'package:miroru_story_editor/presentation/widgets/decoration/text/color_list_selector_view.dart';
 import 'package:miroru_story_editor/presentation/widgets/decoration/text/font_list_selector_view.dart';
 import 'package:uuid/uuid.dart';
 
@@ -32,6 +33,8 @@ class TextEditingView extends HookWidget {
       ),
     );
 
+    final isColorEditing = useState<bool>(false);
+
     // 関数の中は再度インスタンスを生成する必要がある
     final decorationText = textItem.value.data as DecorationText;
 
@@ -48,6 +51,39 @@ class TextEditingView extends HookWidget {
               padding: const EdgeInsets.fromLTRB(4, 4, 4, 0),
               child: TextToolHeaderView(
                 renderItem: textItem.value,
+                onColor: () {
+                  isColorEditing.value = !isColorEditing.value;
+                },
+                changeTextAlign: () {
+                  if (textItem.value.data is! DecorationText) {
+                    throw Exception(
+                      'textItem.value.data is not DecorationText',
+                    );
+                  }
+                  late final TextAlign newAlignment;
+
+                  if (decorationText.textAlign == TextAlign.left.name) {
+                    newAlignment = TextAlign.center;
+                  } else if (decorationText.textAlign ==
+                      TextAlign.center.name) {
+                    newAlignment = TextAlign.right;
+                  } else if (decorationText.textAlign == TextAlign.right.name) {
+                    newAlignment = TextAlign.left;
+                  } else {
+                    newAlignment = TextAlign.left;
+                  }
+
+                  final newDecorationText =
+                      textItem.value.data as DecorationText;
+                  textItem.value = RenderItem<DecorationText>(
+                    transform: textItem.value.transform,
+                    data: newDecorationText.copyWith(
+                      textAlign: newAlignment.name,
+                    ),
+                    uuid: textItem.value.uuid,
+                    order: textItem.value.order,
+                  );
+                },
                 changeFillColor: () {
                   if (textItem.value.data is! DecorationText) {
                     throw Exception(
@@ -148,24 +184,45 @@ class TextEditingView extends HookWidget {
         ),
         bottomNavigationBar: Padding(
           padding: const EdgeInsets.only(bottom: 8),
-          child: FontListSelectorWidget(
-            onChangeFontName: (fontName) {
-              if (textItem.value.data is! DecorationText) {
-                throw Exception(
-                  'textItem.value.data is not DecorationText',
-                );
-              }
-              final newDecorationText = textItem.value.data as DecorationText;
-              textItem.value = RenderItem<DecorationText>(
-                transform: textItem.value.transform,
-                data: newDecorationText.copyWith(
-                  fontFamily: fontName,
+          child: isColorEditing.value
+              ? ColorListSelectorWidget(
+                  onChangeColor: (color) {
+                    if (textItem.value.data is! DecorationText) {
+                      throw Exception(
+                        'textItem.value.data is not DecorationText',
+                      );
+                    }
+                    final newDecorationText =
+                        textItem.value.data as DecorationText;
+                    textItem.value = RenderItem<DecorationText>(
+                      transform: textItem.value.transform,
+                      data: newDecorationText.copyWith(
+                        colorCode: color.hex,
+                      ),
+                      uuid: textItem.value.uuid,
+                      order: textItem.value.order,
+                    );
+                  },
+                )
+              : FontListSelectorWidget(
+                  onChangeFontName: (fontName) {
+                    if (textItem.value.data is! DecorationText) {
+                      throw Exception(
+                        'textItem.value.data is not DecorationText',
+                      );
+                    }
+                    final newDecorationText =
+                        textItem.value.data as DecorationText;
+                    textItem.value = RenderItem<DecorationText>(
+                      transform: textItem.value.transform,
+                      data: newDecorationText.copyWith(
+                        fontFamily: fontName,
+                      ),
+                      uuid: textItem.value.uuid,
+                      order: textItem.value.order,
+                    );
+                  },
                 ),
-                uuid: textItem.value.uuid,
-                order: textItem.value.order,
-              );
-            },
-          ),
         ),
       ),
     );
