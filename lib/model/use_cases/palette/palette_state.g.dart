@@ -6,7 +6,7 @@ part of 'palette_state.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$paletteStateHash() => r'e8dd87b3dd4bdd8263932b2457856734d3f685e7';
+String _$paletteStateHash() => r'f245edc6cae313940dd33178d1ff866f7f832cec';
 
 /// See also [PaletteState].
 @ProviderFor(PaletteState)

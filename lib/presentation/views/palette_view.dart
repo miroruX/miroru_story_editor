@@ -5,6 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:miroru_story_editor/model/dto/action_icon_button/action_icon_button_dto.dart';
 import 'package:miroru_story_editor/model/dto/leading_icon_button/leading_icon_button_dto.dart';
 import 'package:miroru_story_editor/model/use_cases/palette/palette_state.dart';
+import 'package:miroru_story_editor/presentation/views/background_image/background_image_blur_view.dart';
 import 'package:miroru_story_editor/presentation/views/background_image/background_image_view.dart';
 import 'package:miroru_story_editor/presentation/views/decoration/common/decoration_view.dart';
 import 'package:miroru_story_editor/presentation/views/decoration/common/text_editing_view.dart';
@@ -47,6 +48,7 @@ class PaletteView extends HookConsumerWidget {
         color: Colors.white,
         child: Stack(
           children: [
+            const BackgroundBlurImageView(),
             const BackgroundImageView(),
             const DecorationWidget(),
             if (isEditingText) ...[

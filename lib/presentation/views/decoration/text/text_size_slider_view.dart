@@ -5,13 +5,15 @@ class TextSizeSliderView extends HookWidget {
   const TextSizeSliderView({
     super.key,
     required this.onChangeFontSize,
+    required this.fontSize,
   });
 
+  final double fontSize;
   final void Function(double fontSize) onChangeFontSize;
 
   @override
   Widget build(BuildContext context) {
-    final sliderValue = useState<double>(30);
+    final sliderValue = useState<double>(fontSize);
     return ConstrainedBox(
       constraints: const BoxConstraints(
         maxWidth: 50,
@@ -27,8 +29,8 @@ class TextSizeSliderView extends HookWidget {
             ),
           ),
           child: Slider(
-            max: 40,
-            min: 12,
+            max: 80,
+            min: 14,
             value: sliderValue.value,
             onChanged: (value) {
               sliderValue.value = value;

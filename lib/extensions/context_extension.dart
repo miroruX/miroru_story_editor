@@ -29,6 +29,8 @@ extension ContextExtension on BuildContext {
 
   Color get scaffoldBackgroundColor => Theme.of(this).scaffoldBackgroundColor;
 
+  ColorScheme get colorScheme => Theme.of(this).colorScheme;
+
   void hideKeyboard() {
     // https://github.com/flutter/flutter/issues/54277#issuecomment-640998757
     final currentScope = FocusScope.of(this);

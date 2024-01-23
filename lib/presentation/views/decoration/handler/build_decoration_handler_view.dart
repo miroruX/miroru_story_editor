@@ -3,6 +3,7 @@ import 'package:miroru_story_editor/model/entities/decorations/background_image/
 import 'package:miroru_story_editor/model/entities/decorations/decoration_item.dart';
 import 'package:miroru_story_editor/model/entities/decorations/emoji/decoration_emoji.dart';
 import 'package:miroru_story_editor/model/entities/decorations/text/decoration_text.dart';
+import 'package:miroru_story_editor/presentation/widgets/decoration/text/render_text_widget.dart';
 
 class BuildDecorationHandler extends StatelessWidget {
   const BuildDecorationHandler({
@@ -19,12 +20,8 @@ class BuildDecorationHandler extends StatelessWidget {
     } else if (item is DecorationEmoji) {
       return const SizedBox();
     } else if (item is DecorationText) {
-      return const ColoredBox(
-        color: Colors.red,
-        child: Padding(
-          padding: EdgeInsets.all(10),
-          child: Text('テキスト'),
-        ),
+      return RenderTextWidget(
+        decorationText: item as DecorationText,
       );
     } else {
       throw Exception('not found DecorationItem type.');
