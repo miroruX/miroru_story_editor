@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:miroru_story_editor/model/entities/palette_state/palette_state.dart';
-import 'package:miroru_story_editor/model/use_cases/palette/palette_actions.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:miroru_story_editor/model/use_cases/palette/palette_state.dart';
 import 'package:miroru_story_editor/presentation/res/editing_text_theme.dart';
 import 'package:miroru_story_editor/presentation/widgets/decoration/common/color_picker_icon.dart';
 
-class TextToolHeaderView extends HookWidget {
+class TextToolHeaderView extends HookConsumerWidget {
   const TextToolHeaderView({
     super.key,
-    required this.paletteReducer,
   });
 
-  final Store<PaletteState, PaletteAction> paletteReducer;
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Theme(
       data: editingTextTheme(),
       child: Row(
@@ -39,9 +36,9 @@ class TextToolHeaderView extends HookWidget {
           const Spacer(),
           TextButton(
             onPressed: () {
-              paletteReducer.dispatch(
-                ChangeEditText(false),
-              );
+              ref.read(paletteStateProvider.notifier).changeEditingText(
+                    false,
+                  );
             },
             child: const Text('完了'),
           ),

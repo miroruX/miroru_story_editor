@@ -1,29 +1,33 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:miroru_story_editor/model/dto/action_icon_button/action_icon_button_dto.dart';
 import 'package:miroru_story_editor/model/dto/leading_icon_button/leading_icon_button_dto.dart';
-import 'package:miroru_story_editor/model/entities/palette_state/palette_state.dart';
 import 'package:miroru_story_editor/model/enums/menu_result_type.dart';
-import 'package:miroru_story_editor/model/use_cases/palette/palette_actions.dart';
+import 'package:miroru_story_editor/model/use_cases/palette/palette_state.dart';
 import 'package:miroru_story_editor/presentation/custom_hooks/use_global_key.dart';
 
-class HeaderView extends HookWidget {
+class HeaderView extends HookConsumerWidget {
   const HeaderView({
     super.key,
     required this.actionIconButton,
     required this.leadingIconButton,
-    required this.paletteReducer,
   });
 
   final ActionIconButtonDto actionIconButton;
   final LeadingIconButtonDto leadingIconButton;
-  final Store<PaletteState, PaletteAction> paletteReducer;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final iconButtonKey = useGlobalKey();
+    final canBack = ref.watch(
+      paletteStateProvider.select((value) => value.canBack),
+    );
+
+    final canNext = ref.watch(
+      paletteStateProvider.select((value) => value.canNext),
+    );
 
     return Row(
       children: [
@@ -38,10 +42,8 @@ class HeaderView extends HookWidget {
         ),
         const Spacer(),
         IconButton(
-          onPressed: paletteReducer.state.canBack
-              ? () {
-                  paletteReducer.dispatch(BackHistory());
-                }
+          onPressed: canBack
+              ? () => ref.read(paletteStateProvider.notifier).backHistory()
               : null,
           style: actionIconButton.style,
           icon: const Icon(
@@ -49,10 +51,8 @@ class HeaderView extends HookWidget {
           ),
         ),
         IconButton(
-          onPressed: paletteReducer.state.canNext
-              ? () {
-                  paletteReducer.dispatch(ForwardHistory());
-                }
+          onPressed: canNext
+              ? () => ref.read(paletteStateProvider.notifier).nextHistory()
               : null,
           style: actionIconButton.style,
           icon: const Icon(
@@ -60,9 +60,8 @@ class HeaderView extends HookWidget {
           ),
         ),
         IconButton(
-          onPressed: () {
-            paletteReducer.dispatch(ChangeEditText(true));
-          },
+          onPressed: () =>
+              ref.read(paletteStateProvider.notifier).changeEditingText(true),
           style: actionIconButton.style,
           icon: Icon(
             actionIconButton.font,

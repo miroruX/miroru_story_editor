@@ -21,7 +21,7 @@ class FontListSelectorWidget extends HookWidget {
         tabController.addListener(() {
           onChangeFontName(FontType.values[tabController.index].name);
         });
-        return tabController.dispose;
+        return null;
       },
       [],
     );
