@@ -12,6 +12,8 @@ dependencies:
     sdk: flutter
   # entity
   freezed_annotation: ^2.4.1
+  riverpod_annotation: ^3.0.0-dev.3
+
   matrix_gesture_detector_pro: ^1.0.0
   collection: ^1.18.0
 
@@ -27,6 +29,7 @@ dependencies:
 
   # state management
   flutter_hooks: ^0.20.4
+  hooks_riverpod: ^3.0.0-dev.3
 
   gap: any
 
@@ -41,9 +44,12 @@ dev_dependencies:
     sdk: flutter
   pedantic_mono:
   custom_lint:
+  riverpod_lint: ^3.0.0-dev.4
 
   build_runner:
   freezed:
+
+  riverpod_generator: ^3.0.0-dev.11
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

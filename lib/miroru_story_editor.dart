@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:miroru_story_editor/model/dto/action_icon_button/action_icon_button_dto.dart';
 import 'package:miroru_story_editor/model/dto/back_confirm/story_back_confirm_dto.dart';
 import 'package:miroru_story_editor/model/dto/leading_icon_button/leading_icon_button_dto.dart';
@@ -19,14 +20,16 @@ Future<void> showMiroruStoryEditor(
   return Navigator.of(context).push<void>(
     MaterialPageRoute(
       builder: (context) {
-        return Theme(
-          data: getInstagramThemeDark(),
-          child: PalettePage(
-            backgroundImageFile: imageFile,
-            leadingIconButton: leadingIconButton,
-            actionIconButton: actionIconButton,
-            backConfirm: backConfirm,
-            nextIconButton: nextIconButton,
+        return ProviderScope(
+          child: Theme(
+            data: getInstagramThemeDark(),
+            child: PalettePage(
+              backgroundImageFile: imageFile,
+              leadingIconButton: leadingIconButton,
+              actionIconButton: actionIconButton,
+              backConfirm: backConfirm,
+              nextIconButton: nextIconButton,
+            ),
           ),
         );
       },

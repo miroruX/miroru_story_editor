@@ -9,6 +9,11 @@ analyzer:
     - lib/gen/*.dart
   errors:
     invalid_annotation_target: ignore
+
+custom_lint:
+  rules:
+    - missing_provider_scope: false
+
 linter:
   rules:
     sort_pub_dependencies: false
