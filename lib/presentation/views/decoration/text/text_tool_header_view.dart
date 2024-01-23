@@ -11,9 +11,11 @@ class TextToolHeaderView extends HookConsumerWidget {
   const TextToolHeaderView({
     super.key,
     required this.renderItem,
+    required this.changeFillColor,
   });
 
   final RenderItem<DecorationText> renderItem;
+  final VoidCallback changeFillColor;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -33,7 +35,7 @@ class TextToolHeaderView extends HookConsumerWidget {
             icon: const ColorPickerIcon(),
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: changeFillColor,
             icon: const Icon(
               FontAwesomeIcons.fill,
             ),

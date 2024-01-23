@@ -25,6 +25,7 @@ class TextEditingView extends HookWidget {
           fontFamily: FontType.roboto.name,
           backgroundColorCode: Colors.black.hex,
           fontSize: 20,
+          colorCode: Colors.white.hex,
         ),
         uuid: const Uuid().v4(),
         order: 0,
@@ -47,6 +48,36 @@ class TextEditingView extends HookWidget {
               padding: const EdgeInsets.fromLTRB(4, 4, 4, 0),
               child: TextToolHeaderView(
                 renderItem: textItem.value,
+                changeFillColor: () {
+                  if (textItem.value.data is! DecorationText) {
+                    throw Exception(
+                      'textItem.value.data is not DecorationText',
+                    );
+                  }
+                  late final Color newBackgroundColor;
+                  late final Color newTextColor;
+
+                  if (decorationText.backgroundColorCode.toColor ==
+                      Colors.black) {
+                    newBackgroundColor = Colors.white;
+                    newTextColor = Colors.black;
+                  } else {
+                    newBackgroundColor = Colors.black;
+                    newTextColor = Colors.white;
+                  }
+
+                  final newDecorationText =
+                      textItem.value.data as DecorationText;
+                  textItem.value = RenderItem<DecorationText>(
+                    transform: textItem.value.transform,
+                    data: newDecorationText.copyWith(
+                      backgroundColorCode: newBackgroundColor.hex,
+                      colorCode: newTextColor.hex,
+                    ),
+                    uuid: textItem.value.uuid,
+                    order: textItem.value.order,
+                  );
+                },
               ),
             ),
             Align(
@@ -73,34 +104,41 @@ class TextEditingView extends HookWidget {
               ),
             ),
             Align(
-              child: IntrinsicWidth(
-                child: TextField(
-                  autofocus: true,
-                  onChanged: (value) {
-                    if (textItem.value.data is! DecorationText) {
-                      throw Exception(
-                        'textItem.value.data is not DecorationText',
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 50),
+                child: IntrinsicWidth(
+                  child: TextField(
+                    autofocus: true,
+                    onChanged: (value) {
+                      if (textItem.value.data is! DecorationText) {
+                        throw Exception(
+                          'textItem.value.data is not DecorationText',
+                        );
+                      }
+                      final newDecorationText =
+                          textItem.value.data as DecorationText;
+                      textItem.value = RenderItem<DecorationText>(
+                        transform: textItem.value.transform,
+                        data: newDecorationText.copyWith(
+                          text: value,
+                        ),
+                        uuid: textItem.value.uuid,
+                        order: textItem.value.order,
                       );
-                    }
-                    final newDecorationText =
-                        textItem.value.data as DecorationText;
-                    textItem.value = RenderItem<DecorationText>(
-                      transform: textItem.value.transform,
-                      data: newDecorationText.copyWith(
-                        text: value,
+                    },
+                    decoration: InputDecoration(
+                      hintText: 'Aa',
+                      fillColor: decorationText.backgroundColorCode.toColor,
+                      hintStyle: TextStyle(
+                        fontSize: decorationText.fontSize,
+                        color: decorationText.colorCode.toColor,
                       ),
-                      uuid: textItem.value.uuid,
-                      order: textItem.value.order,
-                    );
-                  },
-                  decoration: InputDecoration(
-                    hintText: 'Aa',
-                    hintStyle: TextStyle(
-                      fontSize: decorationText.fontSize,
                     ),
-                  ),
-                  style: decorationText.fontFamily.fontStyle.copyWith(
-                    fontSize: decorationText.fontSize,
+                    maxLines: null,
+                    style: decorationText.fontFamily.fontStyle.copyWith(
+                      fontSize: decorationText.fontSize,
+                      color: decorationText.colorCode.toColor,
+                    ),
                   ),
                 ),
               ),

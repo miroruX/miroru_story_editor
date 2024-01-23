@@ -29,7 +29,7 @@ class TextSizeSliderView extends HookWidget {
             ),
           ),
           child: Slider(
-            max: 80,
+            max: 60,
             min: 14,
             value: sliderValue.value,
             onChanged: (value) {
