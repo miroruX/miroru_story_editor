@@ -33,14 +33,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.11.0"
-  auto_size_text_field:
-    dependency: transitive
-    description:
-      name: auto_size_text_field
-      sha256: d47c81ffa9b61d219f6c50492dc03ea28fa9346561b2ec33b46ccdc000ddb0aa
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.2.2"
   boolean_selector:
     dependency: transitive
     description:

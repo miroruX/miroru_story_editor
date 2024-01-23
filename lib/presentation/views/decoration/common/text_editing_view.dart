@@ -34,19 +34,19 @@ class TextEditingView extends HookWidget {
       text: decorationText.text,
     );
 
-    final focusNode = useFocusNode();
+    // final focusNode = useFocusNode();
 
-    //autoFocusを使うとパフォーマンスが悪くなる[]https://github.com/flutter/flutter/issues/20987
-    useEffect(
-      () {
-        Future.delayed(
-          const Duration(milliseconds: 200),
-          focusNode.requestFocus,
-        );
-        return null;
-      },
-      [],
-    );
+    // //autoFocusを使うとパフォーマンスが悪くなる[]https://github.com/flutter/flutter/issues/20987
+    // useEffect(
+    //   () {
+    //     Future.delayed(
+    //       const Duration(milliseconds: 200),
+    //       focusNode.requestFocus,
+    //     );
+    //     return null;
+    //   },
+    //   [],
+    // );
 
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
@@ -86,7 +86,7 @@ class TextEditingView extends HookWidget {
             Align(
               child: IntrinsicWidth(
                 child: TextField(
-                  focusNode: focusNode,
+                  autofocus: true,
                   controller: textEditingController,
                   decoration: InputDecoration(
                     hintText: 'Aa',
@@ -99,11 +99,6 @@ class TextEditingView extends HookWidget {
                   ),
                 ),
               ),
-            ),
-            Container(
-              height: 60,
-              width: double.infinity,
-              color: Colors.red,
             ),
           ],
         ),
