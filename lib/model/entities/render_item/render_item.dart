@@ -14,6 +14,7 @@ class RenderItem<T extends DecorationItem> with _$RenderItem {
     required Matrix4 transform,
     required T data,
     required int order,
+    @Default(false) bool deletePosition,
   }) = _RenderItem;
   const RenderItem._();
 

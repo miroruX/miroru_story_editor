@@ -13,12 +13,14 @@ class RenderItemWidget extends HookWidget {
     this.onPointerDown,
     required this.onPointerUp,
     required this.onPointerMove,
+    this.deletePosition = false,
   });
 
   final RenderItem item;
   final void Function(PointerDownEvent event)? onPointerDown;
   final void Function(PointerUpEvent event, Matrix4 matrix) onPointerUp;
   final void Function(PointerMoveEvent event, Matrix4 matrix) onPointerMove;
+  final bool deletePosition;
 
   @override
   Widget build(BuildContext context) {
@@ -35,8 +37,10 @@ class RenderItemWidget extends HookWidget {
     );
 
     return AnimatedAlignPositioned(
-      duration: Duration.zero,
-      matrix4Transform: Matrix4Transform.from(matrixNotifier.value),
+      duration: const Duration(milliseconds: 50),
+      matrix4Transform: Matrix4Transform.from(matrixNotifier.value).scale(
+        deletePosition ? 0.2 : 1,
+      ),
       child: MatrixGestureDetector(
         onMatrixUpdate: (m, t, s, r) {
           matrixNotifier.value = m;

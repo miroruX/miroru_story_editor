@@ -20,6 +20,7 @@ mixin _$RenderItem<T extends DecorationItem> {
   Matrix4 get transform => throw _privateConstructorUsedError;
   T get data => throw _privateConstructorUsedError;
   int get order => throw _privateConstructorUsedError;
+  bool get deletePosition => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $RenderItemCopyWith<T, RenderItem<T>> get copyWith =>
@@ -32,7 +33,8 @@ abstract class $RenderItemCopyWith<T extends DecorationItem, $Res> {
           RenderItem<T> value, $Res Function(RenderItem<T>) then) =
       _$RenderItemCopyWithImpl<T, $Res, RenderItem<T>>;
   @useResult
-  $Res call({String uuid, Matrix4 transform, T data, int order});
+  $Res call(
+      {String uuid, Matrix4 transform, T data, int order, bool deletePosition});
 }
 
 /// @nodoc
@@ -52,6 +54,7 @@ class _$RenderItemCopyWithImpl<T extends DecorationItem, $Res,
     Object? transform = null,
     Object? data = null,
     Object? order = null,
+    Object? deletePosition = null,
   }) {
     return _then(_value.copyWith(
       uuid: null == uuid
@@ -70,6 +73,10 @@ class _$RenderItemCopyWithImpl<T extends DecorationItem, $Res,
           ? _value.order
           : order // ignore: cast_nullable_to_non_nullable
               as int,
+      deletePosition: null == deletePosition
+          ? _value.deletePosition
+          : deletePosition // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -82,7 +89,8 @@ abstract class _$$RenderItemImplCopyWith<T extends DecorationItem, $Res>
       __$$RenderItemImplCopyWithImpl<T, $Res>;
   @override
   @useResult
-  $Res call({String uuid, Matrix4 transform, T data, int order});
+  $Res call(
+      {String uuid, Matrix4 transform, T data, int order, bool deletePosition});
 }
 
 /// @nodoc
@@ -100,6 +108,7 @@ class __$$RenderItemImplCopyWithImpl<T extends DecorationItem, $Res>
     Object? transform = null,
     Object? data = null,
     Object? order = null,
+    Object? deletePosition = null,
   }) {
     return _then(_$RenderItemImpl<T>(
       uuid: null == uuid
@@ -118,6 +127,10 @@ class __$$RenderItemImplCopyWithImpl<T extends DecorationItem, $Res>
           ? _value.order
           : order // ignore: cast_nullable_to_non_nullable
               as int,
+      deletePosition: null == deletePosition
+          ? _value.deletePosition
+          : deletePosition // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -129,7 +142,8 @@ class _$RenderItemImpl<T extends DecorationItem> extends _RenderItem<T> {
       {required this.uuid,
       required this.transform,
       required this.data,
-      required this.order})
+      required this.order,
+      this.deletePosition = false})
       : super._();
 
   @override
@@ -140,10 +154,13 @@ class _$RenderItemImpl<T extends DecorationItem> extends _RenderItem<T> {
   final T data;
   @override
   final int order;
+  @override
+  @JsonKey()
+  final bool deletePosition;
 
   @override
   String toString() {
-    return 'RenderItem<$T>(uuid: $uuid, transform: $transform, data: $data, order: $order)';
+    return 'RenderItem<$T>(uuid: $uuid, transform: $transform, data: $data, order: $order, deletePosition: $deletePosition)';
   }
 
   @override
@@ -155,12 +172,14 @@ class _$RenderItemImpl<T extends DecorationItem> extends _RenderItem<T> {
             (identical(other.transform, transform) ||
                 other.transform == transform) &&
             const DeepCollectionEquality().equals(other.data, data) &&
-            (identical(other.order, order) || other.order == order));
+            (identical(other.order, order) || other.order == order) &&
+            (identical(other.deletePosition, deletePosition) ||
+                other.deletePosition == deletePosition));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, uuid, transform,
-      const DeepCollectionEquality().hash(data), order);
+      const DeepCollectionEquality().hash(data), order, deletePosition);
 
   @JsonKey(ignore: true)
   @override
@@ -174,7 +193,8 @@ abstract class _RenderItem<T extends DecorationItem> extends RenderItem<T> {
       {required final String uuid,
       required final Matrix4 transform,
       required final T data,
-      required final int order}) = _$RenderItemImpl<T>;
+      required final int order,
+      final bool deletePosition}) = _$RenderItemImpl<T>;
   const _RenderItem._() : super._();
 
   @override
@@ -185,6 +205,8 @@ abstract class _RenderItem<T extends DecorationItem> extends RenderItem<T> {
   T get data;
   @override
   int get order;
+  @override
+  bool get deletePosition;
   @override
   @JsonKey(ignore: true)
   _$$RenderItemImplCopyWith<T, _$RenderItemImpl<T>> get copyWith =>

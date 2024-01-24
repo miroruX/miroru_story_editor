@@ -37,14 +37,14 @@ class RainbowCircleGradientPainter extends CustomPainter {
           Colors.red,
         ],
         stops: [
-          0.0, // 赤
-          0.17, // オレンジ
-          0.33, // 黄色
-          0.47, // 緑（狭める）
-          0.6, // 青（狭める）
-          0.73, // 藍色（狭める）
-          0.85, // 紫（狭める）
-          1.0, // 赤
+          0.0,
+          0.17,
+          0.33,
+          0.47,
+          0.6,
+          0.73,
+          0.85,
+          1.0,
         ],
       ).createShader(rect);
 

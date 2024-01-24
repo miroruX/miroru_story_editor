@@ -92,6 +92,7 @@ class PaletteState extends _$PaletteState {
         ...state.historyRenderItems,
       ],
       currentHistoryIndex: 0,
+      isMovingItem: false,
     );
   }
 
@@ -120,6 +121,22 @@ class PaletteState extends _$PaletteState {
   void changeMovingItem(bool isMovingItem) {
     state = state.copyWith(
       isMovingItem: isMovingItem,
+    );
+  }
+
+  void changeDeletePosition(String uuid, bool isDeletePosition) {
+    state = state.copyWith(
+      historyRenderItems: [
+        state.renderItems
+            .map(
+              (item) => item.uuid == uuid
+                  ? item.copyWith(deletePosition: isDeletePosition)
+                  : item,
+            )
+            .toList(),
+        ...state.historyRenderItems,
+      ],
+      currentHistoryIndex: 0,
     );
   }
 }
