@@ -184,10 +184,4 @@ class DecorationWidget extends HookConsumerWidget {
       },
     );
   }
-
-  Future isDeletePosition(
-    RenderItem item,
-  ) async {
-    return item.deletePosition;
-  }
 }
