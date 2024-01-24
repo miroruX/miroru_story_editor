@@ -7,9 +7,11 @@ import 'package:miroru_story_editor/presentation/custom_hooks/use_debounce.dart'
 import 'package:miroru_story_editor/presentation/custom_hooks/use_global_key.dart';
 import 'package:miroru_story_editor/presentation/widgets/custom/center_line_x_widget.dart';
 import 'package:miroru_story_editor/presentation/widgets/custom/center_line_y_widget.dart';
+import 'package:miroru_story_editor/presentation/widgets/decoration/common/decoration_delete_widget.dart';
 import 'package:miroru_story_editor/presentation/widgets/decoration/common/render_item_widget.dart';
 import 'package:miroru_story_editor/util/is_moving_center.dart';
 import 'package:miroru_story_editor/util/is_moving_delete_area.dart';
+import 'package:miroru_story_editor/util/vibration.dart';
 
 class DecorationWidget extends HookConsumerWidget {
   const DecorationWidget({
@@ -116,6 +118,7 @@ class DecorationWidget extends HookConsumerWidget {
 
                     /// アイテムを離したときの処理
                     onPointerUp: (event, matrix) {
+                      Vibration.click();
                       if (isNearDeleteArea.value) {
                         ref
                             .read(paletteStateProvider.notifier)
@@ -168,12 +171,9 @@ class DecorationWidget extends HookConsumerWidget {
                   alignment: Alignment.bottomCenter,
                   child: Padding(
                     padding: const EdgeInsets.only(bottom: 20), // 下部からの距離
-                    child: Icon(
+                    child: DecorationDeleteWidget(
                       key: deleteIconKey,
-                      Icons.delete,
-                      color: isNearDeleteArea.value
-                          ? Colors.red
-                          : Colors.black.withOpacity(0.5),
+                      nearDeleteArea: isNearDeleteArea.value,
                     ),
                   ),
                 ),
