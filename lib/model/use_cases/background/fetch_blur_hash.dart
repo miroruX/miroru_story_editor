@@ -16,9 +16,9 @@ FutureOr<BlurHash> fetchBlurHash(
   if (image == null) {
     throw Exception('image is null');
   }
-  final blurHash = BlurHash.encode(
-    image,
-  );
+
+  final resizedImage = img.copyResize(image, width: 50);
+  final blurHash = BlurHash.encode(resizedImage);
 
   return blurHash;
 }
