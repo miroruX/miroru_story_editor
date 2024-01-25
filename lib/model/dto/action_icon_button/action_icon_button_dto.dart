@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:ionicons/ionicons.dart';
 
@@ -9,7 +10,7 @@ class ActionIconButtonDto with _$ActionIconButtonDto {
   const factory ActionIconButtonDto({
     ButtonStyle? style,
     @Default(Ionicons.ellipsis_horizontal) IconData? ellipsis,
-    @Default(Ionicons.language) IconData? font,
+    @Default(FontAwesomeIcons.a) IconData? font,
   }) = _ActionIconButtonDto;
   const ActionIconButtonDto._();
 }

@@ -117,7 +117,7 @@ class _$ActionIconButtonDtoImpl extends _ActionIconButtonDto {
   const _$ActionIconButtonDtoImpl(
       {this.style,
       this.ellipsis = Ionicons.ellipsis_horizontal,
-      this.font = Ionicons.language})
+      this.font = FontAwesomeIcons.a})
       : super._();
 
   @override
