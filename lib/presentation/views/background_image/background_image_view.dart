@@ -2,7 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matrix_gesture_detector_pro/matrix_gesture_detector_pro.dart';
-import 'package:miroru_story_editor/model/entities/decorations/background_image/background_image.dart';
+import 'package:miroru_story_editor/model/entities/decoration/decorations/background_image/background_image.dart';
 import 'package:miroru_story_editor/model/use_cases/palette/palette_state.dart';
 import 'package:miroru_story_editor/presentation/custom_hooks/use_debounce.dart';
 

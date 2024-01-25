@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:miroru_story_editor/model/entities/decorations/background_image/background_image.dart';
-import 'package:miroru_story_editor/model/entities/decorations/decoration_item.dart';
-import 'package:miroru_story_editor/model/entities/decorations/emoji/decoration_emoji.dart';
-import 'package:miroru_story_editor/model/entities/decorations/text/decoration_text.dart';
+import 'package:miroru_story_editor/model/entities/decoration/decorations/background_image/background_image.dart';
+import 'package:miroru_story_editor/model/entities/decoration/decorations/decoration_item.dart';
+import 'package:miroru_story_editor/model/entities/decoration/decorations/emoji/decoration_emoji.dart';
+import 'package:miroru_story_editor/model/entities/decoration/decorations/text/decoration_text.dart';
 import 'package:miroru_story_editor/presentation/widgets/decoration/text/render_text_widget.dart';
 
 class BuildDecorationHandler extends StatelessWidget {

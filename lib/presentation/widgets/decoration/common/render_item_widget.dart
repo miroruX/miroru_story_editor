@@ -4,7 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matrix4_transform/matrix4_transform.dart';
 import 'package:matrix_gesture_detector_pro/matrix_gesture_detector_pro.dart';
-import 'package:miroru_story_editor/model/entities/render_item/render_item.dart';
+import 'package:miroru_story_editor/model/entities/decoration/render_item/render_item.dart';
 import 'package:miroru_story_editor/model/use_cases/palette/editing_text_item_state.dart';
 import 'package:miroru_story_editor/presentation/views/decoration/handler/build_decoration_handler_view.dart';
 

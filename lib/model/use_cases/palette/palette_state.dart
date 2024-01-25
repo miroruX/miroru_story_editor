@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:miroru_story_editor/model/entities/decorations/background_image/background_image.dart';
-import 'package:miroru_story_editor/model/entities/decorations/decoration_item.dart';
-import 'package:miroru_story_editor/model/entities/palette/palette.dart';
-import 'package:miroru_story_editor/model/entities/render_item/render_item.dart';
+import 'package:miroru_story_editor/model/entities/decoration/decoration_palette/decoration_palette.dart';
+import 'package:miroru_story_editor/model/entities/decoration/decorations/background_image/background_image.dart';
+import 'package:miroru_story_editor/model/entities/decoration/decorations/decoration_item.dart';
+import 'package:miroru_story_editor/model/entities/decoration/render_item/render_item.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:uuid/uuid.dart';
 
@@ -11,8 +11,8 @@ part 'palette_state.g.dart';
 @Riverpod(keepAlive: true)
 class PaletteState extends _$PaletteState {
   @override
-  Palette build() {
-    return Palette(
+  DecorationPalette build() {
+    return DecorationPalette(
       historyRenderItems: [
         [
           RenderItem<DecorationBackgroundImage>(

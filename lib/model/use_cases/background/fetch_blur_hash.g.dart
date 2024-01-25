@@ -6,7 +6,7 @@ part of 'fetch_blur_hash.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$fetchBlurHashHash() => r'14050ab8b5ab19eb7ab0508b8f7112bb9b0894d1';
+String _$fetchBlurHashHash() => r'f4bbffcd1218c63987609b5dafdf3f07e1e1b3a8';
 
 /// Copied from Dart SDK
 class _SystemHash {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:miroru_story_editor/extensions/string_extension.dart';
-import 'package:miroru_story_editor/model/entities/decorations/text/decoration_text.dart';
+import 'package:miroru_story_editor/model/entities/decoration/decorations/text/decoration_text.dart';
 
 class RenderTextWidget extends StatelessWidget {
   const RenderTextWidget({

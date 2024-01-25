@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'palette.dart';
+part of 'decoration_palette.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$Palette {
+mixin _$DecorationPalette {
   List<List<RenderItem<DecorationItem>>> get historyRenderItems =>
       throw _privateConstructorUsedError;
   bool get isEditingText => throw _privateConstructorUsedError;
@@ -23,13 +23,15 @@ mixin _$Palette {
   int get currentHistoryIndex => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $PaletteCopyWith<Palette> get copyWith => throw _privateConstructorUsedError;
+  $DecorationPaletteCopyWith<DecorationPalette> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $PaletteCopyWith<$Res> {
-  factory $PaletteCopyWith(Palette value, $Res Function(Palette) then) =
-      _$PaletteCopyWithImpl<$Res, Palette>;
+abstract class $DecorationPaletteCopyWith<$Res> {
+  factory $DecorationPaletteCopyWith(
+          DecorationPalette value, $Res Function(DecorationPalette) then) =
+      _$DecorationPaletteCopyWithImpl<$Res, DecorationPalette>;
   @useResult
   $Res call(
       {List<List<RenderItem<DecorationItem>>> historyRenderItems,
@@ -39,9 +41,9 @@ abstract class $PaletteCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$PaletteCopyWithImpl<$Res, $Val extends Palette>
-    implements $PaletteCopyWith<$Res> {
-  _$PaletteCopyWithImpl(this._value, this._then);
+class _$DecorationPaletteCopyWithImpl<$Res, $Val extends DecorationPalette>
+    implements $DecorationPaletteCopyWith<$Res> {
+  _$DecorationPaletteCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -78,10 +80,11 @@ class _$PaletteCopyWithImpl<$Res, $Val extends Palette>
 }
 
 /// @nodoc
-abstract class _$$PaletteImplCopyWith<$Res> implements $PaletteCopyWith<$Res> {
-  factory _$$PaletteImplCopyWith(
-          _$PaletteImpl value, $Res Function(_$PaletteImpl) then) =
-      __$$PaletteImplCopyWithImpl<$Res>;
+abstract class _$$DecorationPaletteImplCopyWith<$Res>
+    implements $DecorationPaletteCopyWith<$Res> {
+  factory _$$DecorationPaletteImplCopyWith(_$DecorationPaletteImpl value,
+          $Res Function(_$DecorationPaletteImpl) then) =
+      __$$DecorationPaletteImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -92,11 +95,11 @@ abstract class _$$PaletteImplCopyWith<$Res> implements $PaletteCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$PaletteImplCopyWithImpl<$Res>
-    extends _$PaletteCopyWithImpl<$Res, _$PaletteImpl>
-    implements _$$PaletteImplCopyWith<$Res> {
-  __$$PaletteImplCopyWithImpl(
-      _$PaletteImpl _value, $Res Function(_$PaletteImpl) _then)
+class __$$DecorationPaletteImplCopyWithImpl<$Res>
+    extends _$DecorationPaletteCopyWithImpl<$Res, _$DecorationPaletteImpl>
+    implements _$$DecorationPaletteImplCopyWith<$Res> {
+  __$$DecorationPaletteImplCopyWithImpl(_$DecorationPaletteImpl _value,
+      $Res Function(_$DecorationPaletteImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -107,7 +110,7 @@ class __$$PaletteImplCopyWithImpl<$Res>
     Object? isMovingItem = null,
     Object? currentHistoryIndex = null,
   }) {
-    return _then(_$PaletteImpl(
+    return _then(_$DecorationPaletteImpl(
       historyRenderItems: null == historyRenderItems
           ? _value._historyRenderItems
           : historyRenderItems // ignore: cast_nullable_to_non_nullable
@@ -130,8 +133,8 @@ class __$$PaletteImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$PaletteImpl extends _Palette {
-  const _$PaletteImpl(
+class _$DecorationPaletteImpl extends _DecorationPalette {
+  const _$DecorationPaletteImpl(
       {required final List<List<RenderItem<DecorationItem>>> historyRenderItems,
       this.isEditingText = false,
       this.isMovingItem = false,
@@ -160,14 +163,14 @@ class _$PaletteImpl extends _Palette {
 
   @override
   String toString() {
-    return 'Palette(historyRenderItems: $historyRenderItems, isEditingText: $isEditingText, isMovingItem: $isMovingItem, currentHistoryIndex: $currentHistoryIndex)';
+    return 'DecorationPalette(historyRenderItems: $historyRenderItems, isEditingText: $isEditingText, isMovingItem: $isMovingItem, currentHistoryIndex: $currentHistoryIndex)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$PaletteImpl &&
+            other is _$DecorationPaletteImpl &&
             const DeepCollectionEquality()
                 .equals(other._historyRenderItems, _historyRenderItems) &&
             (identical(other.isEditingText, isEditingText) ||
@@ -189,17 +192,18 @@ class _$PaletteImpl extends _Palette {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$PaletteImplCopyWith<_$PaletteImpl> get copyWith =>
-      __$$PaletteImplCopyWithImpl<_$PaletteImpl>(this, _$identity);
+  _$$DecorationPaletteImplCopyWith<_$DecorationPaletteImpl> get copyWith =>
+      __$$DecorationPaletteImplCopyWithImpl<_$DecorationPaletteImpl>(
+          this, _$identity);
 }
 
-abstract class _Palette extends Palette {
-  const factory _Palette(
+abstract class _DecorationPalette extends DecorationPalette {
+  const factory _DecorationPalette(
       {required final List<List<RenderItem<DecorationItem>>> historyRenderItems,
       final bool isEditingText,
       final bool isMovingItem,
-      final int currentHistoryIndex}) = _$PaletteImpl;
-  const _Palette._() : super._();
+      final int currentHistoryIndex}) = _$DecorationPaletteImpl;
+  const _DecorationPalette._() : super._();
 
   @override
   List<List<RenderItem<DecorationItem>>> get historyRenderItems;
@@ -211,6 +215,6 @@ abstract class _Palette extends Palette {
   int get currentHistoryIndex;
   @override
   @JsonKey(ignore: true)
-  _$$PaletteImplCopyWith<_$PaletteImpl> get copyWith =>
+  _$$DecorationPaletteImplCopyWith<_$DecorationPaletteImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -1,19 +1,18 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:miroru_story_editor/model/entities/decorations/background_image/background_image.dart';
-import 'package:miroru_story_editor/model/entities/decorations/decoration_item.dart';
-import 'package:miroru_story_editor/model/entities/render_item/render_item.dart';
+import 'package:miroru_story_editor/model/entities/decoration/decorations/background_image/background_image.dart';
+import 'package:miroru_story_editor/model/entities/decoration/render_item/render_item.dart';
 
-part 'palette.freezed.dart';
+part 'decoration_palette.freezed.dart';
 
 @freezed
-class Palette with _$Palette {
-  const factory Palette({
+class DecorationPalette with _$DecorationPalette {
+  const factory DecorationPalette({
     required List<List<RenderItem>> historyRenderItems,
     @Default(false) bool isEditingText,
     @Default(false) bool isMovingItem,
     @Default(0) int currentHistoryIndex,
-  }) = _Palette;
-  const Palette._();
+  }) = _DecorationPalette;
+  const DecorationPalette._();
 
   /// 背景画像を含む全てのレンダリングされるアイテム
   List<RenderItem> get renderItems {

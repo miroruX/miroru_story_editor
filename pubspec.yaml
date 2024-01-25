@@ -24,9 +24,6 @@ dependencies:
   riverpod_annotation: ^3.0.0-dev.3
   collection: ^1.18.0
 
-  # ui
-  matrix_gesture_detector_pro: ^1.0.0
-
   # sliver
   sliver_tools: ^0.2.12
 
@@ -48,6 +45,10 @@ dependencies:
   # animation
   align_positioned: ^4.0.0
   matrix4_transform: ^3.0.0
+  matrix_gesture_detector_pro: ^1.0.0
+
+  # paint
+  perfect_freehand: ^2.3.0
 
 dev_dependencies:
   flutter_test:

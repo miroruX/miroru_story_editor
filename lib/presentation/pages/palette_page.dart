@@ -7,8 +7,8 @@ import 'package:miroru_story_editor/model/dto/action_icon_button/action_icon_but
 import 'package:miroru_story_editor/model/dto/back_confirm/story_back_confirm_dto.dart';
 import 'package:miroru_story_editor/model/dto/leading_icon_button/leading_icon_button_dto.dart';
 import 'package:miroru_story_editor/model/dto/next_icon_button/next_icon_button_dto.dart';
-import 'package:miroru_story_editor/model/entities/decorations/background_image/background_image.dart';
-import 'package:miroru_story_editor/model/entities/render_item/render_item.dart';
+import 'package:miroru_story_editor/model/entities/decoration/decorations/background_image/background_image.dart';
+import 'package:miroru_story_editor/model/entities/decoration/render_item/render_item.dart';
 import 'package:miroru_story_editor/model/use_cases/palette/palette_state.dart';
 import 'package:miroru_story_editor/presentation/views/footer_view.dart';
 import 'package:miroru_story_editor/presentation/views/palette_view.dart';

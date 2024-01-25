@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:miroru_story_editor/extensions/color_extension.dart';
 import 'package:miroru_story_editor/extensions/string_extension.dart';
-import 'package:miroru_story_editor/model/entities/decorations/text/decoration_text.dart';
-import 'package:miroru_story_editor/model/entities/render_item/render_item.dart';
+import 'package:miroru_story_editor/model/entities/decoration/decorations/text/decoration_text.dart';
+import 'package:miroru_story_editor/model/entities/decoration/render_item/render_item.dart';
 import 'package:miroru_story_editor/model/enums/font_type.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
