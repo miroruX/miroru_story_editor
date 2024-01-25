@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:miroru_story_editor/model/entities/decoration/decorations/background_image/background_image.dart';
+import 'package:miroru_story_editor/model/entities/decoration/decorations/decoration_item.dart';
 import 'package:miroru_story_editor/model/entities/decoration/render_item/render_item.dart';
 
 part 'decoration_palette.freezed.dart';
@@ -7,7 +8,7 @@ part 'decoration_palette.freezed.dart';
 @freezed
 class DecorationPalette with _$DecorationPalette {
   const factory DecorationPalette({
-    required List<List<RenderItem>> historyRenderItems,
+    required List<List<RenderItem<DecorationItem>>> historyRenderItems,
     @Default(false) bool isEditingText,
     @Default(false) bool isMovingItem,
     @Default(0) int currentHistoryIndex,

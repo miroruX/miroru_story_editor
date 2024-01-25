@@ -256,14 +256,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.4.1"
-  gap:
-    dependency: transitive
-    description:
-      name: gap
-      sha256: f19387d4e32f849394758b91377f9153a1b41d79513ef7668c088c77dbc6955d
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.0.1"
   google_fonts:
     dependency: transitive
     description:
@@ -519,6 +511,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.2.1"
+  perfect_freehand:
+    dependency: transitive
+    description:
+      name: perfect_freehand
+      sha256: "2dd4a89fd1291f2a3312d2e6bbc65c4059d8f4e8086515f2311c4c1162e064d8"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.3.0"
   permission_handler:
     dependency: "direct main"
     description:
