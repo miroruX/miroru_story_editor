@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:miroru_story_editor/model/entities/decorations/text/decoration_text.dart';
 import 'package:miroru_story_editor/model/entities/render_item/render_item.dart';
+import 'package:miroru_story_editor/model/use_cases/palette/editing_text_item_state.dart';
 import 'package:miroru_story_editor/model/use_cases/palette/palette_state.dart';
 import 'package:miroru_story_editor/presentation/custom_hooks/use_debounce.dart';
 import 'package:miroru_story_editor/presentation/custom_hooks/use_global_key.dart';
@@ -105,9 +107,11 @@ class DecorationWidget extends HookConsumerWidget {
               /// 描画するアイテム
               ...renderItems.map(
                 (e) {
+                  final isMovingItem = movingItem.value?.uuid == e.uuid;
+
                   return RenderItemWidget(
                     item: e,
-                    deletePosition: isNearDeleteArea.value,
+                    deletePosition: isNearDeleteArea.value && isMovingItem,
 
                     /// アイテムをタップしたときの処理
                     onPointerDown: (event) {
@@ -119,10 +123,24 @@ class DecorationWidget extends HookConsumerWidget {
                     /// アイテムを離したときの処理
                     onPointerUp: (event, matrix) {
                       Vibration.click();
+                      //移動していないとき
+                      if (e.transform == matrix) {
+                        if (e.isText) {
+                          ref
+                              .read(editingTextItemStateProvider.notifier)
+                              .setItem(
+                                e as RenderItem<DecorationText>,
+                              );
+                          ref
+                              .read(paletteStateProvider.notifier)
+                              .changeEditingText(true);
+                        } else if (e.isEmoji) {}
+                      }
+
                       if (isNearDeleteArea.value) {
                         ref
                             .read(paletteStateProvider.notifier)
-                            .removeRenderItem(e.uuid);
+                            .removeRenderItem(e.uuid!);
                       } else {
                         debounce.onChanged(() {
                           movingItem.value = null;

@@ -50,6 +50,23 @@ class PaletteState extends _$PaletteState {
     );
   }
 
+  /// DecorationItemの更新
+  void updateRenderItem(RenderItem<DecorationItem> renderItem) {
+    state = state.copyWith(
+      historyRenderItems: [
+        state.renderItems
+            .map(
+              (item) => item.uuid == renderItem.uuid ? renderItem : item,
+            )
+            .toList(),
+        ...state.historyRenderItems,
+      ],
+      currentHistoryIndex: 0,
+      isEditingText: false,
+    );
+  }
+
+  /// RenderItemの移動
   void moveRenderItem(RenderItem<DecorationItem> renderItem) {
     if (state.isShowingHistory) {
       final updatedRenderItems = state.renderItems

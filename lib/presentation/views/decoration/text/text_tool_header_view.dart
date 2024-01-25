@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:miroru_story_editor/model/entities/decorations/text/decoration_text.dart';
 import 'package:miroru_story_editor/model/entities/render_item/render_item.dart';
+import 'package:miroru_story_editor/model/use_cases/palette/editing_text_item_state.dart';
 import 'package:miroru_story_editor/model/use_cases/palette/palette_state.dart';
 import 'package:miroru_story_editor/presentation/res/editing_text_theme.dart';
 import 'package:miroru_story_editor/presentation/widgets/decoration/common/color_picker_icon.dart';
@@ -55,9 +56,16 @@ class TextToolHeaderView extends HookConsumerWidget {
 
                 return;
               }
-              ref.read(paletteStateProvider.notifier).addRenderItem(
-                    renderItem,
-                  );
+              if (renderItem.uuid == null) {
+                ref.read(paletteStateProvider.notifier).addRenderItem(
+                      renderItem,
+                    );
+              } else {
+                ref.read(paletteStateProvider.notifier).updateRenderItem(
+                      renderItem,
+                    );
+              }
+              ref.read(editingTextItemStateProvider.notifier).reset();
             },
             child: const Text('完了'),
           ),
