@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:miroru_story_editor/model/dto/action_icon_button/action_icon_button_dto.dart';
 import 'package:miroru_story_editor/model/dto/leading_icon_button/leading_icon_button_dto.dart';
+import 'package:miroru_story_editor/model/use_cases/palette/palette_key.dart';
 import 'package:miroru_story_editor/model/use_cases/palette/palette_state.dart';
 import 'package:miroru_story_editor/presentation/views/background_image/background_image_blur_view.dart';
 import 'package:miroru_story_editor/presentation/views/background_image/background_image_view.dart';
@@ -25,6 +26,7 @@ class PaletteView extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final paletteKey = ref.watch(paletteKeyProvider);
     final isEditingText = ref.watch(
       paletteStateProvider.select((value) => value.isEditingText),
     );
@@ -44,8 +46,8 @@ class PaletteView extends HookConsumerWidget {
     ];
     return ClipRRect(
       borderRadius: BorderRadius.circular(20),
-      child: ColoredBox(
-        color: Colors.white,
+      child: RepaintBoundary(
+        key: paletteKey,
         child: Stack(
           children: [
             const BackgroundBlurImageView(),

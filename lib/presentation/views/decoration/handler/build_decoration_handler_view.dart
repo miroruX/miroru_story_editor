@@ -18,7 +18,11 @@ class BuildDecorationHandler extends StatelessWidget {
     if (item is DecorationBackgroundImage) {
       return const SizedBox();
     } else if (item is DecorationEmoji) {
-      return const SizedBox();
+      final data = item as DecorationEmoji;
+      return Text(
+        data.emoji ?? '',
+        style: const TextStyle(fontSize: 80),
+      );
     } else if (item is DecorationText) {
       return RenderTextWidget(
         decorationText: item as DecorationText,

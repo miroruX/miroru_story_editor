@@ -6,11 +6,7 @@ part 'decoration_emoji.freezed.dart';
 @freezed
 class DecorationEmoji with _$DecorationEmoji implements DecorationItem {
   const factory DecorationEmoji({
-    String? text,
-    double? fontSize,
-    String? fontFamily,
-    String? colorCode,
-    String? backgroundColorCode,
+    String? emoji,
   }) = _DecorationEmoji;
   const DecorationEmoji._();
 }

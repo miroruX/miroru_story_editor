@@ -1,11 +1,15 @@
+import 'package:animated_emoji/animated_emoji.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:miroru_story_editor/model/dto/action_icon_button/action_icon_button_dto.dart';
 import 'package:miroru_story_editor/model/dto/leading_icon_button/leading_icon_button_dto.dart';
+import 'package:miroru_story_editor/model/entities/decorations/emoji/decoration_emoji.dart';
+import 'package:miroru_story_editor/model/entities/render_item/render_item.dart';
 import 'package:miroru_story_editor/model/enums/menu_result_type.dart';
 import 'package:miroru_story_editor/model/use_cases/palette/palette_state.dart';
+import 'package:miroru_story_editor/presentation/bottom_sheet/show_select_emoji_sheet.dart';
 import 'package:miroru_story_editor/presentation/custom_hooks/use_global_key.dart';
 
 class HeaderView extends HookConsumerWidget {
@@ -40,7 +44,9 @@ class HeaderView extends HookConsumerWidget {
             leadingIconButton.back,
           ),
         ),
-        const Spacer(),
+        const SizedBox(
+          width: 12,
+        ),
         IconButton(
           onPressed: canBack
               ? () => ref.read(paletteStateProvider.notifier).backHistory()
@@ -57,6 +63,34 @@ class HeaderView extends HookConsumerWidget {
           style: actionIconButton.style,
           icon: const Icon(
             Ionicons.arrow_forward,
+          ),
+        ),
+        const Spacer(),
+        IconButton(
+          onPressed: () async {
+            final emoji = await showSelectEmojiSheet(
+              context,
+            );
+
+            if (emoji == null) {
+              return;
+            }
+
+            ref.read(paletteStateProvider.notifier).addRenderItem(
+                  RenderItem<DecorationEmoji>(
+                    transform: Matrix4.identity(),
+                    data: DecorationEmoji(
+                      emoji: emoji,
+                    ),
+                    uuid: null,
+                    order: 0,
+                  ),
+                );
+          },
+          style: actionIconButton.style,
+          icon: const AnimatedEmoji(
+            AnimatedEmojis.smile,
+            size: 25,
           ),
         ),
         IconButton(

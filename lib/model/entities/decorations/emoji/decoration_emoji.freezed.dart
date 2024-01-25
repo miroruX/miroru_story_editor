@@ -16,11 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$DecorationEmoji {
-  String? get text => throw _privateConstructorUsedError;
-  double? get fontSize => throw _privateConstructorUsedError;
-  String? get fontFamily => throw _privateConstructorUsedError;
-  String? get colorCode => throw _privateConstructorUsedError;
-  String? get backgroundColorCode => throw _privateConstructorUsedError;
+  String? get emoji => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $DecorationEmojiCopyWith<DecorationEmoji> get copyWith =>
@@ -33,12 +29,7 @@ abstract class $DecorationEmojiCopyWith<$Res> {
           DecorationEmoji value, $Res Function(DecorationEmoji) then) =
       _$DecorationEmojiCopyWithImpl<$Res, DecorationEmoji>;
   @useResult
-  $Res call(
-      {String? text,
-      double? fontSize,
-      String? fontFamily,
-      String? colorCode,
-      String? backgroundColorCode});
+  $Res call({String? emoji});
 }
 
 /// @nodoc
@@ -54,32 +45,12 @@ class _$DecorationEmojiCopyWithImpl<$Res, $Val extends DecorationEmoji>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? text = freezed,
-    Object? fontSize = freezed,
-    Object? fontFamily = freezed,
-    Object? colorCode = freezed,
-    Object? backgroundColorCode = freezed,
+    Object? emoji = freezed,
   }) {
     return _then(_value.copyWith(
-      text: freezed == text
-          ? _value.text
-          : text // ignore: cast_nullable_to_non_nullable
-              as String?,
-      fontSize: freezed == fontSize
-          ? _value.fontSize
-          : fontSize // ignore: cast_nullable_to_non_nullable
-              as double?,
-      fontFamily: freezed == fontFamily
-          ? _value.fontFamily
-          : fontFamily // ignore: cast_nullable_to_non_nullable
-              as String?,
-      colorCode: freezed == colorCode
-          ? _value.colorCode
-          : colorCode // ignore: cast_nullable_to_non_nullable
-              as String?,
-      backgroundColorCode: freezed == backgroundColorCode
-          ? _value.backgroundColorCode
-          : backgroundColorCode // ignore: cast_nullable_to_non_nullable
+      emoji: freezed == emoji
+          ? _value.emoji
+          : emoji // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -93,12 +64,7 @@ abstract class _$$DecorationEmojiImplCopyWith<$Res>
       __$$DecorationEmojiImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String? text,
-      double? fontSize,
-      String? fontFamily,
-      String? colorCode,
-      String? backgroundColorCode});
+  $Res call({String? emoji});
 }
 
 /// @nodoc
@@ -112,32 +78,12 @@ class __$$DecorationEmojiImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? text = freezed,
-    Object? fontSize = freezed,
-    Object? fontFamily = freezed,
-    Object? colorCode = freezed,
-    Object? backgroundColorCode = freezed,
+    Object? emoji = freezed,
   }) {
     return _then(_$DecorationEmojiImpl(
-      text: freezed == text
-          ? _value.text
-          : text // ignore: cast_nullable_to_non_nullable
-              as String?,
-      fontSize: freezed == fontSize
-          ? _value.fontSize
-          : fontSize // ignore: cast_nullable_to_non_nullable
-              as double?,
-      fontFamily: freezed == fontFamily
-          ? _value.fontFamily
-          : fontFamily // ignore: cast_nullable_to_non_nullable
-              as String?,
-      colorCode: freezed == colorCode
-          ? _value.colorCode
-          : colorCode // ignore: cast_nullable_to_non_nullable
-              as String?,
-      backgroundColorCode: freezed == backgroundColorCode
-          ? _value.backgroundColorCode
-          : backgroundColorCode // ignore: cast_nullable_to_non_nullable
+      emoji: freezed == emoji
+          ? _value.emoji
+          : emoji // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -146,28 +92,14 @@ class __$$DecorationEmojiImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$DecorationEmojiImpl extends _DecorationEmoji {
-  const _$DecorationEmojiImpl(
-      {this.text,
-      this.fontSize,
-      this.fontFamily,
-      this.colorCode,
-      this.backgroundColorCode})
-      : super._();
+  const _$DecorationEmojiImpl({this.emoji}) : super._();
 
   @override
-  final String? text;
-  @override
-  final double? fontSize;
-  @override
-  final String? fontFamily;
-  @override
-  final String? colorCode;
-  @override
-  final String? backgroundColorCode;
+  final String? emoji;
 
   @override
   String toString() {
-    return 'DecorationEmoji(text: $text, fontSize: $fontSize, fontFamily: $fontFamily, colorCode: $colorCode, backgroundColorCode: $backgroundColorCode)';
+    return 'DecorationEmoji(emoji: $emoji)';
   }
 
   @override
@@ -175,20 +107,11 @@ class _$DecorationEmojiImpl extends _DecorationEmoji {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$DecorationEmojiImpl &&
-            (identical(other.text, text) || other.text == text) &&
-            (identical(other.fontSize, fontSize) ||
-                other.fontSize == fontSize) &&
-            (identical(other.fontFamily, fontFamily) ||
-                other.fontFamily == fontFamily) &&
-            (identical(other.colorCode, colorCode) ||
-                other.colorCode == colorCode) &&
-            (identical(other.backgroundColorCode, backgroundColorCode) ||
-                other.backgroundColorCode == backgroundColorCode));
+            (identical(other.emoji, emoji) || other.emoji == emoji));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, text, fontSize, fontFamily, colorCode, backgroundColorCode);
+  int get hashCode => Object.hash(runtimeType, emoji);
 
   @JsonKey(ignore: true)
   @override
@@ -199,24 +122,11 @@ class _$DecorationEmojiImpl extends _DecorationEmoji {
 }
 
 abstract class _DecorationEmoji extends DecorationEmoji {
-  const factory _DecorationEmoji(
-      {final String? text,
-      final double? fontSize,
-      final String? fontFamily,
-      final String? colorCode,
-      final String? backgroundColorCode}) = _$DecorationEmojiImpl;
+  const factory _DecorationEmoji({final String? emoji}) = _$DecorationEmojiImpl;
   const _DecorationEmoji._() : super._();
 
   @override
-  String? get text;
-  @override
-  double? get fontSize;
-  @override
-  String? get fontFamily;
-  @override
-  String? get colorCode;
-  @override
-  String? get backgroundColorCode;
+  String? get emoji;
   @override
   @JsonKey(ignore: true)
   _$$DecorationEmojiImplCopyWith<_$DecorationEmojiImpl> get copyWith =>
