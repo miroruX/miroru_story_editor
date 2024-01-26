@@ -125,6 +125,7 @@ class DecorationWidget extends HookConsumerWidget {
 
                       /// アイテムをタップしたときの処理
                       onPointerDown: (event) {
+                        Vibration.call();
                         ref
                             .read(paletteStateProvider.notifier)
                             .changeMovingItem(true);

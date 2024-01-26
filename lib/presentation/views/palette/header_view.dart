@@ -11,6 +11,7 @@ import 'package:miroru_story_editor/model/use_cases/decoration/decoration_palett
 import 'package:miroru_story_editor/model/use_cases/palette/palette_state.dart';
 import 'package:miroru_story_editor/presentation/bottom_sheet/show_select_emoji_sheet.dart';
 import 'package:miroru_story_editor/presentation/custom_hooks/use_global_key.dart';
+import 'package:miroru_story_editor/util/vibration.dart';
 
 class HeaderView extends HookConsumerWidget {
   const HeaderView({
@@ -37,6 +38,7 @@ class HeaderView extends HookConsumerWidget {
       children: [
         IconButton(
           onPressed: () {
+            Vibration.call();
             Navigator.of(context).pop();
           },
           // style: leadingIconButton.style,
@@ -49,9 +51,12 @@ class HeaderView extends HookConsumerWidget {
         ),
         IconButton(
           onPressed: canBack
-              ? () => ref
-                  .read(decorationPaletteStateProvider.notifier)
-                  .backHistory()
+              ? () {
+                  Vibration.call();
+                  ref
+                      .read(decorationPaletteStateProvider.notifier)
+                      .backHistory();
+                }
               : null,
           // style: actionIconButton.style,
           icon: const Icon(
@@ -60,9 +65,12 @@ class HeaderView extends HookConsumerWidget {
         ),
         IconButton(
           onPressed: canNext
-              ? () => ref
-                  .read(decorationPaletteStateProvider.notifier)
-                  .nextHistory()
+              ? () {
+                  Vibration.call();
+                  ref
+                      .read(decorationPaletteStateProvider.notifier)
+                      .nextHistory();
+                }
               : null,
           // style: actionIconButton.style,
           icon: const Icon(
@@ -72,6 +80,7 @@ class HeaderView extends HookConsumerWidget {
         const Spacer(),
         IconButton(
           onPressed: () async {
+            await Vibration.call();
             final emoji = await showSelectEmojiSheet(
               context,
             );
@@ -98,8 +107,10 @@ class HeaderView extends HookConsumerWidget {
           ),
         ),
         IconButton(
-          onPressed: () =>
-              ref.read(paletteStateProvider.notifier).changeEditingText(true),
+          onPressed: () {
+            Vibration.call();
+            ref.read(paletteStateProvider.notifier).changeEditingText(true);
+          },
           style: actionIconButton.style,
           icon: Icon(
             actionIconButton.font,
@@ -108,6 +119,7 @@ class HeaderView extends HookConsumerWidget {
         IconButton(
           key: iconButtonKey,
           onPressed: () async {
+            await Vibration.call();
             final res = await _showPopupMenu(context, iconButtonKey);
             if (res == MenuFeatureType.paint) {
               ref.read(paletteStateProvider.notifier).changePainting(true);

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:miroru_story_editor/model/dto/next_icon_button/next_icon_button_dto.dart';
+import 'package:miroru_story_editor/util/vibration.dart';
 
 class FooterView extends StatelessWidget {
   const FooterView({
@@ -14,7 +15,7 @@ class FooterView extends StatelessWidget {
       children: [
         const Spacer(),
         IconButton(
-          onPressed: () {},
+          onPressed: Vibration.call,
           style: nextIconButton.style ??
               IconButton.styleFrom(
                 backgroundColor: Colors.white,

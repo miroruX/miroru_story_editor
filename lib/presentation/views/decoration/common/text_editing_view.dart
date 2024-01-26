@@ -12,6 +12,7 @@ import 'package:miroru_story_editor/presentation/views/decoration/text/text_tool
 import 'package:miroru_story_editor/presentation/widgets/decoration/text/color_list_selector_view.dart';
 import 'package:miroru_story_editor/presentation/widgets/decoration/text/font_list_selector_view.dart';
 import 'package:miroru_story_editor/presentation/widgets/decoration/text/text_size_slider_widget.dart';
+import 'package:miroru_story_editor/util/vibration.dart';
 
 class TextEditingView extends HookConsumerWidget {
   const TextEditingView({
@@ -64,23 +65,33 @@ class TextEditingView extends HookConsumerWidget {
               child: TextToolHeaderView(
                 renderItem: textItem,
                 onColor: () {
+                  Vibration.call();
                   isColorEditing.value = !isColorEditing.value;
                 },
-                changeTextAlign: ref
-                    .read(editingTextItemStateProvider.notifier)
-                    .changeTextAlign,
-                changeFillColor: ref
-                    .read(editingTextItemStateProvider.notifier)
-                    .changeFillColor,
+                changeTextAlign: () {
+                  Vibration.call();
+                  ref
+                      .read(editingTextItemStateProvider.notifier)
+                      .changeTextAlign();
+                },
+                changeFillColor: () {
+                  Vibration.call();
+                  ref
+                      .read(editingTextItemStateProvider.notifier)
+                      .changeFillColor();
+                },
               ),
             ),
             Align(
               alignment: Alignment.centerLeft,
               child: TextSizeSliderWidget(
                 fontSize: decorationText.fontSize ?? 20,
-                onChangeFontSize: ref
-                    .read(editingTextItemStateProvider.notifier)
-                    .changeFontSize,
+                onChangeFontSize: (size) {
+                  Vibration.call();
+                  ref
+                      .read(editingTextItemStateProvider.notifier)
+                      .changeFontSize(size);
+                },
               ),
             ),
             Align(
@@ -118,14 +129,20 @@ class TextEditingView extends HookConsumerWidget {
                 child: isColorEditing.value
                     ? ColorListSelectorWidget(
                         selectedColor: decorationText.colorCode.toColor,
-                        onChangeColor: ref
-                            .read(editingTextItemStateProvider.notifier)
-                            .changeTextColor,
+                        onChangeColor: (color) {
+                          Vibration.call();
+                          ref
+                              .read(editingTextItemStateProvider.notifier)
+                              .changeTextColor(color);
+                        },
                       )
                     : FontListSelectorWidget(
-                        onChangeFontName: ref
-                            .read(editingTextItemStateProvider.notifier)
-                            .changeFontFamily,
+                        onChangeFontName: (font) {
+                          Vibration.call();
+                          ref
+                              .read(editingTextItemStateProvider.notifier)
+                              .changeFontFamily(font);
+                        },
                       ),
               ),
             ),

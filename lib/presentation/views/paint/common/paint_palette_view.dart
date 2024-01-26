@@ -10,6 +10,7 @@ import 'package:miroru_story_editor/model/use_cases/palette/palette_state.dart';
 import 'package:miroru_story_editor/presentation/views/paint/common/paint_tool_header_view.dart';
 import 'package:miroru_story_editor/presentation/widgets/decoration/text/color_list_selector_view.dart';
 import 'package:miroru_story_editor/presentation/widgets/paint/line_painter.dart';
+import 'package:miroru_story_editor/util/vibration.dart';
 import 'package:perfect_freehand/perfect_freehand.dart';
 
 // [参考]https://pub.dev/packages/perfect_freehand/example
@@ -132,8 +133,12 @@ class PaintPaletteView extends HookConsumerWidget {
               padding: const EdgeInsets.only(bottom: 8),
               child: ColorListSelectorWidget(
                 selectedColor: selectedColor,
-                onChangeColor:
-                    ref.read(paintPaletteStateProvider.notifier).changeColor,
+                onChangeColor: (color) {
+                  Vibration.call();
+                  ref
+                      .read(paintPaletteStateProvider.notifier)
+                      .changeColor(color);
+                },
               ),
             ),
           ),
