@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:miroru_story_editor/model/entities/decoration/decorations/text/decoration_text.dart';
 import 'package:miroru_story_editor/model/entities/decoration/render_item/render_item.dart';
+import 'package:miroru_story_editor/model/use_cases/decoration/decoration_palette_state.dart';
 import 'package:miroru_story_editor/model/use_cases/palette/editing_text_item_state.dart';
 import 'package:miroru_story_editor/model/use_cases/palette/palette_state.dart';
 import 'package:miroru_story_editor/presentation/res/editing_text_theme.dart';
@@ -57,11 +58,13 @@ class TextToolHeaderView extends HookConsumerWidget {
                 return;
               }
               if (renderItem.uuid == null) {
-                ref.read(paletteStateProvider.notifier).addRenderItem(
+                ref.read(decorationPaletteStateProvider.notifier).addRenderItem(
                       renderItem,
                     );
               } else {
-                ref.read(paletteStateProvider.notifier).updateRenderItem(
+                ref
+                    .read(decorationPaletteStateProvider.notifier)
+                    .updateRenderItem(
                       renderItem,
                     );
               }

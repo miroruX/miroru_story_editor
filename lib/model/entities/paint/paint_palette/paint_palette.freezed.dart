@@ -16,9 +16,8 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$PaintPalette {
-  List<PaintLine> get lines => throw _privateConstructorUsedError;
   BrushType get brushType => throw _privateConstructorUsedError;
-  String? get colorCode => throw _privateConstructorUsedError;
+  Color get color => throw _privateConstructorUsedError;
   StrokeOptions? get strokeOptions => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -32,11 +31,7 @@ abstract class $PaintPaletteCopyWith<$Res> {
           PaintPalette value, $Res Function(PaintPalette) then) =
       _$PaintPaletteCopyWithImpl<$Res, PaintPalette>;
   @useResult
-  $Res call(
-      {List<PaintLine> lines,
-      BrushType brushType,
-      String? colorCode,
-      StrokeOptions? strokeOptions});
+  $Res call({BrushType brushType, Color color, StrokeOptions? strokeOptions});
 }
 
 /// @nodoc
@@ -52,24 +47,19 @@ class _$PaintPaletteCopyWithImpl<$Res, $Val extends PaintPalette>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? lines = null,
     Object? brushType = null,
-    Object? colorCode = freezed,
+    Object? color = null,
     Object? strokeOptions = freezed,
   }) {
     return _then(_value.copyWith(
-      lines: null == lines
-          ? _value.lines
-          : lines // ignore: cast_nullable_to_non_nullable
-              as List<PaintLine>,
       brushType: null == brushType
           ? _value.brushType
           : brushType // ignore: cast_nullable_to_non_nullable
               as BrushType,
-      colorCode: freezed == colorCode
-          ? _value.colorCode
-          : colorCode // ignore: cast_nullable_to_non_nullable
-              as String?,
+      color: null == color
+          ? _value.color
+          : color // ignore: cast_nullable_to_non_nullable
+              as Color,
       strokeOptions: freezed == strokeOptions
           ? _value.strokeOptions
           : strokeOptions // ignore: cast_nullable_to_non_nullable
@@ -86,11 +76,7 @@ abstract class _$$PaintPaletteImplCopyWith<$Res>
       __$$PaintPaletteImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {List<PaintLine> lines,
-      BrushType brushType,
-      String? colorCode,
-      StrokeOptions? strokeOptions});
+  $Res call({BrushType brushType, Color color, StrokeOptions? strokeOptions});
 }
 
 /// @nodoc
@@ -104,24 +90,19 @@ class __$$PaintPaletteImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? lines = null,
     Object? brushType = null,
-    Object? colorCode = freezed,
+    Object? color = null,
     Object? strokeOptions = freezed,
   }) {
     return _then(_$PaintPaletteImpl(
-      lines: null == lines
-          ? _value._lines
-          : lines // ignore: cast_nullable_to_non_nullable
-              as List<PaintLine>,
       brushType: null == brushType
           ? _value.brushType
           : brushType // ignore: cast_nullable_to_non_nullable
               as BrushType,
-      colorCode: freezed == colorCode
-          ? _value.colorCode
-          : colorCode // ignore: cast_nullable_to_non_nullable
-              as String?,
+      color: null == color
+          ? _value.color
+          : color // ignore: cast_nullable_to_non_nullable
+              as Color,
       strokeOptions: freezed == strokeOptions
           ? _value.strokeOptions
           : strokeOptions // ignore: cast_nullable_to_non_nullable
@@ -134,32 +115,23 @@ class __$$PaintPaletteImplCopyWithImpl<$Res>
 
 class _$PaintPaletteImpl extends _PaintPalette {
   const _$PaintPaletteImpl(
-      {required final List<PaintLine> lines,
-      this.brushType = BrushType.pen,
-      this.colorCode,
+      {this.brushType = BrushType.pen,
+      this.color = Colors.black,
       this.strokeOptions})
-      : _lines = lines,
-        super._();
-
-  final List<PaintLine> _lines;
-  @override
-  List<PaintLine> get lines {
-    if (_lines is EqualUnmodifiableListView) return _lines;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_lines);
-  }
+      : super._();
 
   @override
   @JsonKey()
   final BrushType brushType;
   @override
-  final String? colorCode;
+  @JsonKey()
+  final Color color;
   @override
   final StrokeOptions? strokeOptions;
 
   @override
   String toString() {
-    return 'PaintPalette(lines: $lines, brushType: $brushType, colorCode: $colorCode, strokeOptions: $strokeOptions)';
+    return 'PaintPalette(brushType: $brushType, color: $color, strokeOptions: $strokeOptions)';
   }
 
   @override
@@ -167,22 +139,15 @@ class _$PaintPaletteImpl extends _PaintPalette {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PaintPaletteImpl &&
-            const DeepCollectionEquality().equals(other._lines, _lines) &&
             (identical(other.brushType, brushType) ||
                 other.brushType == brushType) &&
-            (identical(other.colorCode, colorCode) ||
-                other.colorCode == colorCode) &&
+            (identical(other.color, color) || other.color == color) &&
             (identical(other.strokeOptions, strokeOptions) ||
                 other.strokeOptions == strokeOptions));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(_lines),
-      brushType,
-      colorCode,
-      strokeOptions);
+  int get hashCode => Object.hash(runtimeType, brushType, color, strokeOptions);
 
   @JsonKey(ignore: true)
   @override
@@ -193,18 +158,15 @@ class _$PaintPaletteImpl extends _PaintPalette {
 
 abstract class _PaintPalette extends PaintPalette {
   const factory _PaintPalette(
-      {required final List<PaintLine> lines,
-      final BrushType brushType,
-      final String? colorCode,
+      {final BrushType brushType,
+      final Color color,
       final StrokeOptions? strokeOptions}) = _$PaintPaletteImpl;
   const _PaintPalette._() : super._();
 
   @override
-  List<PaintLine> get lines;
-  @override
   BrushType get brushType;
   @override
-  String? get colorCode;
+  Color get color;
   @override
   StrokeOptions? get strokeOptions;
   @override

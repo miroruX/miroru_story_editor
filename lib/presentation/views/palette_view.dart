@@ -54,10 +54,10 @@ class PaletteView extends HookConsumerWidget {
             const BackgroundBlurImageView(),
             const BackgroundImageView(),
             const PaintPaletteView(),
-            // const DecorationWidget(),
-            // if (isEditingText) ...[
-            //   ...editingView,
-            // ],
+            const DecorationWidget(),
+            if (isEditingText) ...[
+              ...editingView,
+            ],
             if (isShowHeader) ...[
               Align(
                 alignment: Alignment.topCenter,

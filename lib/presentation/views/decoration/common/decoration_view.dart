@@ -3,6 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:miroru_story_editor/model/entities/decoration/decorations/text/decoration_text.dart';
 import 'package:miroru_story_editor/model/entities/decoration/render_item/render_item.dart';
+import 'package:miroru_story_editor/model/use_cases/decoration/decoration_palette_state.dart';
 import 'package:miroru_story_editor/model/use_cases/palette/editing_text_item_state.dart';
 import 'package:miroru_story_editor/model/use_cases/palette/palette_state.dart';
 import 'package:miroru_story_editor/presentation/custom_hooks/use_debounce.dart';
@@ -22,8 +23,9 @@ class DecorationWidget extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final renderItems =
-        ref.watch(paletteStateProvider).renderItemsWithoutBackgroundImage;
+    final renderItems = ref
+        .watch(decorationPaletteStateProvider)
+        .renderItemsWithoutBackgroundImage;
 
     final isMoving = ref.watch(paletteStateProvider).isMovingItem;
     final movingItem = useState<RenderItem?>(null);
@@ -139,14 +141,14 @@ class DecorationWidget extends HookConsumerWidget {
 
                       if (isNearDeleteArea.value) {
                         ref
-                            .read(paletteStateProvider.notifier)
+                            .read(decorationPaletteStateProvider.notifier)
                             .removeRenderItem(e.uuid!);
                       } else {
                         debounce.onChanged(() {
                           movingItem.value = null;
                           pointer.value = null;
                           ref
-                              .read(paletteStateProvider.notifier)
+                              .read(decorationPaletteStateProvider.notifier)
                               .moveRenderItem(
                                 e.copyWith(
                                   transform: matrix,

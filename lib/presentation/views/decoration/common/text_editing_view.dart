@@ -5,6 +5,7 @@ import 'package:miroru_story_editor/extensions/context_extension.dart';
 import 'package:miroru_story_editor/extensions/string_extension.dart';
 import 'package:miroru_story_editor/model/entities/decoration/decorations/text/decoration_text.dart';
 import 'package:miroru_story_editor/model/entities/decoration/render_item/render_item.dart';
+import 'package:miroru_story_editor/model/use_cases/decoration/decoration_palette_state.dart';
 import 'package:miroru_story_editor/model/use_cases/palette/editing_text_item_state.dart';
 import 'package:miroru_story_editor/model/use_cases/palette/palette_state.dart';
 import 'package:miroru_story_editor/presentation/views/decoration/text/text_size_slider_view.dart';
@@ -44,11 +45,11 @@ class TextEditingView extends HookConsumerWidget {
         }
 
         if (textItem.uuid == null) {
-          ref.read(paletteStateProvider.notifier).addRenderItem(
+          ref.read(decorationPaletteStateProvider.notifier).addRenderItem(
                 textItem,
               );
         } else {
-          ref.read(paletteStateProvider.notifier).updateRenderItem(
+          ref.read(decorationPaletteStateProvider.notifier).updateRenderItem(
                 textItem,
               );
         }

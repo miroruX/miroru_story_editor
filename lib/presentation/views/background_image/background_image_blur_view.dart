@@ -3,7 +3,7 @@ import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:miroru_story_editor/model/entities/decoration/decorations/background_image/background_image.dart';
 import 'package:miroru_story_editor/model/use_cases/background/fetch_blur_hash.dart';
-import 'package:miroru_story_editor/model/use_cases/palette/palette_state.dart';
+import 'package:miroru_story_editor/model/use_cases/decoration/decoration_palette_state.dart';
 
 class BackgroundBlurImageView extends HookConsumerWidget {
   const BackgroundBlurImageView({
@@ -11,7 +11,7 @@ class BackgroundBlurImageView extends HookConsumerWidget {
   });
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final image = ref.watch(paletteStateProvider).backgroundImage;
+    final image = ref.watch(decorationPaletteStateProvider).backgroundImage;
     final data = image.data as DecorationBackgroundImage;
 
     if (data.backgroundImageFile == null) {

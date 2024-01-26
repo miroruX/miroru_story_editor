@@ -18,6 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$PaintLine {
   List<PointVector> get points => throw _privateConstructorUsedError;
   StrokeOptions? get strokeOptions => throw _privateConstructorUsedError;
+  Color get color => throw _privateConstructorUsedError;
+  BrushType get brushType => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PaintLineCopyWith<PaintLine> get copyWith =>
@@ -29,7 +31,11 @@ abstract class $PaintLineCopyWith<$Res> {
   factory $PaintLineCopyWith(PaintLine value, $Res Function(PaintLine) then) =
       _$PaintLineCopyWithImpl<$Res, PaintLine>;
   @useResult
-  $Res call({List<PointVector> points, StrokeOptions? strokeOptions});
+  $Res call(
+      {List<PointVector> points,
+      StrokeOptions? strokeOptions,
+      Color color,
+      BrushType brushType});
 }
 
 /// @nodoc
@@ -47,6 +53,8 @@ class _$PaintLineCopyWithImpl<$Res, $Val extends PaintLine>
   $Res call({
     Object? points = null,
     Object? strokeOptions = freezed,
+    Object? color = null,
+    Object? brushType = null,
   }) {
     return _then(_value.copyWith(
       points: null == points
@@ -57,6 +65,14 @@ class _$PaintLineCopyWithImpl<$Res, $Val extends PaintLine>
           ? _value.strokeOptions
           : strokeOptions // ignore: cast_nullable_to_non_nullable
               as StrokeOptions?,
+      color: null == color
+          ? _value.color
+          : color // ignore: cast_nullable_to_non_nullable
+              as Color,
+      brushType: null == brushType
+          ? _value.brushType
+          : brushType // ignore: cast_nullable_to_non_nullable
+              as BrushType,
     ) as $Val);
   }
 }
@@ -69,7 +85,11 @@ abstract class _$$PaintLineImplCopyWith<$Res>
       __$$PaintLineImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<PointVector> points, StrokeOptions? strokeOptions});
+  $Res call(
+      {List<PointVector> points,
+      StrokeOptions? strokeOptions,
+      Color color,
+      BrushType brushType});
 }
 
 /// @nodoc
@@ -85,6 +105,8 @@ class __$$PaintLineImplCopyWithImpl<$Res>
   $Res call({
     Object? points = null,
     Object? strokeOptions = freezed,
+    Object? color = null,
+    Object? brushType = null,
   }) {
     return _then(_$PaintLineImpl(
       points: null == points
@@ -95,6 +117,14 @@ class __$$PaintLineImplCopyWithImpl<$Res>
           ? _value.strokeOptions
           : strokeOptions // ignore: cast_nullable_to_non_nullable
               as StrokeOptions?,
+      color: null == color
+          ? _value.color
+          : color // ignore: cast_nullable_to_non_nullable
+              as Color,
+      brushType: null == brushType
+          ? _value.brushType
+          : brushType // ignore: cast_nullable_to_non_nullable
+              as BrushType,
     ));
   }
 }
@@ -103,7 +133,10 @@ class __$$PaintLineImplCopyWithImpl<$Res>
 
 class _$PaintLineImpl extends _PaintLine {
   const _$PaintLineImpl(
-      {final List<PointVector> points = const [], this.strokeOptions})
+      {final List<PointVector> points = const [],
+      this.strokeOptions,
+      this.color = Colors.black,
+      this.brushType = BrushType.pen})
       : _points = points,
         super._();
 
@@ -118,10 +151,16 @@ class _$PaintLineImpl extends _PaintLine {
 
   @override
   final StrokeOptions? strokeOptions;
+  @override
+  @JsonKey()
+  final Color color;
+  @override
+  @JsonKey()
+  final BrushType brushType;
 
   @override
   String toString() {
-    return 'PaintLine(points: $points, strokeOptions: $strokeOptions)';
+    return 'PaintLine(points: $points, strokeOptions: $strokeOptions, color: $color, brushType: $brushType)';
   }
 
   @override
@@ -131,12 +170,19 @@ class _$PaintLineImpl extends _PaintLine {
             other is _$PaintLineImpl &&
             const DeepCollectionEquality().equals(other._points, _points) &&
             (identical(other.strokeOptions, strokeOptions) ||
-                other.strokeOptions == strokeOptions));
+                other.strokeOptions == strokeOptions) &&
+            (identical(other.color, color) || other.color == color) &&
+            (identical(other.brushType, brushType) ||
+                other.brushType == brushType));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_points), strokeOptions);
+      runtimeType,
+      const DeepCollectionEquality().hash(_points),
+      strokeOptions,
+      color,
+      brushType);
 
   @JsonKey(ignore: true)
   @override
@@ -148,13 +194,19 @@ class _$PaintLineImpl extends _PaintLine {
 abstract class _PaintLine extends PaintLine {
   const factory _PaintLine(
       {final List<PointVector> points,
-      final StrokeOptions? strokeOptions}) = _$PaintLineImpl;
+      final StrokeOptions? strokeOptions,
+      final Color color,
+      final BrushType brushType}) = _$PaintLineImpl;
   const _PaintLine._() : super._();
 
   @override
   List<PointVector> get points;
   @override
   StrokeOptions? get strokeOptions;
+  @override
+  Color get color;
+  @override
+  BrushType get brushType;
   @override
   @JsonKey(ignore: true)
   _$$PaintLineImplCopyWith<_$PaintLineImpl> get copyWith =>

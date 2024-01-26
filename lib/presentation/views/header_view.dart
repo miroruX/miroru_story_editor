@@ -8,6 +8,7 @@ import 'package:miroru_story_editor/model/dto/leading_icon_button/leading_icon_b
 import 'package:miroru_story_editor/model/entities/decoration/decorations/emoji/decoration_emoji.dart';
 import 'package:miroru_story_editor/model/entities/decoration/render_item/render_item.dart';
 import 'package:miroru_story_editor/model/enums/menu_result_type.dart';
+import 'package:miroru_story_editor/model/use_cases/decoration/decoration_palette_state.dart';
 import 'package:miroru_story_editor/model/use_cases/palette/palette_state.dart';
 import 'package:miroru_story_editor/presentation/bottom_sheet/show_select_emoji_sheet.dart';
 import 'package:miroru_story_editor/presentation/custom_hooks/use_global_key.dart';
@@ -26,11 +27,11 @@ class HeaderView extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final iconButtonKey = useGlobalKey();
     final canBack = ref.watch(
-      paletteStateProvider.select((value) => value.canBack),
+      decorationPaletteStateProvider.select((value) => value.canBack),
     );
 
     final canNext = ref.watch(
-      paletteStateProvider.select((value) => value.canNext),
+      decorationPaletteStateProvider.select((value) => value.canNext),
     );
 
     return Row(
@@ -49,7 +50,9 @@ class HeaderView extends HookConsumerWidget {
         ),
         IconButton(
           onPressed: canBack
-              ? () => ref.read(paletteStateProvider.notifier).backHistory()
+              ? () => ref
+                  .read(decorationPaletteStateProvider.notifier)
+                  .backHistory()
               : null,
           style: actionIconButton.style,
           icon: const Icon(
@@ -58,7 +61,9 @@ class HeaderView extends HookConsumerWidget {
         ),
         IconButton(
           onPressed: canNext
-              ? () => ref.read(paletteStateProvider.notifier).nextHistory()
+              ? () => ref
+                  .read(decorationPaletteStateProvider.notifier)
+                  .nextHistory()
               : null,
           style: actionIconButton.style,
           icon: const Icon(
@@ -76,7 +81,7 @@ class HeaderView extends HookConsumerWidget {
               return;
             }
 
-            ref.read(paletteStateProvider.notifier).addRenderItem(
+            ref.read(decorationPaletteStateProvider.notifier).addRenderItem(
                   RenderItem<DecorationEmoji>(
                     transform: Matrix4.identity(),
                     data: DecorationEmoji(

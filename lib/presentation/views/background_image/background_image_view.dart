@@ -3,7 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matrix_gesture_detector_pro/matrix_gesture_detector_pro.dart';
 import 'package:miroru_story_editor/model/entities/decoration/decorations/background_image/background_image.dart';
-import 'package:miroru_story_editor/model/use_cases/palette/palette_state.dart';
+import 'package:miroru_story_editor/model/use_cases/decoration/decoration_palette_state.dart';
 import 'package:miroru_story_editor/presentation/custom_hooks/use_debounce.dart';
 
 class BackgroundImageView extends HookConsumerWidget {
@@ -12,7 +12,7 @@ class BackgroundImageView extends HookConsumerWidget {
   });
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final image = ref.watch(paletteStateProvider).backgroundImage;
+    final image = ref.watch(decorationPaletteStateProvider).backgroundImage;
     final data = image.data as DecorationBackgroundImage;
 
     if (data.backgroundImageFile == null) {
@@ -47,7 +47,7 @@ class BackgroundImageView extends HookConsumerWidget {
         onPointerUp: (PointerUpEvent event) {
           debounce.onChanged(
             () {
-              ref.read(paletteStateProvider.notifier).moveRenderItem(
+              ref.read(decorationPaletteStateProvider.notifier).moveRenderItem(
                     image.copyWith(
                       transform: matrixNotifier.value,
                     ),

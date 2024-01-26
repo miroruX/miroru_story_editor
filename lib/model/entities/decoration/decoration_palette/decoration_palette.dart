@@ -9,8 +9,6 @@ part 'decoration_palette.freezed.dart';
 class DecorationPalette with _$DecorationPalette {
   const factory DecorationPalette({
     required List<List<RenderItem<DecorationItem>>> historyRenderItems,
-    @Default(false) bool isEditingText,
-    @Default(false) bool isMovingItem,
     @Default(0) int currentHistoryIndex,
   }) = _DecorationPalette;
   const DecorationPalette._();
@@ -74,7 +72,4 @@ class DecorationPalette with _$DecorationPalette {
 
   /// 履歴を表示しているかどうか
   bool get isShowingHistory => currentHistoryIndex != 0;
-
-  /// ヘッダーを表示しているかどうか
-  bool get isShowHeader => !isEditingText && !isMovingItem;
 }

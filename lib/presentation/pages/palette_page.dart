@@ -9,7 +9,7 @@ import 'package:miroru_story_editor/model/dto/leading_icon_button/leading_icon_b
 import 'package:miroru_story_editor/model/dto/next_icon_button/next_icon_button_dto.dart';
 import 'package:miroru_story_editor/model/entities/decoration/decorations/background_image/background_image.dart';
 import 'package:miroru_story_editor/model/entities/decoration/render_item/render_item.dart';
-import 'package:miroru_story_editor/model/use_cases/palette/palette_state.dart';
+import 'package:miroru_story_editor/model/use_cases/decoration/decoration_palette_state.dart';
 import 'package:miroru_story_editor/presentation/views/footer_view.dart';
 import 'package:miroru_story_editor/presentation/views/palette_view.dart';
 import 'package:uuid/uuid.dart';
@@ -34,7 +34,9 @@ class PalettePage extends HookConsumerWidget {
     useEffect(
       () {
         Future.microtask(
-          () => ref.read(paletteStateProvider.notifier).initHistoryRenderItem(
+          () => ref
+              .read(decorationPaletteStateProvider.notifier)
+              .initHistoryRenderItem(
             [
               [
                 RenderItem<DecorationBackgroundImage>(

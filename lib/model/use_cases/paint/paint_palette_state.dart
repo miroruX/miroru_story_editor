@@ -1,4 +1,4 @@
-import 'package:miroru_story_editor/model/entities/paint/paint_line/paint_line.dart';
+import 'package:flutter/material.dart';
 import 'package:miroru_story_editor/model/entities/paint/paint_palette/paint_palette.dart';
 import 'package:miroru_story_editor/model/enums/brush_type.dart';
 import 'package:perfect_freehand/perfect_freehand.dart';
@@ -11,7 +11,6 @@ class PaintPaletteState extends _$PaintPaletteState {
   @override
   PaintPalette build() {
     return PaintPalette(
-      lines: [],
       strokeOptions: StrokeOptions(
         size: 16,
         thinning: 0.7,
@@ -33,26 +32,6 @@ class PaintPaletteState extends _$PaintPaletteState {
     );
   }
 
-  void addLine(
-    PaintLine line,
-  ) {
-    state = state.copyWith(
-      lines: [...state.lines, line],
-    );
-  }
-
-  void delete() {
-    state = state.copyWith(
-      lines: state.lines.sublist(0, state.lines.length - 1),
-    );
-  }
-
-  void clear() {
-    state = state.copyWith(
-      lines: [],
-    );
-  }
-
   void changeBrushType(
     BrushType brushType,
   ) {
@@ -62,10 +41,10 @@ class PaintPaletteState extends _$PaintPaletteState {
   }
 
   void changeColorCode(
-    String colorCode,
+    Color color,
   ) {
     state = state.copyWith(
-      colorCode: colorCode,
+      color: color,
     );
   }
 

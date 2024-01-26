@@ -1,26 +1,26 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'paint_palette_state.dart';
+part of 'paint_lines_state.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$paintPaletteStateHash() => r'6ac7f3725a197aa7473a1af7fdb5c6d52a2deb42';
+String _$paintLinesStateHash() => r'4331108a6775a4e75f5273aae62a4b08f4d45892';
 
-/// See also [PaintPaletteState].
-@ProviderFor(PaintPaletteState)
-final paintPaletteStateProvider =
-    NotifierProvider<PaintPaletteState, PaintPalette>.internal(
-  PaintPaletteState.new,
-  name: r'paintPaletteStateProvider',
+/// See also [PaintLinesState].
+@ProviderFor(PaintLinesState)
+final paintLinesStateProvider =
+    NotifierProvider<PaintLinesState, List<PaintLine>>.internal(
+  PaintLinesState.new,
+  name: r'paintLinesStateProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$paintPaletteStateHash,
+      : _$paintLinesStateHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$PaintPaletteState = Notifier<PaintPalette>;
+typedef _$PaintLinesState = Notifier<List<PaintLine>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, inference_failure_on_uninitialized_variable, inference_failure_on_function_return_type, inference_failure_on_untyped_parameter, deprecated_member_use_from_same_package
