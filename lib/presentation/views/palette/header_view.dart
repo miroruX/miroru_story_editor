@@ -39,7 +39,7 @@ class HeaderView extends HookConsumerWidget {
           onPressed: () {
             Navigator.of(context).pop();
           },
-          style: leadingIconButton.style,
+          // style: leadingIconButton.style,
           icon: Icon(
             leadingIconButton.back,
           ),
@@ -53,7 +53,7 @@ class HeaderView extends HookConsumerWidget {
                   .read(decorationPaletteStateProvider.notifier)
                   .backHistory()
               : null,
-          style: actionIconButton.style,
+          // style: actionIconButton.style,
           icon: const Icon(
             Ionicons.arrow_back,
           ),
@@ -64,7 +64,7 @@ class HeaderView extends HookConsumerWidget {
                   .read(decorationPaletteStateProvider.notifier)
                   .nextHistory()
               : null,
-          style: actionIconButton.style,
+          // style: actionIconButton.style,
           icon: const Icon(
             Ionicons.arrow_forward,
           ),

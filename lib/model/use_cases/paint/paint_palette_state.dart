@@ -6,7 +6,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'paint_palette_state.g.dart';
 
-@Riverpod(keepAlive: true)
+@riverpod
 class PaintPaletteState extends _$PaintPaletteState {
   @override
   PaintPalette build() {

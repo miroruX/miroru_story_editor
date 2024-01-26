@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:miroru_story_editor/extensions/color_extension.dart';
 import 'package:miroru_story_editor/extensions/context_extension.dart';
+import 'package:miroru_story_editor/model/use_cases/theme/editor_theme_mode.dart';
 
 class ColorListSelectorWidget extends HookWidget {
   const ColorListSelectorWidget({
@@ -95,7 +97,7 @@ class ColorListSelectorWidget extends HookWidget {
   }
 }
 
-class ColorCircle extends StatelessWidget {
+class ColorCircle extends ConsumerWidget {
   const ColorCircle({
     super.key,
     required this.color,
@@ -105,9 +107,10 @@ class ColorCircle extends StatelessWidget {
   final bool isSelected;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final themeMode = ref.watch(editorThemeModeProvider);
     return CircleAvatar(
-      backgroundColor: Colors.white,
+      backgroundColor: themeMode == ThemeMode.dark ? Colors.white : Colors.grey,
       radius: 12,
       child: CircleAvatar(
         backgroundColor: color,

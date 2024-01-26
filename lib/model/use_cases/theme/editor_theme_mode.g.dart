@@ -1,26 +1,26 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'paint_palette_state.dart';
+part of 'editor_theme_mode.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$paintPaletteStateHash() => r'732f16eed88e472d28e8d2527172543660c91fe4';
+String _$editorThemeModeHash() => r'efc28f7a1a08bfadab0a15c0535ddd741b380f68';
 
-/// See also [PaintPaletteState].
-@ProviderFor(PaintPaletteState)
-final paintPaletteStateProvider =
-    AutoDisposeNotifierProvider<PaintPaletteState, PaintPalette>.internal(
-  PaintPaletteState.new,
-  name: r'paintPaletteStateProvider',
+/// See also [EditorThemeMode].
+@ProviderFor(EditorThemeMode)
+final editorThemeModeProvider =
+    NotifierProvider<EditorThemeMode, ThemeMode>.internal(
+  EditorThemeMode.new,
+  name: r'editorThemeModeProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$paintPaletteStateHash,
+      : _$editorThemeModeHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$PaintPaletteState = AutoDisposeNotifier<PaintPalette>;
+typedef _$EditorThemeMode = Notifier<ThemeMode>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, inference_failure_on_uninitialized_variable, inference_failure_on_function_return_type, inference_failure_on_untyped_parameter, deprecated_member_use_from_same_package

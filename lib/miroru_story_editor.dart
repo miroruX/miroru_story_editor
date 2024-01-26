@@ -7,7 +7,6 @@ import 'package:miroru_story_editor/model/dto/back_confirm/story_back_confirm_dt
 import 'package:miroru_story_editor/model/dto/leading_icon_button/leading_icon_button_dto.dart';
 import 'package:miroru_story_editor/model/dto/next_icon_button/next_icon_button_dto.dart';
 import 'package:miroru_story_editor/presentation/pages/palette_page.dart';
-import 'package:miroru_story_editor/presentation/res/theme.dart';
 
 Future<void> showMiroruStoryEditor(
   BuildContext context, {
@@ -21,15 +20,12 @@ Future<void> showMiroruStoryEditor(
     MaterialPageRoute(
       builder: (context) {
         return ProviderScope(
-          child: Theme(
-            data: getInstagramThemeDark(),
-            child: PalettePage(
-              backgroundImageFile: imageFile,
-              leadingIconButton: leadingIconButton,
-              actionIconButton: actionIconButton,
-              backConfirm: backConfirm,
-              nextIconButton: nextIconButton,
-            ),
+          child: PalettePage(
+            backgroundImageFile: imageFile,
+            leadingIconButton: leadingIconButton,
+            actionIconButton: actionIconButton,
+            backConfirm: backConfirm,
+            nextIconButton: nextIconButton,
           ),
         );
       },

@@ -6,7 +6,7 @@ import 'package:miroru_story_editor/model/entities/decoration/render_item/render
 import 'package:miroru_story_editor/model/use_cases/decoration/decoration_palette_state.dart';
 import 'package:miroru_story_editor/model/use_cases/palette/editing_text_item_state.dart';
 import 'package:miroru_story_editor/model/use_cases/palette/palette_state.dart';
-import 'package:miroru_story_editor/presentation/res/editing_text_theme.dart';
+import 'package:miroru_story_editor/model/use_cases/theme/editor_editing_theme_data.dart';
 import 'package:miroru_story_editor/presentation/widgets/decoration/common/color_picker_icon.dart';
 
 class TextToolHeaderView extends HookConsumerWidget {
@@ -25,8 +25,9 @@ class TextToolHeaderView extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final editingTheme = ref.watch(editorEditingThemeDataProvider);
     return Theme(
-      data: editingTextTheme(),
+      data: editingTheme,
       child: Row(
         children: [
           const Spacer(flex: 4),

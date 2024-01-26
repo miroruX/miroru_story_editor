@@ -10,6 +10,7 @@ import 'package:miroru_story_editor/model/dto/next_icon_button/next_icon_button_
 import 'package:miroru_story_editor/model/entities/decoration/decorations/background_image/background_image.dart';
 import 'package:miroru_story_editor/model/entities/decoration/render_item/render_item.dart';
 import 'package:miroru_story_editor/model/use_cases/decoration/decoration_palette_state.dart';
+import 'package:miroru_story_editor/model/use_cases/theme/editor_theme_data.dart';
 import 'package:miroru_story_editor/presentation/views/palette/footer_view.dart';
 import 'package:miroru_story_editor/presentation/views/palette/palette_view.dart';
 import 'package:uuid/uuid.dart';
@@ -31,6 +32,7 @@ class PalettePage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final themeData = ref.watch(editorThemeDataProvider);
     useEffect(
       () {
         Future.microtask(
@@ -55,19 +57,22 @@ class PalettePage extends HookConsumerWidget {
       },
       [],
     );
-    return Scaffold(
-      body: SafeArea(
-        child: PaletteView(
-          backgroundImageFile: backgroundImageFile,
-          leadingIconButton: leadingIconButton,
-          actionIconButton: actionIconButton,
+    return Theme(
+      data: themeData,
+      child: Scaffold(
+        body: SafeArea(
+          child: PaletteView(
+            backgroundImageFile: backgroundImageFile,
+            leadingIconButton: leadingIconButton,
+            actionIconButton: actionIconButton,
+          ),
         ),
-      ),
-      bottomNavigationBar: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(6),
-          child: FooterView(
-            nextIconButton: nextIconButton,
+        bottomNavigationBar: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(6),
+            child: FooterView(
+              nextIconButton: nextIconButton,
+            ),
           ),
         ),
       ),

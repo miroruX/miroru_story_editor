@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:miroru_story_editor/model/use_cases/theme/editor_theme_mode.dart';
 
-class ColorPickerIcon extends StatelessWidget {
+class ColorPickerIcon extends ConsumerWidget {
   const ColorPickerIcon({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final themeMode = ref.watch(editorThemeModeProvider);
     return ClipOval(
       child: ColoredBox(
-        color: Colors.white,
+        color: themeMode == ThemeMode.dark ? Colors.white : Colors.black,
         child: Padding(
           padding: const EdgeInsets.all(2),
           child: CustomPaint(

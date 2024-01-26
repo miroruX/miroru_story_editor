@@ -6,6 +6,7 @@ import 'package:miroru_story_editor/model/dto/action_icon_button/action_icon_but
 import 'package:miroru_story_editor/model/dto/leading_icon_button/leading_icon_button_dto.dart';
 import 'package:miroru_story_editor/model/use_cases/palette/palette_key.dart';
 import 'package:miroru_story_editor/model/use_cases/palette/palette_state.dart';
+import 'package:miroru_story_editor/model/use_cases/theme/editor_theme_mode.dart';
 import 'package:miroru_story_editor/presentation/views/background_image/background_image_blur_view.dart';
 import 'package:miroru_story_editor/presentation/views/background_image/background_image_view.dart';
 import 'package:miroru_story_editor/presentation/views/decoration/common/decoration_view.dart';
@@ -29,16 +30,17 @@ class PaletteView extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final paletteKey = ref.watch(paletteKeyProvider);
     final palette = ref.watch(paletteStateProvider);
+    final themeMode = ref.watch(editorThemeModeProvider);
 
     // 気持ち程度のパフォーマンス向上
-    const editingView = [
+    final editingView = [
       Positioned.fill(
         child: ColoredBox(
-          color: Colors.black54,
-          child: SizedBox.expand(),
+          color: themeMode == ThemeMode.dark ? Colors.black54 : Colors.white24,
+          child: const SizedBox.expand(),
         ),
       ),
-      TextEditingView(),
+      const TextEditingView(),
     ];
 
     return ClipRRect(
