@@ -9,7 +9,7 @@ import 'package:miroru_story_editor/model/entities/decoration/render_item/render
 import 'package:miroru_story_editor/model/enums/menu_result_type.dart';
 import 'package:miroru_story_editor/model/use_cases/decoration/decoration_palette_state.dart';
 import 'package:miroru_story_editor/model/use_cases/palette/palette_state.dart';
-import 'package:miroru_story_editor/presentation/bottom_sheet/show_select_emoji_sheet.dart';
+import 'package:miroru_story_editor/presentation/bottom_sheets/show_select_emoji_sheet.dart';
 import 'package:miroru_story_editor/presentation/custom_hooks/use_global_key.dart';
 import 'package:miroru_story_editor/util/vibration.dart';
 
