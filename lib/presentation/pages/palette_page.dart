@@ -57,21 +57,24 @@ class PalettePage extends HookConsumerWidget {
       },
       [],
     );
-    return Theme(
-      data: themeData,
-      child: Scaffold(
-        body: SafeArea(
-          child: PaletteView(
-            backgroundImageFile: backgroundImageFile,
-            leadingIconButton: leadingIconButton,
-            actionIconButton: actionIconButton,
+    return PopScope(
+      canPop: false,
+      child: Theme(
+        data: themeData,
+        child: Scaffold(
+          body: SafeArea(
+            child: PaletteView(
+              backgroundImageFile: backgroundImageFile,
+              leadingIconButton: leadingIconButton,
+              actionIconButton: actionIconButton,
+            ),
           ),
-        ),
-        bottomNavigationBar: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(6),
-            child: FooterView(
-              nextIconButton: nextIconButton,
+          bottomNavigationBar: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.all(6),
+              child: FooterView(
+                nextIconButton: nextIconButton,
+              ),
             ),
           ),
         ),
