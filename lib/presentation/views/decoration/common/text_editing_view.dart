@@ -56,98 +56,94 @@ class TextEditingView extends HookConsumerWidget {
         }
         ref.read(editingTextItemStateProvider.notifier).reset();
       },
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        body: Stack(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(6),
-              child: TextToolHeaderView(
-                renderItem: textItem,
-                onColor: () {
-                  Vibration.call();
-                  isColorEditing.value = !isColorEditing.value;
-                },
-                changeTextAlign: () {
-                  Vibration.call();
-                  ref
-                      .read(editingTextItemStateProvider.notifier)
-                      .changeTextAlign();
-                },
-                changeFillColor: () {
-                  Vibration.call();
-                  ref
-                      .read(editingTextItemStateProvider.notifier)
-                      .changeFillColor();
-                },
-              ),
+      child: Stack(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(6),
+            child: TextToolHeaderView(
+              renderItem: textItem,
+              onColor: () {
+                Vibration.call();
+                isColorEditing.value = !isColorEditing.value;
+              },
+              changeTextAlign: () {
+                Vibration.call();
+                ref
+                    .read(editingTextItemStateProvider.notifier)
+                    .changeTextAlign();
+              },
+              changeFillColor: () {
+                Vibration.call();
+                ref
+                    .read(editingTextItemStateProvider.notifier)
+                    .changeFillColor();
+              },
             ),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: TextSizeSliderWidget(
-                fontSize: decorationText.fontSize ?? 20,
-                onChangeFontSize: (size) {
-                  Vibration.call();
-                  ref
-                      .read(editingTextItemStateProvider.notifier)
-                      .changeFontSize(size);
-                },
-              ),
+          ),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: TextSizeSliderWidget(
+              fontSize: decorationText.fontSize ?? 20,
+              onChangeFontSize: (size) {
+                Vibration.call();
+                ref
+                    .read(editingTextItemStateProvider.notifier)
+                    .changeFontSize(size);
+              },
             ),
-            Align(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 50),
-                child: IntrinsicWidth(
-                  child: TextFormField(
-                    autofocus: true,
-                    onChanged: ref
-                        .read(editingTextItemStateProvider.notifier)
-                        .changeText,
-                    initialValue: decorationText.text,
-                    decoration: InputDecoration(
-                      hintText: 'Aa',
-                      fillColor: decorationText.backgroundColorCode.toColor,
-                      hintStyle: TextStyle(
-                        fontSize: decorationText.fontSize,
-                        color:
-                            decorationText.colorCode.toColor.withOpacity(0.5),
-                      ),
-                    ),
-                    maxLines: null,
-                    style: decorationText.fontFamily.fontStyle.copyWith(
+          ),
+          Align(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 50),
+              child: IntrinsicWidth(
+                child: TextFormField(
+                  autofocus: true,
+                  onChanged: ref
+                      .read(editingTextItemStateProvider.notifier)
+                      .changeText,
+                  initialValue: decorationText.text,
+                  decoration: InputDecoration(
+                    hintText: 'Aa',
+                    fillColor: decorationText.backgroundColorCode.toColor,
+                    hintStyle: TextStyle(
                       fontSize: decorationText.fontSize,
-                      color: decorationText.colorCode.toColor,
+                      color: decorationText.colorCode.toColor.withOpacity(0.5),
                     ),
+                  ),
+                  maxLines: null,
+                  style: decorationText.fontFamily.fontStyle.copyWith(
+                    fontSize: decorationText.fontSize,
+                    color: decorationText.colorCode.toColor,
                   ),
                 ),
               ),
             ),
-            Positioned(
-              bottom: 0,
-              child: Padding(
-                padding: const EdgeInsets.only(bottom: 8),
-                child: isColorEditing.value
-                    ? ColorListSelectorWidget(
-                        selectedColor: decorationText.colorCode.toColor,
-                        onChangeColor: (color) {
-                          Vibration.call();
-                          ref
-                              .read(editingTextItemStateProvider.notifier)
-                              .changeTextColor(color);
-                        },
-                      )
-                    : FontListSelectorWidget(
-                        onChangeFontName: (font) {
-                          Vibration.call();
-                          ref
-                              .read(editingTextItemStateProvider.notifier)
-                              .changeFontFamily(font);
-                        },
-                      ),
-              ),
+          ),
+          Positioned(
+            bottom: 0,
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: isColorEditing.value
+                  ? ColorListSelectorWidget(
+                      selectedColor: decorationText.colorCode.toColor,
+                      onChangeColor: (color) {
+                        Vibration.call();
+                        ref
+                            .read(editingTextItemStateProvider.notifier)
+                            .changeTextColor(color);
+                      },
+                    )
+                  : FontListSelectorWidget(
+                      onChangeFontName: (font) {
+                        Vibration.call();
+                        ref
+                            .read(editingTextItemStateProvider.notifier)
+                            .changeFontFamily(font);
+                      },
+                    ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
