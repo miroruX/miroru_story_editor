@@ -11,7 +11,7 @@ typedef Stroke = List<PointVector>;
 class PaintLine with _$PaintLine {
   const factory PaintLine({
     @Default([]) Stroke points,
-    StrokeOptions? strokeOptions,
+    required StrokeOptions strokeOptions,
     @Default(Colors.black) Color color,
     @Default(BrushType.pen) BrushType brushType,
   }) = _PaintLine;

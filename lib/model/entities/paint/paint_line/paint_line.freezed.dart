@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$PaintLine {
   List<PointVector> get points => throw _privateConstructorUsedError;
-  StrokeOptions? get strokeOptions => throw _privateConstructorUsedError;
+  StrokeOptions get strokeOptions => throw _privateConstructorUsedError;
   Color get color => throw _privateConstructorUsedError;
   BrushType get brushType => throw _privateConstructorUsedError;
 
@@ -33,7 +33,7 @@ abstract class $PaintLineCopyWith<$Res> {
   @useResult
   $Res call(
       {List<PointVector> points,
-      StrokeOptions? strokeOptions,
+      StrokeOptions strokeOptions,
       Color color,
       BrushType brushType});
 }
@@ -52,7 +52,7 @@ class _$PaintLineCopyWithImpl<$Res, $Val extends PaintLine>
   @override
   $Res call({
     Object? points = null,
-    Object? strokeOptions = freezed,
+    Object? strokeOptions = null,
     Object? color = null,
     Object? brushType = null,
   }) {
@@ -61,10 +61,10 @@ class _$PaintLineCopyWithImpl<$Res, $Val extends PaintLine>
           ? _value.points
           : points // ignore: cast_nullable_to_non_nullable
               as List<PointVector>,
-      strokeOptions: freezed == strokeOptions
+      strokeOptions: null == strokeOptions
           ? _value.strokeOptions
           : strokeOptions // ignore: cast_nullable_to_non_nullable
-              as StrokeOptions?,
+              as StrokeOptions,
       color: null == color
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
@@ -87,7 +87,7 @@ abstract class _$$PaintLineImplCopyWith<$Res>
   @useResult
   $Res call(
       {List<PointVector> points,
-      StrokeOptions? strokeOptions,
+      StrokeOptions strokeOptions,
       Color color,
       BrushType brushType});
 }
@@ -104,7 +104,7 @@ class __$$PaintLineImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? points = null,
-    Object? strokeOptions = freezed,
+    Object? strokeOptions = null,
     Object? color = null,
     Object? brushType = null,
   }) {
@@ -113,10 +113,10 @@ class __$$PaintLineImplCopyWithImpl<$Res>
           ? _value._points
           : points // ignore: cast_nullable_to_non_nullable
               as List<PointVector>,
-      strokeOptions: freezed == strokeOptions
+      strokeOptions: null == strokeOptions
           ? _value.strokeOptions
           : strokeOptions // ignore: cast_nullable_to_non_nullable
-              as StrokeOptions?,
+              as StrokeOptions,
       color: null == color
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
@@ -134,7 +134,7 @@ class __$$PaintLineImplCopyWithImpl<$Res>
 class _$PaintLineImpl extends _PaintLine {
   const _$PaintLineImpl(
       {final List<PointVector> points = const [],
-      this.strokeOptions,
+      required this.strokeOptions,
       this.color = Colors.black,
       this.brushType = BrushType.pen})
       : _points = points,
@@ -150,7 +150,7 @@ class _$PaintLineImpl extends _PaintLine {
   }
 
   @override
-  final StrokeOptions? strokeOptions;
+  final StrokeOptions strokeOptions;
   @override
   @JsonKey()
   final Color color;
@@ -194,7 +194,7 @@ class _$PaintLineImpl extends _PaintLine {
 abstract class _PaintLine extends PaintLine {
   const factory _PaintLine(
       {final List<PointVector> points,
-      final StrokeOptions? strokeOptions,
+      required final StrokeOptions strokeOptions,
       final Color color,
       final BrushType brushType}) = _$PaintLineImpl;
   const _PaintLine._() : super._();
@@ -202,7 +202,7 @@ abstract class _PaintLine extends PaintLine {
   @override
   List<PointVector> get points;
   @override
-  StrokeOptions? get strokeOptions;
+  StrokeOptions get strokeOptions;
   @override
   Color get color;
   @override
