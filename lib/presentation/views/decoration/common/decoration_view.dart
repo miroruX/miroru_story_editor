@@ -148,11 +148,13 @@ class DecorationWidget extends HookConsumerWidget {
                           } else if (e.isEmoji) {}
                         }
 
+                        // 削除エリアにいるとき(on Delete Area)
                         if (isNearDeleteArea.value) {
                           ref
                               .read(decorationPaletteStateProvider.notifier)
                               .removeRenderItem(e.uuid!);
                         } else {
+                          // 単なる移動のとき
                           debounce.onChanged(() {
                             movingItem.value = null;
                             pointer.value = null;
@@ -187,6 +189,7 @@ class DecorationWidget extends HookConsumerWidget {
                   ),
                 ],
 
+                /// 中心線(Assist Center Line Y)
                 if (isMovingCenterY.value) ...[
                   Align(
                     child: CenterLineYWidget(
@@ -195,6 +198,7 @@ class DecorationWidget extends HookConsumerWidget {
                   ),
                 ],
 
+                /// 削除エリア(Delete Area)
                 if (isMovingItem) ...[
                   Align(
                     alignment: Alignment.bottomCenter,
