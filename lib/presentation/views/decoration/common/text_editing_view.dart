@@ -61,7 +61,7 @@ class TextEditingView extends HookConsumerWidget {
         body: Stack(
           children: [
             Padding(
-              padding: const EdgeInsets.fromLTRB(4, 4, 4, 0),
+              padding: const EdgeInsets.all(6),
               child: TextToolHeaderView(
                 renderItem: textItem,
                 onColor: () {

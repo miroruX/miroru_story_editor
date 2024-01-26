@@ -126,7 +126,10 @@ class PaintPaletteView extends HookConsumerWidget {
           ),
         ),
         if (isPainting) ...[
-          const PaintToolHeaderView(),
+          const Padding(
+            padding: EdgeInsets.all(6),
+            child: PaintToolHeaderView(),
+          ),
           Positioned(
             bottom: 0,
             child: Padding(
