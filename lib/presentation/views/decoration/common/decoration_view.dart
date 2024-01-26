@@ -31,14 +31,14 @@ class DecorationWidget extends HookConsumerWidget {
       paletteStateProvider.select((value) => value.isPainting),
     );
 
-    final isMoving = ref.watch(
+    final isMovingItem = ref.watch(
       paletteStateProvider.select((value) => value.isMovingItem),
     );
+
     final movingItem = useState<RenderItem?>(null);
     final isMovingCenterX = useState(false);
     final isMovingCenterY = useState(false);
     final isNearDeleteArea = useState(false);
-
     final pointer = useState<Offset?>(null);
 
     final debounce = useDebounce<VoidCallback>(
@@ -51,16 +51,16 @@ class DecorationWidget extends HookConsumerWidget {
     final decorationAreaKey = useGlobalKey();
     final deleteIconKey = useGlobalKey();
 
-    // Assist Center Line
+    // アイテムを動かしているときの処理
     useEffect(
       () {
-        if (!isMoving) {
+        if (!isMovingItem) {
           isMovingCenterX.value = false;
           isMovingCenterY.value = false;
           isNearDeleteArea.value = false;
         }
         final itemVector3 = movingItem.value?.transform.getTranslation();
-        if (itemVector3 != null && isMoving) {
+        if (itemVector3 != null && isMovingItem) {
           isMovingCenterX.value = isMovingCenter(
             transform: movingItem.value!.transform,
             axis: Axis.horizontal,
@@ -101,7 +101,7 @@ class DecorationWidget extends HookConsumerWidget {
         }
         return null;
       },
-      [movingItem.value?.transform, isMoving],
+      [movingItem.value?.transform, isMovingItem],
     );
 
     return LayoutBuilder(
@@ -132,7 +132,7 @@ class DecorationWidget extends HookConsumerWidget {
 
                       /// アイテムを離したときの処理
                       onPointerUp: (event, matrix) {
-                        Vibration.click();
+                        Vibration.call();
                         //移動していないとき
                         if (e.transform == matrix) {
                           if (e.isText) {
@@ -194,7 +194,7 @@ class DecorationWidget extends HookConsumerWidget {
                   ),
                 ],
 
-                if (isMoving) ...[
+                if (isMovingItem) ...[
                   Align(
                     alignment: Alignment.bottomCenter,
                     child: Padding(
