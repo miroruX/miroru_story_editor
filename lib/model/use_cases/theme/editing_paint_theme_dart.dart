@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:miroru_story_editor/model/use_cases/theme/editor_theme_mode.dart';
-import 'package:miroru_story_editor/presentation/res/editing_text_theme.dart';
+import 'package:miroru_story_editor/presentation/res/editing_paint_theme.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'editor_editing_theme_data.g.dart';
+part 'editing_paint_theme_dart.g.dart';
 
 @Riverpod(keepAlive: true)
-class EditorEditingThemeData extends _$EditorEditingThemeData {
+class EditingPaintTheme extends _$EditingPaintTheme {
   @override
   ThemeData build() {
     final themeMode = ref.watch(editorThemeModeProvider);
     if (themeMode == ThemeMode.dark) {
-      return miroruEditorEditingThemeDark();
+      return editingPaintThemeDark();
     } else {
-      return miroruEditorEditingThemeLight();
+      return editingPaintThemeLight();
     }
   }
 }

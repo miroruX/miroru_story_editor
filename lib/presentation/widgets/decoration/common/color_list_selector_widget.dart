@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:miroru_story_editor/extensions/color_extension.dart';
 import 'package:miroru_story_editor/extensions/context_extension.dart';
 import 'package:miroru_story_editor/model/use_cases/theme/editor_theme_mode.dart';
 
@@ -43,54 +42,63 @@ class ColorListSelectorWidget extends HookWidget {
 
     final pageController = usePageController();
 
+    final colorTabController = useTabController(initialLength: colors.length);
+    final accentColorTabController =
+        useTabController(initialLength: accentColors.length);
+
+    useEffect(
+      () {
+        colorTabController.addListener(() {
+          onChangeColor(colors[colorTabController.index]);
+        });
+        accentColorTabController.addListener(() {
+          onChangeColor(accentColors[accentColorTabController.index]);
+        });
+        return null;
+      },
+      [],
+    );
+
     return SizedBox(
       height: 40,
       width: context.deviceWidth,
       child: Align(
-        child: PageView(
-          controller: pageController,
-          children: [
-            SizedBox(
-              width: context.deviceWidth,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: colors
-                    .map(
-                      (color) => GestureDetector(
-                        onTap: () => onChangeColor(color),
-                        child: Padding(
-                          padding: const EdgeInsets.all(2),
-                          child: ColorCircle(
-                            color: color,
-                            isSelected: selectedColor.hex == color.hex,
-                          ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          child: PageView(
+            controller: pageController,
+            children: [
+              SizedBox(
+                width: context.deviceWidth,
+                child: TabBar(
+                  controller: colorTabController,
+                  tabs: colors
+                      .map(
+                        (color) => ColorCircle(
+                          color: color,
+                          isSelected: color == selectedColor,
                         ),
-                      ),
-                    )
-                    .toList(),
+                      )
+                      .toList(),
+                ),
               ),
-            ),
-            SizedBox(
-              width: context.deviceWidth,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: accentColors
-                    .map(
-                      (color) => GestureDetector(
-                        onTap: () => onChangeColor(color),
-                        child: Padding(
-                          padding: const EdgeInsets.all(2),
-                          child: ColorCircle(
-                            color: color,
-                            isSelected: selectedColor.hex == color.hex,
-                          ),
+              SizedBox(
+                width: context.deviceWidth,
+                child: TabBar(
+                  isScrollable: true,
+                  controller: accentColorTabController,
+                  tabs: accentColors
+                      .map(
+                        (color) => ColorCircle(
+                          color: color,
+                          isSelected: color == selectedColor,
                         ),
-                      ),
-                    )
-                    .toList(),
+                      )
+                      .toList(),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

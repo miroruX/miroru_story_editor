@@ -8,7 +8,7 @@ import 'package:miroru_story_editor/model/use_cases/paint/paint_lines_state.dart
 import 'package:miroru_story_editor/model/use_cases/paint/paint_palette_state.dart';
 import 'package:miroru_story_editor/model/use_cases/palette/palette_state.dart';
 import 'package:miroru_story_editor/presentation/views/paint/common/paint_tool_header_view.dart';
-import 'package:miroru_story_editor/presentation/widgets/decoration/text/color_list_selector_view.dart';
+import 'package:miroru_story_editor/presentation/widgets/decoration/common/color_list_selector_widget.dart';
 import 'package:miroru_story_editor/presentation/widgets/paint/line_painter.dart';
 import 'package:miroru_story_editor/util/vibration.dart';
 import 'package:perfect_freehand/perfect_freehand.dart';

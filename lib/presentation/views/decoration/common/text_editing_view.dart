@@ -9,8 +9,8 @@ import 'package:miroru_story_editor/model/use_cases/decoration/decoration_palett
 import 'package:miroru_story_editor/model/use_cases/palette/editing_text_item_state.dart';
 import 'package:miroru_story_editor/model/use_cases/palette/palette_state.dart';
 import 'package:miroru_story_editor/presentation/views/decoration/text/text_tool_header_view.dart';
-import 'package:miroru_story_editor/presentation/widgets/decoration/text/color_list_selector_view.dart';
-import 'package:miroru_story_editor/presentation/widgets/decoration/text/font_list_selector_view.dart';
+import 'package:miroru_story_editor/presentation/widgets/decoration/common/color_list_selector_widget.dart';
+import 'package:miroru_story_editor/presentation/widgets/decoration/text/font_list_selector_widget.dart';
 import 'package:miroru_story_editor/presentation/widgets/decoration/text/text_size_slider_widget.dart';
 import 'package:miroru_story_editor/util/vibration.dart';
 

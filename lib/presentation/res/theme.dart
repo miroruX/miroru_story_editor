@@ -23,13 +23,13 @@ ThemeData getMiroruThemeLight() {
       labelColor: lightColorScheme.primary,
       unselectedLabelColor: lightColorScheme.onSurface.withOpacity(0.5),
       indicator: BoxDecoration(
-        borderRadius: BorderRadius.circular(100),
+        shape: BoxShape.circle,
         color: lightColorScheme.primaryContainer,
       ),
+      labelPadding: const EdgeInsets.all(8),
       splashFactory: NoSplash.splashFactory,
       overlayColor: MaterialStateProperty.all(Colors.transparent),
       dividerHeight: 0,
-      labelPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
       indicatorSize: TabBarIndicatorSize.tab,
       labelStyle: base.textTheme.bodyMedium?.copyWith(
         fontSize: 14,
@@ -166,16 +166,16 @@ ThemeData getMiroruThemeDark() {
       ),
     ),
     tabBarTheme: TabBarTheme(
-      labelColor: Colors.redAccent,
+      labelColor: lightColorScheme.primary,
       unselectedLabelColor: darkColorScheme.onSurface.withOpacity(0.5),
       indicator: BoxDecoration(
-        borderRadius: BorderRadius.circular(100),
-        color: Colors.white,
+        shape: BoxShape.circle,
+        color: darkColorScheme.scrim,
       ),
       splashFactory: NoSplash.splashFactory,
       overlayColor: MaterialStateProperty.all(Colors.transparent),
       dividerHeight: 0,
-      labelPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+      labelPadding: const EdgeInsets.all(8),
       indicatorSize: TabBarIndicatorSize.tab,
       labelStyle: base.textTheme.bodyMedium?.copyWith(
         fontSize: 14,

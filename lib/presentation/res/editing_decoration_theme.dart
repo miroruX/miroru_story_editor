@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:miroru_story_editor/presentation/res/theme.dart';
 
-ThemeData miroruEditorEditingThemeLight() {
+ThemeData editingDecorationThemeLight() {
   return getMiroruThemeLight().copyWith(
     iconButtonTheme: IconButtonThemeData(
       style: IconButton.styleFrom(
@@ -23,13 +23,12 @@ ThemeData miroruEditorEditingThemeLight() {
   );
 }
 
-ThemeData miroruEditorEditingThemeDark() {
+ThemeData editingDecorationThemeDark() {
   return getMiroruThemeDark().copyWith(
     iconButtonTheme: IconButtonThemeData(
       style: IconButton.styleFrom(
         elevation: 0,
         foregroundColor: Colors.white,
-        highlightColor: Colors.red,
       ),
     ),
     textButtonTheme: TextButtonThemeData(
