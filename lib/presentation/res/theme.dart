@@ -94,7 +94,7 @@ ThemeData getInstagramThemeDark() {
       ),
     ),
     dividerTheme: DividerThemeData(
-      color: instagramColorScheme.tertiary,
+      color: instagramColorScheme.onPrimary,
       thickness: 2,
     ),
     iconButtonTheme: IconButtonThemeData(

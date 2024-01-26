@@ -10,8 +10,8 @@ import 'package:miroru_story_editor/presentation/views/background_image/backgrou
 import 'package:miroru_story_editor/presentation/views/background_image/background_image_view.dart';
 import 'package:miroru_story_editor/presentation/views/decoration/common/decoration_view.dart';
 import 'package:miroru_story_editor/presentation/views/decoration/common/text_editing_view.dart';
-import 'package:miroru_story_editor/presentation/views/header_view.dart';
 import 'package:miroru_story_editor/presentation/views/paint/common/paint_palette_view.dart';
+import 'package:miroru_story_editor/presentation/views/palette/header_view.dart';
 
 class PaletteView extends HookConsumerWidget {
   const PaletteView({
@@ -28,14 +28,9 @@ class PaletteView extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final paletteKey = ref.watch(paletteKeyProvider);
-    final isEditingText = ref.watch(
-      paletteStateProvider.select((value) => value.isEditingText),
-    );
+    final palette = ref.watch(paletteStateProvider);
 
-    final isShowHeader = ref.watch(
-      paletteStateProvider.select((value) => value.isShowHeader),
-    );
-
+    // 気持ち程度のパフォーマンス向上
     const editingView = [
       Positioned.fill(
         child: ColoredBox(
@@ -45,6 +40,7 @@ class PaletteView extends HookConsumerWidget {
       ),
       TextEditingView(),
     ];
+
     return ClipRRect(
       borderRadius: BorderRadius.circular(20),
       child: RepaintBoundary(
@@ -55,10 +51,10 @@ class PaletteView extends HookConsumerWidget {
             const BackgroundImageView(),
             const PaintPaletteView(),
             const DecorationWidget(),
-            if (isEditingText) ...[
+            if (palette.isEditingText) ...[
               ...editingView,
             ],
-            if (isShowHeader) ...[
+            if (palette.isShowHeader) ...[
               Align(
                 alignment: Alignment.topCenter,
                 child: Padding(

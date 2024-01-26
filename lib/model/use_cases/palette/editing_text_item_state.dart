@@ -25,8 +25,7 @@ class EditingTextItemState extends _$EditingTextItemState {
     );
   }
 
-  // ignore: avoid_public_notifier_properties
-  DecorationText get decorationText => state.data as DecorationText;
+  DecorationText get _decorationText => state.data as DecorationText;
 
   void setItem(RenderItem<DecorationText> renderItem) {
     state = renderItem;
@@ -41,11 +40,11 @@ class EditingTextItemState extends _$EditingTextItemState {
 
     late final TextAlign newAlignment;
 
-    if (decorationText.textAlign == TextAlign.left.name) {
+    if (_decorationText.textAlign == TextAlign.left.name) {
       newAlignment = TextAlign.center;
-    } else if (decorationText.textAlign == TextAlign.center.name) {
+    } else if (_decorationText.textAlign == TextAlign.center.name) {
       newAlignment = TextAlign.right;
-    } else if (decorationText.textAlign == TextAlign.right.name) {
+    } else if (_decorationText.textAlign == TextAlign.right.name) {
       newAlignment = TextAlign.left;
     } else {
       newAlignment = TextAlign.left;
@@ -53,7 +52,7 @@ class EditingTextItemState extends _$EditingTextItemState {
 
     state = RenderItem<DecorationText>(
       transform: state.transform,
-      data: decorationText.copyWith(
+      data: _decorationText.copyWith(
         textAlign: newAlignment.name,
       ),
       uuid: state.uuid,
@@ -70,7 +69,7 @@ class EditingTextItemState extends _$EditingTextItemState {
 
     late final Color newBackgroundColor;
 
-    if (decorationText.backgroundColorCode.toColor == Colors.black) {
+    if (_decorationText.backgroundColorCode.toColor == Colors.black) {
       newBackgroundColor = Colors.white;
     } else {
       newBackgroundColor = Colors.black;
@@ -78,7 +77,7 @@ class EditingTextItemState extends _$EditingTextItemState {
 
     state = RenderItem<DecorationText>(
       transform: state.transform,
-      data: decorationText.copyWith(
+      data: _decorationText.copyWith(
         backgroundColorCode: newBackgroundColor.hex,
       ),
       uuid: state.uuid,
@@ -95,7 +94,7 @@ class EditingTextItemState extends _$EditingTextItemState {
 
     state = RenderItem<DecorationText>(
       transform: state.transform,
-      data: decorationText.copyWith(
+      data: _decorationText.copyWith(
         fontSize: fontSize,
       ),
       uuid: state.uuid,
@@ -112,7 +111,7 @@ class EditingTextItemState extends _$EditingTextItemState {
 
     state = RenderItem<DecorationText>(
       transform: state.transform,
-      data: decorationText.copyWith(
+      data: _decorationText.copyWith(
         text: text,
       ),
       uuid: state.uuid,
@@ -129,7 +128,7 @@ class EditingTextItemState extends _$EditingTextItemState {
 
     state = RenderItem<DecorationText>(
       transform: state.transform,
-      data: decorationText.copyWith(
+      data: _decorationText.copyWith(
         colorCode: color.hex,
       ),
       uuid: state.uuid,
@@ -146,7 +145,7 @@ class EditingTextItemState extends _$EditingTextItemState {
 
     state = RenderItem<DecorationText>(
       transform: state.transform,
-      data: decorationText.copyWith(
+      data: _decorationText.copyWith(
         fontFamily: fontFamily,
       ),
       uuid: state.uuid,

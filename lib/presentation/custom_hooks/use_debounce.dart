@@ -3,8 +3,7 @@ import 'dart:async' show Timer;
 import 'package:flutter/material.dart' show BuildContext;
 import 'package:flutter_hooks/flutter_hooks.dart' show Hook, HookState, use;
 
-// ignore: library_private_types_in_public_api
-_Debounce<T> useDebounce<T>({
+Debounce<T> useDebounce<T>({
   required int debounceDelay,
   required void Function(T) callback,
   List<Object?>? keys,
@@ -18,7 +17,7 @@ _Debounce<T> useDebounce<T>({
   );
 }
 
-class _DebounceHook<T> extends Hook<_Debounce<T>> {
+class _DebounceHook<T> extends Hook<Debounce<T>> {
   const _DebounceHook({
     required this.debounceDelay,
     required this.callback,
@@ -29,18 +28,18 @@ class _DebounceHook<T> extends Hook<_Debounce<T>> {
   final void Function(T) callback;
 
   @override
-  HookState<_Debounce<T>, Hook<_Debounce<T>>> createState() =>
+  HookState<Debounce<T>, Hook<Debounce<T>>> createState() =>
       _DebounceHookState();
 }
 
-class _DebounceHookState<T> extends HookState<_Debounce<T>, _DebounceHook<T>> {
-  late final _debounce = _Debounce(
+class _DebounceHookState<T> extends HookState<Debounce<T>, _DebounceHook<T>> {
+  late final _debounce = Debounce(
     debounceDelay: hook.debounceDelay,
     callback: hook.callback,
   );
 
   @override
-  _Debounce<T> build(BuildContext context) => _debounce;
+  Debounce<T> build(BuildContext context) => _debounce;
 
   @override
   void dispose() => _debounce.dispose();
@@ -49,8 +48,8 @@ class _DebounceHookState<T> extends HookState<_Debounce<T>, _DebounceHook<T>> {
   String get debugLabel => 'useDebounce';
 }
 
-class _Debounce<T> {
-  _Debounce({
+class Debounce<T> {
+  Debounce({
     required int debounceDelay,
     required void Function(T) callback,
   })  : _debounceDelay = debounceDelay,

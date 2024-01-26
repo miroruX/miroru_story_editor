@@ -27,7 +27,7 @@ class DecorationPaletteState extends _$DecorationPaletteState {
     );
   }
 
-  PaletteState get paletteState => ref.read(paletteStateProvider.notifier);
+  PaletteState get _paletteState => ref.read(paletteStateProvider.notifier);
 
   void initHistoryRenderItem(
     List<List<RenderItem<DecorationItem>>> initHistoryRenderItem,
@@ -51,7 +51,7 @@ class DecorationPaletteState extends _$DecorationPaletteState {
       currentHistoryIndex: 0,
     );
 
-    paletteState.changeEditingText(false);
+    _paletteState.changeEditingText(false);
   }
 
   /// DecorationItemの更新
@@ -68,7 +68,7 @@ class DecorationPaletteState extends _$DecorationPaletteState {
       currentHistoryIndex: 0,
     );
 
-    paletteState.changeEditingText(false);
+    _paletteState.changeEditingText(false);
   }
 
   /// RenderItemの移動
@@ -103,7 +103,7 @@ class DecorationPaletteState extends _$DecorationPaletteState {
         currentHistoryIndex: 0,
       );
     }
-    paletteState.changeMovingItem(false);
+    _paletteState.changeMovingItem(false);
   }
 
   void removeRenderItem(String renderItemId) {
@@ -114,7 +114,7 @@ class DecorationPaletteState extends _$DecorationPaletteState {
       ],
       currentHistoryIndex: 0,
     );
-    paletteState.changeMovingItem(false);
+    _paletteState.changeMovingItem(false);
   }
 
   void backHistory() {

@@ -40,7 +40,7 @@ class PaintPaletteState extends _$PaintPaletteState {
     );
   }
 
-  void changeColorCode(
+  void changeColor(
     Color color,
   ) {
     state = state.copyWith(

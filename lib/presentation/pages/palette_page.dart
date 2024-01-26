@@ -10,8 +10,8 @@ import 'package:miroru_story_editor/model/dto/next_icon_button/next_icon_button_
 import 'package:miroru_story_editor/model/entities/decoration/decorations/background_image/background_image.dart';
 import 'package:miroru_story_editor/model/entities/decoration/render_item/render_item.dart';
 import 'package:miroru_story_editor/model/use_cases/decoration/decoration_palette_state.dart';
-import 'package:miroru_story_editor/presentation/views/footer_view.dart';
-import 'package:miroru_story_editor/presentation/views/palette_view.dart';
+import 'package:miroru_story_editor/presentation/views/palette/footer_view.dart';
+import 'package:miroru_story_editor/presentation/views/palette/palette_view.dart';
 import 'package:uuid/uuid.dart';
 
 class PalettePage extends HookConsumerWidget {

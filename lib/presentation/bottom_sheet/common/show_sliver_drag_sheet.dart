@@ -26,7 +26,9 @@ Future<T?> showSliverDragSheet<T>(
         maxChildSize: maxChildSize,
         builder: (BuildContext context, scrollController) {
           return BottomSheet(
-            onClosing: () {},
+            onClosing: () {
+              Navigator.of(context).pop();
+            },
             backgroundColor: context.scaffoldBackgroundColor,
             builder: (BuildContext context) {
               return ClipRRect(

@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matrix_gesture_detector_pro/matrix_gesture_detector_pro.dart';
 import 'package:miroru_story_editor/model/entities/decoration/decorations/background_image/background_image.dart';
 import 'package:miroru_story_editor/model/use_cases/decoration/decoration_palette_state.dart';
+import 'package:miroru_story_editor/model/use_cases/palette/palette_state.dart';
 import 'package:miroru_story_editor/presentation/custom_hooks/use_debounce.dart';
 
 class BackgroundImageView extends HookConsumerWidget {
@@ -12,6 +13,9 @@ class BackgroundImageView extends HookConsumerWidget {
   });
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final isPainting = ref.watch(
+      paletteStateProvider.select((value) => value.isPainting),
+    );
     final image = ref.watch(decorationPaletteStateProvider).backgroundImage;
     final data = image.data as DecorationBackgroundImage;
 
@@ -39,35 +43,40 @@ class BackgroundImageView extends HookConsumerWidget {
       [image.transform],
     );
 
-    return MatrixGestureDetector(
-      onMatrixUpdate: (m, t, s, r) {
-        matrixNotifier.value = m;
-      },
-      child: Listener(
-        onPointerUp: (PointerUpEvent event) {
-          debounce.onChanged(
-            () {
-              ref.read(decorationPaletteStateProvider.notifier).moveRenderItem(
-                    image.copyWith(
-                      transform: matrixNotifier.value,
-                    ),
-                  );
-            },
-          );
+    return IgnorePointer(
+      ignoring: isPainting,
+      child: MatrixGestureDetector(
+        onMatrixUpdate: (m, t, s, r) {
+          matrixNotifier.value = m;
         },
-        child: AnimatedBuilder(
-          animation: matrixNotifier,
-          builder: (context, child) {
-            return Transform(
-              transform: matrixNotifier.value,
-              child: Image.file(
-                data.backgroundImageFile!,
-                height: double.infinity,
-                width: double.infinity,
-                cacheWidth: 10000,
-              ),
+        child: Listener(
+          onPointerUp: (PointerUpEvent event) {
+            debounce.onChanged(
+              () {
+                ref
+                    .read(decorationPaletteStateProvider.notifier)
+                    .moveRenderItem(
+                      image.copyWith(
+                        transform: matrixNotifier.value,
+                      ),
+                    );
+              },
             );
           },
+          child: AnimatedBuilder(
+            animation: matrixNotifier,
+            builder: (context, child) {
+              return Transform(
+                transform: matrixNotifier.value,
+                child: Image.file(
+                  data.backgroundImageFile!,
+                  height: double.infinity,
+                  width: double.infinity,
+                  cacheWidth: 10000,
+                ),
+              );
+            },
+          ),
         ),
       ),
     );

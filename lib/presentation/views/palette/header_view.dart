@@ -114,7 +114,9 @@ class HeaderView extends HookConsumerWidget {
               print(res);
             }
 
-            // TODO(namba): ここで分岐した処理を作成する.
+            if (res == MenuFeatureType.paint) {
+              ref.read(paletteStateProvider.notifier).changePainting(true);
+            }
           },
           style: actionIconButton.style,
           icon: Icon(

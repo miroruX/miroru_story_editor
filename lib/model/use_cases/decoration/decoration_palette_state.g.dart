@@ -7,7 +7,7 @@ part of 'decoration_palette_state.dart';
 // **************************************************************************
 
 String _$decorationPaletteStateHash() =>
-    r'9d5b961b00405bdbba0564ca4671d3a74eddb2be';
+    r'5fc7a34e37a9d1f48b844fb1eeaddfdcddce19a2';
 
 /// See also [DecorationPaletteState].
 @ProviderFor(DecorationPaletteState)

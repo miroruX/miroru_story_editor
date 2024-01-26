@@ -6,6 +6,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:miroru_story_editor/model/entities/paint/paint_line/paint_line.dart';
 import 'package:miroru_story_editor/model/use_cases/paint/paint_lines_state.dart';
 import 'package:miroru_story_editor/model/use_cases/paint/paint_palette_state.dart';
+import 'package:miroru_story_editor/model/use_cases/palette/palette_state.dart';
+import 'package:miroru_story_editor/presentation/views/paint/common/paint_tool_header_view.dart';
+import 'package:miroru_story_editor/presentation/widgets/decoration/text/color_list_selector_view.dart';
 import 'package:miroru_story_editor/presentation/widgets/paint/line_painter.dart';
 import 'package:perfect_freehand/perfect_freehand.dart';
 
@@ -15,6 +18,12 @@ class PaintPaletteView extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final isPainting = ref.watch(
+      paletteStateProvider.select((value) => value.isPainting),
+    );
+    final selectedColor =
+        ref.watch(paintPaletteStateProvider.select((value) => value)).color;
+
     final painedLines = useState<List<PaintLine>>([]);
     final paintingLine = useState<PaintLine?>(null);
 
@@ -72,38 +81,64 @@ class PaintPaletteView extends HookConsumerWidget {
       paintingLine.value = null;
     }
 
-    return Listener(
-      onPointerDown: onPointerDown,
-      onPointerMove: onPointerMove,
-      onPointerUp: onPointerUp,
-      child: Stack(
-        children: [
-          Positioned.fill(
-            child: ValueListenableBuilder(
-              valueListenable: paintingLine,
-              builder: (context, line, _) {
-                return CustomPaint(
-                  painter: StrokePainter(
-                    lines: painedLines.value.map((e) => e).toList(),
+    return Stack(
+      children: [
+        // sketcher
+        IgnorePointer(
+          ignoring: !isPainting,
+          child: Listener(
+            onPointerDown: onPointerDown,
+            onPointerMove: onPointerMove,
+            onPointerUp: onPointerUp,
+            child: SizedBox.expand(
+              child: Stack(
+                children: [
+                  Positioned.fill(
+                    child: ValueListenableBuilder(
+                      valueListenable: paintingLine,
+                      builder: (context, line, _) {
+                        return CustomPaint(
+                          painter: StrokePainter(
+                            lines: painedLines.value.map((e) => e).toList(),
+                          ),
+                        );
+                      },
+                    ),
                   ),
-                );
-              },
+                  Positioned.fill(
+                    child: ValueListenableBuilder(
+                      valueListenable: paintingLine,
+                      builder: (context, line, _) {
+                        return CustomPaint(
+                          painter: StrokePainter(
+                            lines: line == null || line.points.isEmpty
+                                ? []
+                                : [line],
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
-          Positioned.fill(
-            child: ValueListenableBuilder(
-              valueListenable: paintingLine,
-              builder: (context, line, _) {
-                return CustomPaint(
-                  painter: StrokePainter(
-                    lines: line == null || line.points.isEmpty ? [] : [line],
-                  ),
-                );
-              },
+        ),
+        if (isPainting) ...[
+          const PaintToolHeaderView(),
+          Positioned(
+            bottom: 0,
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: ColorListSelectorWidget(
+                selectedColor: selectedColor,
+                onChangeColor:
+                    ref.read(paintPaletteStateProvider.notifier).changeColor,
+              ),
             ),
           ),
         ],
-      ),
+      ],
     );
   }
 }

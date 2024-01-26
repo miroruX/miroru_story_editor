@@ -13,7 +13,9 @@ class StrokePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     var paint = Paint();
+    final path = Path();
 
+    // それぞれのブラシタイプに応じて描画する
     List<Offset> drawPen(PaintLine line) {
       paint = Paint()..color = line.color;
       return getStroke(line.points, options: line.strokeOptions);
@@ -43,10 +45,11 @@ class StrokePainter extends CustomPainter {
       return getStroke(line.points, options: line.strokeOptions);
     }
 
+    // 描画開始
     for (final line in lines) {
       final stroke = switch (line.brushType) {
         BrushType.pen => drawPen(line),
-        BrushType.maker => drawMarker(line),
+        BrushType.marker => drawMarker(line),
         BrushType.neon => drawNeon(line)
       };
 
@@ -60,55 +63,21 @@ class StrokePainter extends CustomPainter {
           paint,
         );
       } else {
-        final path = Path();
-        path.moveTo(stroke.first.dx, stroke.first.dy);
+        final newPath = path..moveTo(stroke.first.dx, stroke.first.dy);
         for (var i = 0; i < stroke.length - 1; ++i) {
           final p0 = stroke[i];
           final p1 = stroke[i + 1];
-          path.quadraticBezierTo(
+          newPath.quadraticBezierTo(
             p0.dx,
             p0.dy,
             (p0.dx + p1.dx) / 2,
             (p0.dy + p1.dy) / 2,
           );
         }
-        // You'll see performance improvements if you cache this Path
-        // instead of creating a new one every paint.
-        canvas.drawPath(path, paint);
+        canvas.drawPath(newPath, paint);
       }
     }
   }
-
-  // for (final line in lines) {
-  //   final outlinePoints = getStroke(line, options: options);
-
-  //   if (outlinePoints.isEmpty) {
-  //     continue;
-  //   } else if (outlinePoints.length < 2) {
-  //     // If the path only has one point, draw a dot.
-  //     canvas.drawCircle(
-  //       outlinePoints.first,
-  //       options.size / 2,
-  //       paint,
-  //     );
-  //   } else {
-  //     final path = Path();
-  //     path.moveTo(outlinePoints.first.dx, outlinePoints.first.dy);
-  //     for (var i = 0; i < outlinePoints.length - 1; ++i) {
-  //       final p0 = outlinePoints[i];
-  //       final p1 = outlinePoints[i + 1];
-  //       path.quadraticBezierTo(
-  //         p0.dx,
-  //         p0.dy,
-  //         (p0.dx + p1.dx) / 2,
-  //         (p0.dy + p1.dy) / 2,
-  //       );
-  //     }
-  //     // You'll see performance improvements if you cache this Path
-  //     // instead of creating a new one every paint.
-  //     canvas.drawPath(path, paint);
-  //   }
-  // }
 
   @override
   bool shouldRepaint(CustomPainter oldDelegate) => true;
