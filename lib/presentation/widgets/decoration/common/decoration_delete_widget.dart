@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:ionicons/ionicons.dart';
 
-class DecorationDeleteWidget extends HookWidget {
+class DecorationDeleteWidget extends StatelessWidget {
   const DecorationDeleteWidget({
     super.key,
     required this.nearDeleteArea,
@@ -25,14 +24,14 @@ class DecorationDeleteWidget extends HookWidget {
           color: Colors.transparent,
           border: Border.fromBorderSide(
             BorderSide(
-              color: nearDeleteArea ? Colors.red : Colors.white,
+              color: nearDeleteArea ? Colors.red : Colors.grey,
               width: 2,
             ),
           ),
         ),
         child: Icon(
           Ionicons.trash,
-          color: nearDeleteArea ? Colors.red : Colors.white,
+          color: nearDeleteArea ? Colors.red : Colors.grey,
           size: 20,
         ),
       ),
