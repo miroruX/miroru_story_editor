@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-class TextSizeSliderView extends HookWidget {
-  const TextSizeSliderView({
+class TextSizeSliderWidget extends HookWidget {
+  const TextSizeSliderWidget({
     super.key,
     required this.onChangeFontSize,
     required this.fontSize,
