@@ -85,7 +85,6 @@ class ColorListSelectorWidget extends HookWidget {
               SizedBox(
                 width: context.deviceWidth,
                 child: TabBar(
-                  isScrollable: true,
                   controller: accentColorTabController,
                   tabs: accentColors
                       .map(
@@ -122,7 +121,7 @@ class ColorCircle extends ConsumerWidget {
       radius: 12,
       child: CircleAvatar(
         backgroundColor: color,
-        radius: isSelected ? 8 : 10,
+        radius: 10,
       ),
     );
   }
