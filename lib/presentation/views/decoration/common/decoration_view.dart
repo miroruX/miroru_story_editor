@@ -27,7 +27,13 @@ class DecorationWidget extends HookConsumerWidget {
         .watch(decorationPaletteStateProvider)
         .renderItemsWithoutBackgroundImage;
 
-    final isMoving = ref.watch(paletteStateProvider).isMovingItem;
+    final isPainting = ref.watch(
+      paletteStateProvider.select((value) => value.isPainting),
+    );
+
+    final isMoving = ref.watch(
+      paletteStateProvider.select((value) => value.isMovingItem),
+    );
     final movingItem = useState<RenderItem?>(null);
     final isMovingCenterX = useState(false);
     final isMovingCenterY = useState(false);
@@ -100,105 +106,108 @@ class DecorationWidget extends HookConsumerWidget {
 
     return LayoutBuilder(
       builder: (ctx, constraints) {
-        return SizedBox(
-          width: constraints.biggest.width,
-          height: constraints.biggest.height,
-          child: Stack(
-            key: decorationAreaKey,
-            children: [
-              /// 描画するアイテム
-              ...renderItems.map(
-                (e) {
-                  final isMovingItem = movingItem.value?.uuid == e.uuid;
+        return IgnorePointer(
+          ignoring: isPainting,
+          child: SizedBox(
+            width: constraints.biggest.width,
+            height: constraints.biggest.height,
+            child: Stack(
+              key: decorationAreaKey,
+              children: [
+                /// 描画するアイテム
+                ...renderItems.map(
+                  (e) {
+                    final isMovingItem = movingItem.value?.uuid == e.uuid;
 
-                  return RenderItemWidget(
-                    item: e,
-                    deletePosition: isNearDeleteArea.value && isMovingItem,
+                    return RenderItemWidget(
+                      item: e,
+                      deletePosition: isNearDeleteArea.value && isMovingItem,
 
-                    /// アイテムをタップしたときの処理
-                    onPointerDown: (event) {
-                      ref
-                          .read(paletteStateProvider.notifier)
-                          .changeMovingItem(true);
-                    },
-
-                    /// アイテムを離したときの処理
-                    onPointerUp: (event, matrix) {
-                      Vibration.click();
-                      //移動していないとき
-                      if (e.transform == matrix) {
-                        if (e.isText) {
-                          ref
-                              .read(editingTextItemStateProvider.notifier)
-                              .setItem(
-                                e as RenderItem<DecorationText>,
-                              );
-                          ref
-                              .read(paletteStateProvider.notifier)
-                              .changeEditingText(true);
-                        } else if (e.isEmoji) {}
-                      }
-
-                      if (isNearDeleteArea.value) {
+                      /// アイテムをタップしたときの処理
+                      onPointerDown: (event) {
                         ref
-                            .read(decorationPaletteStateProvider.notifier)
-                            .removeRenderItem(e.uuid!);
-                      } else {
-                        debounce.onChanged(() {
-                          movingItem.value = null;
-                          pointer.value = null;
+                            .read(paletteStateProvider.notifier)
+                            .changeMovingItem(true);
+                      },
+
+                      /// アイテムを離したときの処理
+                      onPointerUp: (event, matrix) {
+                        Vibration.click();
+                        //移動していないとき
+                        if (e.transform == matrix) {
+                          if (e.isText) {
+                            ref
+                                .read(editingTextItemStateProvider.notifier)
+                                .setItem(
+                                  e as RenderItem<DecorationText>,
+                                );
+                            ref
+                                .watch(paletteStateProvider.notifier)
+                                .changeEditingText(true);
+                          } else if (e.isEmoji) {}
+                        }
+
+                        if (isNearDeleteArea.value) {
                           ref
                               .read(decorationPaletteStateProvider.notifier)
-                              .moveRenderItem(
-                                e.copyWith(
-                                  transform: matrix,
-                                ),
-                              );
-                        });
-                      }
-                    },
+                              .removeRenderItem(e.uuid!);
+                        } else {
+                          debounce.onChanged(() {
+                            movingItem.value = null;
+                            pointer.value = null;
+                            ref
+                                .read(decorationPaletteStateProvider.notifier)
+                                .moveRenderItem(
+                                  e.copyWith(
+                                    transform: matrix,
+                                  ),
+                                );
+                          });
+                        }
+                      },
 
-                    /// アイテムを動かしているときの処理
-                    onPointerMove: (event, matrix) {
-                      pointer.value = event.position;
-                      movingItem.value = e.copyWith(
-                        transform: matrix,
-                      );
-                    },
-                  );
-                },
-              ),
-
-              /// 中心線(Assist Center Line X)
-              if (isMovingCenterX.value) ...[
-                Align(
-                  child: CenterLineXWidget(
-                    height: constraints.biggest.height,
-                  ),
+                      /// アイテムを動かしているときの処理
+                      onPointerMove: (event, matrix) {
+                        pointer.value = event.position;
+                        movingItem.value = e.copyWith(
+                          transform: matrix,
+                        );
+                      },
+                    );
+                  },
                 ),
-              ],
 
-              if (isMovingCenterY.value) ...[
-                Align(
-                  child: CenterLineYWidget(
-                    width: constraints.biggest.width,
-                  ),
-                ),
-              ],
-
-              if (isMoving) ...[
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Padding(
-                    padding: const EdgeInsets.only(bottom: 20), // 下部からの距離
-                    child: DecorationDeleteWidget(
-                      key: deleteIconKey,
-                      nearDeleteArea: isNearDeleteArea.value,
+                /// 中心線(Assist Center Line X)
+                if (isMovingCenterX.value) ...[
+                  Align(
+                    child: CenterLineXWidget(
+                      height: constraints.biggest.height,
                     ),
                   ),
-                ),
+                ],
+
+                if (isMovingCenterY.value) ...[
+                  Align(
+                    child: CenterLineYWidget(
+                      width: constraints.biggest.width,
+                    ),
+                  ),
+                ],
+
+                if (isMoving) ...[
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 20), // 下部からの距離
+                      child: DecorationDeleteWidget(
+                        key: deleteIconKey,
+                        nearDeleteArea: isNearDeleteArea.value,
+                      ),
+                    ),
+                  ),
+                ],
               ],
-            ],
+            ),
           ),
         );
       },

@@ -1,5 +1,4 @@
 import 'package:animated_emoji/animated_emoji.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:ionicons/ionicons.dart';
@@ -110,10 +109,6 @@ class HeaderView extends HookConsumerWidget {
           key: iconButtonKey,
           onPressed: () async {
             final res = await _showPopupMenu(context, iconButtonKey);
-            if (kDebugMode) {
-              print(res);
-            }
-
             if (res == MenuFeatureType.paint) {
               ref.read(paletteStateProvider.notifier).changePainting(true);
             }

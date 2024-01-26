@@ -63,7 +63,7 @@ class PaintToolHeaderView extends HookConsumerWidget {
           ),
           TextButton(
             onPressed: () {
-              ref.read(paletteStateProvider.notifier).changeEditingText(false);
+              ref.read(paletteStateProvider.notifier).changePainting(false);
             },
             child: const Text('完了'),
           ),
