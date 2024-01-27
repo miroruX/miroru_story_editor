@@ -7,10 +7,7 @@ import 'package:miroru_story_editor/model/entities/paint/paint_line/paint_line.d
 import 'package:miroru_story_editor/model/use_cases/paint/paint_lines_state.dart';
 import 'package:miroru_story_editor/model/use_cases/paint/paint_palette_state.dart';
 import 'package:miroru_story_editor/model/use_cases/palette/palette_state.dart';
-import 'package:miroru_story_editor/presentation/views/paint/common/paint_tool_header_view.dart';
-import 'package:miroru_story_editor/presentation/widgets/decoration/common/color_list_selector_widget.dart';
 import 'package:miroru_story_editor/presentation/widgets/paint/line_painter.dart';
-import 'package:miroru_story_editor/util/vibration.dart';
 import 'package:perfect_freehand/perfect_freehand.dart';
 
 // [参考]https://pub.dev/packages/perfect_freehand/example
@@ -22,8 +19,6 @@ class PaintPaletteView extends HookConsumerWidget {
     final isPainting = ref.watch(
       paletteStateProvider.select((value) => value.isPainting),
     );
-    final selectedColor =
-        ref.watch(paintPaletteStateProvider.select((value) => value)).color;
 
     final painedLines = useState<List<PaintLine>>([]);
     final paintingLine = useState<PaintLine?>(null);
@@ -125,27 +120,6 @@ class PaintPaletteView extends HookConsumerWidget {
             ),
           ),
         ),
-        if (isPainting) ...[
-          const Padding(
-            padding: EdgeInsets.all(6),
-            child: PaintToolHeaderView(),
-          ),
-          Positioned(
-            bottom: 0,
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 8),
-              child: ColorListSelectorWidget(
-                selectedColor: selectedColor,
-                onChangeColor: (color) {
-                  Vibration.call();
-                  ref
-                      .read(paintPaletteStateProvider.notifier)
-                      .changeColor(color);
-                },
-              ),
-            ),
-          ),
-        ],
       ],
     );
   }

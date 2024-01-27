@@ -13,4 +13,6 @@ class Palette with _$Palette {
 
   /// ヘッダーを表示しているかどうか
   bool get isShowHeader => !isEditingText && !isMovingItem && !isPainting;
+
+  bool get isShowExportButton => !isEditingText && !isMovingItem && !isPainting;
 }

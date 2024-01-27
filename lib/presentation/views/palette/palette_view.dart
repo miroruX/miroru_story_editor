@@ -11,6 +11,7 @@ import 'package:miroru_story_editor/presentation/views/background_image/backgrou
 import 'package:miroru_story_editor/presentation/views/background_image/background_image_view.dart';
 import 'package:miroru_story_editor/presentation/views/decoration/common/decoration_view.dart';
 import 'package:miroru_story_editor/presentation/views/decoration/common/text_editing_view.dart';
+import 'package:miroru_story_editor/presentation/views/paint/common/paint_palette_edit_view.dart';
 import 'package:miroru_story_editor/presentation/views/paint/common/paint_palette_view.dart';
 import 'package:miroru_story_editor/presentation/views/palette/header_view.dart';
 
@@ -45,31 +46,40 @@ class PaletteView extends HookConsumerWidget {
 
     return ClipRRect(
       borderRadius: BorderRadius.circular(20),
-      child: RepaintBoundary(
-        key: paletteKey,
-        child: Stack(
-          children: [
-            const BackgroundBlurImageView(),
-            const BackgroundImageView(),
-            const PaintPaletteView(),
-            const DecorationWidget(),
-            if (palette.isEditingText) ...[
-              ...editingView,
-            ],
-            if (palette.isShowHeader) ...[
-              Align(
-                alignment: Alignment.topCenter,
-                child: Padding(
-                  padding: const EdgeInsets.all(6),
-                  child: HeaderView(
-                    actionIconButton: actionIconButton,
-                    leadingIconButton: leadingIconButton,
-                  ),
+      child: Stack(
+        children: [
+          // ここがexport imageの対象
+          RepaintBoundary(
+            key: paletteKey,
+            child: const Stack(
+              children: [
+                BackgroundBlurImageView(),
+                BackgroundImageView(),
+                PaintPaletteView(),
+                DecorationWidget(),
+              ],
+            ),
+          ),
+          // ここから下はexport imageの対象外
+          if (palette.isPainting) ...[
+            const PaintPaletteEditView(),
+          ],
+          if (palette.isEditingText) ...[
+            ...editingView,
+          ],
+          if (palette.isShowHeader) ...[
+            Align(
+              alignment: Alignment.topCenter,
+              child: Padding(
+                padding: const EdgeInsets.all(6),
+                child: HeaderView(
+                  actionIconButton: actionIconButton,
+                  leadingIconButton: leadingIconButton,
                 ),
               ),
-            ],
+            ),
           ],
-        ),
+        ],
       ),
     );
   }
