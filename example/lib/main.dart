@@ -5,7 +5,7 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:miroru_story_editor/miroru_story_editor.dart';
-import 'package:permission_handler/permission_handler.dart'; // あなたのライブラリをインポート
+import 'package:permission_handler/permission_handler.dart';
 
 void main() {
   runApp(const MyApp());
