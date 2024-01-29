@@ -1,3 +1,5 @@
-## 0.0.1
+## 0.0.1-dev
 
-* TODO: Describe initial release.
+### Added
+
+- first release

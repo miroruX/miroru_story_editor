@@ -1,6 +1,6 @@
 name: miroru_story_editor
-description: "A new Flutter package project."
-version: 0.0.1
+description: "miroru story editor"
+version: 0.0.1-dev
 homepage: https://miroru.com/
 
 environment:

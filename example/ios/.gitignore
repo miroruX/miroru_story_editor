@@ -33,6 +33,4 @@ Runner/GeneratedPluginRegistrant.*
 !default.pbxuser
 !default.perspectivev3
 
-# wcworkspace
-# **/Runner.xcworkspace/
-# **/Runner.xcodeproj/project.xcworkspace/
+
