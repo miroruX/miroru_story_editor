@@ -1,10 +1,9 @@
 import 'package:animated_emoji/animated_emoji.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:miroru_story_editor/extensions/context_extension.dart';
-import 'package:miroru_story_editor/model/dto/action_icon_button/action_icon_button_dto.dart';
-import 'package:miroru_story_editor/model/dto/leading_icon_button/leading_icon_button_dto.dart';
 import 'package:miroru_story_editor/model/entities/decoration/decorations/emoji/decoration_emoji.dart';
 import 'package:miroru_story_editor/model/entities/decoration/render_item/render_item.dart';
 import 'package:miroru_story_editor/model/enums/menu_result_type.dart';
@@ -18,12 +17,7 @@ import 'package:miroru_story_editor/util/vibration.dart';
 class HeaderView extends HookConsumerWidget {
   const HeaderView({
     super.key,
-    required this.actionIconButton,
-    required this.leadingIconButton,
   });
-
-  final ActionIconButtonDto actionIconButton;
-  final LeadingIconButtonDto leadingIconButton;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -43,9 +37,8 @@ class HeaderView extends HookConsumerWidget {
             Vibration.call();
             Navigator.of(context).pop();
           },
-          // style: leadingIconButton.style,
-          icon: Icon(
-            leadingIconButton.back,
+          icon: const Icon(
+            Ionicons.close,
           ),
         ),
         const SizedBox(
@@ -102,7 +95,6 @@ class HeaderView extends HookConsumerWidget {
                   ),
                 );
           },
-          style: actionIconButton.style,
           icon: const AnimatedEmoji(
             AnimatedEmojis.smile,
             size: 25,
@@ -113,9 +105,8 @@ class HeaderView extends HookConsumerWidget {
             Vibration.call();
             ref.read(paletteStateProvider.notifier).changeEditingText(true);
           },
-          style: actionIconButton.style,
-          icon: Icon(
-            actionIconButton.font,
+          icon: const Icon(
+            FontAwesomeIcons.a,
           ),
         ),
         IconButton(
@@ -135,9 +126,8 @@ class HeaderView extends HookConsumerWidget {
               Navigator.of(context).pop(data);
             }
           },
-          style: actionIconButton.style,
-          icon: Icon(
-            actionIconButton.ellipsis,
+          icon: const Icon(
+            Ionicons.ellipsis_horizontal,
           ),
         ),
       ],

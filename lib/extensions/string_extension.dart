@@ -11,8 +11,6 @@ extension StringExtension on String? {
   }
 
   Color get toColor {
-    // ここに文字列からColorオブジェクトを生成するロジックを実装
-    // 以下は単純な例です
     if (this == null) {
       return Colors.transparent;
     }

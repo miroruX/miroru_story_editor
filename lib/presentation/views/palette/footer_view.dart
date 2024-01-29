@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:ionicons/ionicons.dart';
 import 'package:miroru_story_editor/extensions/context_extension.dart';
-import 'package:miroru_story_editor/model/dto/next_icon_button/next_icon_button_dto.dart';
 import 'package:miroru_story_editor/model/use_cases/palette/palette_state.dart';
 import 'package:miroru_story_editor/model/use_cases/share/export_image.dart';
 import 'package:miroru_story_editor/util/vibration.dart';
@@ -9,10 +9,8 @@ import 'package:miroru_story_editor/util/vibration.dart';
 class FooterView extends ConsumerWidget {
   const FooterView({
     super.key,
-    required this.nextIconButton,
   });
 
-  final NextIconButtonDto nextIconButton;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isShowExportButton = ref.watch(
@@ -33,14 +31,13 @@ class FooterView extends ConsumerWidget {
                   Navigator.of(context).pop(data);
                 }
               : null,
-          style: nextIconButton.style ??
-              IconButton.styleFrom(
-                backgroundColor: Colors.white,
-                shape: const CircleBorder(),
-                padding: const EdgeInsets.all(10),
-                foregroundColor: Colors.black,
-              ),
-          icon: nextIconButton.icon,
+          style: IconButton.styleFrom(
+            backgroundColor: Colors.white,
+            shape: const CircleBorder(),
+            padding: const EdgeInsets.all(10),
+            foregroundColor: Colors.black,
+          ),
+          icon: const Icon(Ionicons.arrow_forward),
         ),
       ],
     );

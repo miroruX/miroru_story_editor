@@ -3,10 +3,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:miroru_story_editor/model/dto/action_icon_button/action_icon_button_dto.dart';
-import 'package:miroru_story_editor/model/dto/back_confirm/story_back_confirm_dto.dart';
-import 'package:miroru_story_editor/model/dto/leading_icon_button/leading_icon_button_dto.dart';
-import 'package:miroru_story_editor/model/dto/next_icon_button/next_icon_button_dto.dart';
 import 'package:miroru_story_editor/model/entities/decoration/decorations/background_image/background_image.dart';
 import 'package:miroru_story_editor/model/entities/decoration/render_item/render_item.dart';
 import 'package:miroru_story_editor/model/use_cases/decoration/decoration_palette_state.dart';
@@ -19,16 +15,8 @@ class PalettePage extends HookConsumerWidget {
   const PalettePage({
     super.key,
     required this.backgroundImageFile,
-    required this.leadingIconButton,
-    required this.actionIconButton,
-    required this.backConfirm,
-    required this.nextIconButton,
   });
   final File backgroundImageFile;
-  final LeadingIconButtonDto leadingIconButton;
-  final ActionIconButtonDto actionIconButton;
-  final BackConfirmDto backConfirm;
-  final NextIconButtonDto nextIconButton;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -65,16 +53,12 @@ class PalettePage extends HookConsumerWidget {
           body: SafeArea(
             child: PaletteView(
               backgroundImageFile: backgroundImageFile,
-              leadingIconButton: leadingIconButton,
-              actionIconButton: actionIconButton,
             ),
           ),
-          bottomNavigationBar: SafeArea(
+          bottomNavigationBar: const SafeArea(
             child: Padding(
-              padding: const EdgeInsets.all(6),
-              child: FooterView(
-                nextIconButton: nextIconButton,
-              ),
+              padding: EdgeInsets.all(6),
+              child: FooterView(),
             ),
           ),
         ),
