@@ -1,27 +1,17 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
-
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages).
-
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages).
--->
-
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
-
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+This is a story editor used in miroru. As other story editors had outdated versions, we decided to create one from scratch. It is designed in accordance with the material theme, and in the future, it will be possible to change the design based on the theme. The code is concise and as simple as possible, so any engineer can fork it and customize it easily.
+
+[movie](https://x.com/dev__our/status/1750942975604236458?s=20)
 
 ## Getting started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+```yaml
+dependencies:
+  flutter:
+    sdk: flutter
+  miroru_story_editor: ^0.0.1
+```
 
 ## Usage
 
@@ -29,11 +19,44 @@ TODO: Include short and useful examples for package users. Add longer examples
 to `/example` folder.
 
 ```dart
-const like = 'sample';
+FilledButton(
+  onPressed: () async {
+    if (Platform.isAndroid) {
+      final deviceInfo = DeviceInfoPlugin();
+      final androidInfo = await deviceInfo.androidInfo;
+      if (androidInfo.version.sdkInt >= 33) {
+        await Permission.photos.request();
+      } else {
+        await Permission.storage.request();
+      }
+    } else {
+      await Permission.photos.request();
+    }
+
+    final file = await ImagePicker().pickImage(
+      source: ImageSource.gallery,
+    );
+    if (file == null) {
+      return;
+    }
+
+    if (!context.mounted) {
+      return;
+    }
+
+    final imageData = await showMiroruStoryEditor(
+      context,
+      imageFile: File(file.path),
+    );
+
+    if (imageData == null) {
+      return;
+    }
+
+      setState(() {
+        image = imageData;
+      });
+    },
+    child: const Text('open miroru story editor'),
+  ),
 ```
-
-## Additional information
-
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
