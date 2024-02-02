@@ -1,3 +1,10 @@
+## 1.0.1 - 2024-02-03
+
+### Added
+
+- fix readme
+- fix homepage url
+
 ## 1.0.0 - 2024-02-03
 
 ### Added
