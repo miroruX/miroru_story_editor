@@ -151,31 +151,27 @@ class HeaderView extends HookConsumerWidget {
     );
 
     final items = [
-      const PopupMenuItem<MenuFeatureType>(
+      PopupMenuItem<MenuFeatureType>(
         value: MenuFeatureType.paint,
         height: 40,
         child: Row(
           children: [
-            Text(
-              '落書き',
-            ),
-            Spacer(),
-            Icon(
+            Text(context.l10n.draw),
+            const Spacer(),
+            const Icon(
               Ionicons.color_palette_outline,
             ),
           ],
         ),
       ),
-      const PopupMenuItem<MenuFeatureType>(
+      PopupMenuItem<MenuFeatureType>(
         value: MenuFeatureType.save,
         height: 40,
         child: Row(
           children: [
-            Text(
-              '保存',
-            ),
-            Spacer(),
-            Icon(Ionicons.download_outline),
+            Text(context.l10n.save),
+            const Spacer(),
+            const Icon(Ionicons.download_outline),
           ],
         ),
       ),

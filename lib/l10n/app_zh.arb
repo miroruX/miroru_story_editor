@@ -1,0 +1,19 @@
+{
+  "@@locale": "zh",
+  "draw": "绘画",
+  "@draw": {
+    "description": "开始在画布上绘画的按钮标签。"
+  },
+  "save": "保存",
+  "@save": {
+    "description": "保存当前绘图或更改的按钮标签。"
+  },
+  "done": "完成",
+  "@done": {
+    "description": "完成当前操作或编辑会话的按钮标签。"
+  },
+  "undo": "撤销",
+  "@undo": {
+    "description": "撤销上一个绘图动作的按钮标签。"
+  }
+}

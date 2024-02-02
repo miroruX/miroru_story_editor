@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/l10n.dart';
 
 extension ContextExtension on BuildContext {
+  L10n get l10n => L10n.of(this)!;
   bool get isDark => MediaQuery.of(this).platformBrightness == Brightness.dark;
   double get deviceWidth => MediaQuery.of(this).size.width;
   double get deviceHeight => MediaQuery.of(this).size.height;
