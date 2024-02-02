@@ -1,6 +1,6 @@
 <a href="https://miroru.com/" align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" src="./doc/images/miroru-logo-dark.png">
+    <source media="(prefers-color-scheme: dark)" srcset="./doc/images/miroru-logo-dark.png">
     <img alt="miroru" src="./doc/images/miroru-logo-light.png">
   </picture>
 </a>
