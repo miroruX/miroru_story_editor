@@ -1,3 +1,9 @@
+## 1.0.2 - 2024-02-03
+
+### Added
+
+- fix readme image url
+
 ## 1.0.1 - 2024-02-03
 
 ### Added

@@ -1,11 +1,11 @@
 <a href="https://miroru.com/" align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./doc/images/miroru-logo-dark.png">
-    <img alt="miroru" src="./doc/images/miroru-logo-light.png">
+    <source media="(prefers-color-scheme: dark)" srcset="https://github.com/miroruX/miroru_story_editor/raw/main/doc/images/miroru-logo-dark.png">
+    <img alt="miroru" src="https://github.com/miroruX/miroru_story_editor/raw/main/doc/images/miroru-logo-light.png">
   </picture>
 </a>
 
-<p align="center"><img src="./doc/images/intro1.png" alt="Reflectly hero image"></p>
+<p align="center"><img src="https://github.com/miroruX/miroru_story_editor/raw/main/doc/images/intro1.png" alt="miroru"></p>
 
 ## Features
 
