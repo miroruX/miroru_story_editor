@@ -1,7 +1,8 @@
 name: miroru_story_editor
 description: "miroru story editor"
-version: 1.0.5
+version: 1.0.6
 homepage: https://www.miroru.com/
+repository: https://github.com/miroruX/miroru_story_editor
 
 environment:
   sdk: ">=3.2.3 <4.0.0"

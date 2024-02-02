@@ -1,3 +1,9 @@
+## 1.0.6 - 2024-02-03
+
+### Added
+
+- add package repository url
+
 ## 1.0.5 - 2024-02-03
 
 ### Added
