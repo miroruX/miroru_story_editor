@@ -19,6 +19,7 @@ class EditingTextItemState extends _$EditingTextItemState {
         backgroundColorCode: Colors.black.hex,
         fontSize: 20,
         colorCode: Colors.white.hex,
+        textAlign: TextAlign.left.name,
       ),
       uuid: null,
       order: 0,
@@ -41,8 +42,6 @@ class EditingTextItemState extends _$EditingTextItemState {
     late final TextAlign newAlignment;
 
     if (_decorationText.textAlign == TextAlign.left.name) {
-      newAlignment = TextAlign.center;
-    } else if (_decorationText.textAlign == TextAlign.center.name) {
       newAlignment = TextAlign.right;
     } else if (_decorationText.textAlign == TextAlign.right.name) {
       newAlignment = TextAlign.left;

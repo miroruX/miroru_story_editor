@@ -1,6 +1,6 @@
 name: miroru_story_editor
 description: "miroru story editor"
-version: 0.0.1-dev
+version: 1.0.0
 homepage: https://miroru.com/
 
 environment:

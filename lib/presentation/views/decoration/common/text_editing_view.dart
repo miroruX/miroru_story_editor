@@ -71,6 +71,8 @@ class TextEditingView extends HookConsumerWidget {
                 ref
                     .read(editingTextItemStateProvider.notifier)
                     .changeTextAlign();
+
+                print(decorationText.textAlign);
               },
               changeFillColor: () {
                 Vibration.call();
@@ -96,24 +98,30 @@ class TextEditingView extends HookConsumerWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 50),
               child: IntrinsicWidth(
-                child: TextFormField(
-                  autofocus: true,
-                  onChanged: ref
-                      .read(editingTextItemStateProvider.notifier)
-                      .changeText,
-                  initialValue: decorationText.text,
-                  decoration: InputDecoration(
-                    hintText: 'Aa',
-                    fillColor: decorationText.backgroundColorCode.toColor,
-                    hintStyle: TextStyle(
-                      fontSize: decorationText.fontSize,
-                      color: decorationText.colorCode.toColor.withOpacity(0.5),
+                child: Directionality(
+                  textDirection: decorationText.textAlign == TextAlign.left.name
+                      ? TextDirection.ltr
+                      : TextDirection.rtl,
+                  child: TextFormField(
+                    autofocus: true,
+                    onChanged: ref
+                        .read(editingTextItemStateProvider.notifier)
+                        .changeText,
+                    initialValue: decorationText.text,
+                    decoration: InputDecoration(
+                      hintText: 'Aa',
+                      fillColor: decorationText.backgroundColorCode.toColor,
+                      hintStyle: TextStyle(
+                        fontSize: decorationText.fontSize,
+                        color:
+                            decorationText.colorCode.toColor.withOpacity(0.5),
+                      ),
                     ),
-                  ),
-                  maxLines: null,
-                  style: decorationText.fontFamily.fontStyle.copyWith(
-                    fontSize: decorationText.fontSize,
-                    color: decorationText.colorCode.toColor,
+                    maxLines: null,
+                    style: decorationText.fontFamily.fontStyle.copyWith(
+                      fontSize: decorationText.fontSize,
+                      color: decorationText.colorCode.toColor,
+                    ),
                   ),
                 ),
               ),

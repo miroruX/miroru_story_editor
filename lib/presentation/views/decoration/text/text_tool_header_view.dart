@@ -26,6 +26,8 @@ class TextToolHeaderView extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final editingTheme = ref.watch(decoratingThemeDataProvider);
+
+    final decorationText = renderItem.data as DecorationText;
     return Theme(
       data: editingTheme,
       child: Row(
@@ -33,8 +35,10 @@ class TextToolHeaderView extends HookConsumerWidget {
           const Spacer(flex: 4),
           IconButton(
             onPressed: changeTextAlign,
-            icon: const Icon(
-              FontAwesomeIcons.alignLeft,
+            icon: Icon(
+              decorationText.textAlign == TextAlign.left.name
+                  ? FontAwesomeIcons.alignLeft
+                  : FontAwesomeIcons.alignRight,
             ),
           ),
           IconButton(

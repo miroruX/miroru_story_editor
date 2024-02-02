@@ -7,7 +7,7 @@ part of 'editing_text_item_state.dart';
 // **************************************************************************
 
 String _$editingTextItemStateHash() =>
-    r'e7ad7b01c155cfbef1eff603119db82f77b788b3';
+    r'a70de6b1959541c5539a8f62c0d361e998e33105';
 
 /// See also [EditingTextItemState].
 @ProviderFor(EditingTextItemState)

@@ -1,8 +1,24 @@
+<a href="https://miroru.com/" align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" src="./doc/images/miroru-logo-dark.png">
+    <img alt="miroru" src="./doc/images/miroru-logo-light.png">
+  </picture>
+</a>
+
+<p align="center"><img src="./doc/images/intro1.png" alt="Reflectly hero image"></p>
+
 ## Features
 
-This is a story editor used in miroru. As other story editors had outdated versions, we decided to create one from scratch. It is designed in accordance with the material theme, and in the future, it will be possible to change the design based on the theme. The code is concise and as simple as possible, so any engineer can fork it and customize it easily.
+miroru story editor is built with an emphasis on ease of theme customization and a modern, extensible architecture. It adheres to Material Design guidelines using ThemeData for all theming, simplifying the process of modifying the app's look and feel.
 
-[movie](https://x.com/dev__our/status/1750942975604236458?s=20)
+✅ **Intelligent Theme Adaptation**
+Automatically adjusts the theme between dark and light modes based on the brightness of the selected background image, enhancing user experience and readability.
+
+✅ **Quick Theme Customization**
+Thanks to the utilization of ThemeData, changing themes to match your preferences or brand identity is straightforward and efficient.
+
+✅ **Designed for Flexibility**
+Our architecture ensures easy customization and future expansion, keeping miroru story editor at the forefront of technology advancements.
 
 ## Getting started
 
@@ -10,7 +26,7 @@ This is a story editor used in miroru. As other story editors had outdated versi
 dependencies:
   flutter:
     sdk: flutter
-  miroru_story_editor: ^0.0.1-dev
+  miroru_story_editor: ^1.0.0
 ```
 
 ## Usage
@@ -56,4 +72,20 @@ FilledButton(
     },
     child: const Text('open miroru story editor'),
   ),
+```
+
+## Change Theme
+
+you can use #ThemeDataDto
+
+```dart
+
+  await showMiroruStoryEditor(
+      context,
+      imageFile: File(file.path),
+      themeDataDto: ThemeDataDto(
+        themeLight: yourLightTheme,
+        themeDark: yourDarkTheme,
+      ),
+  );
 ```
