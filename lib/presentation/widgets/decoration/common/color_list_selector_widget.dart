@@ -42,7 +42,10 @@ class ColorListSelectorWidget extends HookWidget {
 
     final pageController = usePageController();
 
-    final colorTabController = useTabController(initialLength: colors.length);
+    final colorTabController = useTabController(
+      initialLength: colors.length,
+      initialIndex: colors.indexOf(selectedColor),
+    );
     final accentColorTabController =
         useTabController(initialLength: accentColors.length);
 
