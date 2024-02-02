@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:miroru_story_editor/extensions/context_extension.dart';
-import 'package:miroru_story_editor/model/use_cases/theme/editor_theme_mode.dart';
+import 'package:miroru_story_editor/model/use_cases/theme/common/editor_theme_mode.dart';
 
 class ColorListSelectorWidget extends HookWidget {
   const ColorListSelectorWidget({

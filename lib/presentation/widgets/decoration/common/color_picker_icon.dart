@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:miroru_story_editor/model/use_cases/theme/editor_theme_mode.dart';
+import 'package:miroru_story_editor/model/use_cases/theme/common/editor_theme_mode.dart';
 
 class ColorPickerIcon extends ConsumerWidget {
   const ColorPickerIcon({super.key});

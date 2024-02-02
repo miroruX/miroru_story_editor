@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:miroru_story_editor/presentation/res/editing_decoration_theme.dart';
+import 'package:miroru_story_editor/presentation/res/decorating_theme.dart';
 
-ThemeData editingPaintThemeLight() {
-  return editingDecorationThemeLight().copyWith(
+ThemeData getPaintingThemeLight() {
+  return getDecoratingThemeLight().copyWith(
     iconButtonTheme: IconButtonThemeData(
       style: IconButton.styleFrom(
         elevation: 0,
@@ -12,8 +12,8 @@ ThemeData editingPaintThemeLight() {
   );
 }
 
-ThemeData editingPaintThemeDark() {
-  return editingDecorationThemeDark().copyWith(
+ThemeData getPaintingThemeDark() {
+  return getDecoratingThemeDark().copyWith(
     iconButtonTheme: IconButtonThemeData(
       style: IconButton.styleFrom(
         elevation: 0,

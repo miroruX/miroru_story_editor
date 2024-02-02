@@ -1,26 +1,26 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'editor_color_scheme.dart';
+part of 'painting_theme_dart.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$editorColorSchemeHash() => r'18fef0302712e0546a7175558ed5bcd337f00d8b';
+String _$paintingThemeDataHash() => r'039ef6720c4963b54899b2302250399612a6a265';
 
-/// See also [EditorColorScheme].
-@ProviderFor(EditorColorScheme)
-final editorColorSchemeProvider =
-    NotifierProvider<EditorColorScheme, ColorScheme>.internal(
-  EditorColorScheme.new,
-  name: r'editorColorSchemeProvider',
+/// See also [PaintingThemeData].
+@ProviderFor(PaintingThemeData)
+final paintingThemeDataProvider =
+    NotifierProvider<PaintingThemeData, ThemeData>.internal(
+  PaintingThemeData.new,
+  name: r'paintingThemeDataProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$editorColorSchemeHash,
+      : _$paintingThemeDataHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$EditorColorScheme = Notifier<ColorScheme>;
+typedef _$PaintingThemeData = Notifier<ThemeData>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, inference_failure_on_uninitialized_variable, inference_failure_on_function_return_type, inference_failure_on_untyped_parameter, deprecated_member_use_from_same_package

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:miroru_story_editor/model/use_cases/palette/palette_key.dart';
 import 'package:miroru_story_editor/model/use_cases/palette/palette_state.dart';
-import 'package:miroru_story_editor/model/use_cases/theme/editor_theme_mode.dart';
+import 'package:miroru_story_editor/model/use_cases/theme/common/editor_theme_mode.dart';
 import 'package:miroru_story_editor/presentation/views/background_image/background_image_blur_view.dart';
 import 'package:miroru_story_editor/presentation/views/background_image/background_image_view.dart';
 import 'package:miroru_story_editor/presentation/views/decoration/common/decoration_view.dart';
