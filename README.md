@@ -17,11 +17,8 @@ Our architecture ensures easy customization and future expansion, keeping miroru
 
 ## Getting started
 
-```yaml
-dependencies:
-  flutter:
-    sdk: flutter
-  miroru_story_editor: ^1.0.0
+```
+  $ flutter pub add miroru_story_editor
 ```
 
 ## Usage
