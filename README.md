@@ -10,7 +10,7 @@ This is a story editor used in miroru. As other story editors had outdated versi
 dependencies:
   flutter:
     sdk: flutter
-  miroru_story_editor: ^0.0.1
+  miroru_story_editor: ^0.0.1-dev
 ```
 
 ## Usage

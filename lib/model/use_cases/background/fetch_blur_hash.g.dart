@@ -34,23 +34,9 @@ class _SystemHash {
 const fetchBlurHashProvider = FetchBlurHashFamily();
 
 /// See also [fetchBlurHash].
-class FetchBlurHashFamily extends Family {
+class FetchBlurHashFamily extends Family<AsyncValue<BlurHash>> {
   /// See also [fetchBlurHash].
   const FetchBlurHashFamily();
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'fetchBlurHashProvider';
 
   /// See also [fetchBlurHash].
   FetchBlurHashProvider call({
@@ -61,7 +47,6 @@ class FetchBlurHashFamily extends Family {
     );
   }
 
-  @visibleForOverriding
   @override
   FetchBlurHashProvider getProviderOverride(
     covariant FetchBlurHashProvider provider,
@@ -71,27 +56,19 @@ class FetchBlurHashFamily extends Family {
     );
   }
 
-  /// Enables overriding the behavior of this provider, no matter the parameters.
-  Override overrideWith(
-      FutureOr<BlurHash> Function(FetchBlurHashRef ref) create) {
-    return _$FetchBlurHashFamilyOverride(this, create);
-  }
-}
-
-class _$FetchBlurHashFamilyOverride implements FamilyOverride {
-  _$FetchBlurHashFamilyOverride(this.overriddenFamily, this.create);
-
-  final FutureOr<BlurHash> Function(FetchBlurHashRef ref) create;
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
 
   @override
-  final FetchBlurHashFamily overriddenFamily;
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
 
   @override
-  FetchBlurHashProvider getProviderOverride(
-    covariant FetchBlurHashProvider provider,
-  ) {
-    return provider._copyWith(create);
-  }
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'fetchBlurHashProvider';
 }
 
 /// See also [fetchBlurHash].
@@ -117,7 +94,7 @@ class FetchBlurHashProvider extends AutoDisposeFutureProvider<BlurHash> {
         );
 
   FetchBlurHashProvider._internal(
-    super.create, {
+    super._createNotifier, {
     required super.name,
     required super.dependencies,
     required super.allTransitiveDependencies,
@@ -130,7 +107,7 @@ class FetchBlurHashProvider extends AutoDisposeFutureProvider<BlurHash> {
 
   @override
   Override overrideWith(
-    FutureOr<BlurHash> Function(FetchBlurHashRef ref) create,
+    FutureOr<BlurHash> Function(FetchBlurHashRef provider) create,
   ) {
     return ProviderOverride(
       origin: this,
@@ -147,29 +124,8 @@ class FetchBlurHashProvider extends AutoDisposeFutureProvider<BlurHash> {
   }
 
   @override
-  ({
-    File file,
-  }) get argument {
-    return (file: file,);
-  }
-
-  @override
   AutoDisposeFutureProviderElement<BlurHash> createElement() {
     return _FetchBlurHashProviderElement(this);
-  }
-
-  FetchBlurHashProvider _copyWith(
-    FutureOr<BlurHash> Function(FetchBlurHashRef ref) create,
-  ) {
-    return FetchBlurHashProvider._internal(
-      (ref) => create(ref as FetchBlurHashRef),
-      name: name,
-      dependencies: dependencies,
-      allTransitiveDependencies: allTransitiveDependencies,
-      debugGetCreateSourceHash: debugGetCreateSourceHash,
-      from: from,
-      file: file,
-    );
   }
 
   @override
@@ -199,4 +155,4 @@ class _FetchBlurHashProviderElement
   File get file => (origin as FetchBlurHashProvider).file;
 }
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, inference_failure_on_uninitialized_variable, inference_failure_on_function_return_type, inference_failure_on_untyped_parameter, deprecated_member_use_from_same_package
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
