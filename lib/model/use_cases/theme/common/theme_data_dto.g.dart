@@ -1,26 +1,24 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'editing_paint_theme_dart.dart';
+part of 'theme_data_dto.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$editingPaintThemeHash() => r'59510cac6cc28eb0a5b065828080cae2796dc726';
+String _$themeDataDtoHash() => r'99d854c51c5c1f25de64c2160cea6b07eb66f3a1';
 
-/// See also [EditingPaintTheme].
-@ProviderFor(EditingPaintTheme)
-final editingPaintThemeProvider =
-    NotifierProvider<EditingPaintTheme, ThemeData>.internal(
-  EditingPaintTheme.new,
-  name: r'editingPaintThemeProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$editingPaintThemeHash,
+/// See also [themeDataDto].
+@ProviderFor(themeDataDto)
+final themeDataDtoProvider = Provider<ThemeDataDto>.internal(
+  themeDataDto,
+  name: r'themeDataDtoProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$themeDataDtoHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$EditingPaintTheme = Notifier<ThemeData>;
+typedef ThemeDataDtoRef = ProviderRef<ThemeDataDto>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, inference_failure_on_uninitialized_variable, inference_failure_on_function_return_type, inference_failure_on_untyped_parameter, deprecated_member_use_from_same_package

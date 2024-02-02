@@ -5,7 +5,7 @@ import 'package:miroru_story_editor/model/enums/brush_type.dart';
 import 'package:miroru_story_editor/model/use_cases/paint/paint_lines_state.dart';
 import 'package:miroru_story_editor/model/use_cases/paint/paint_palette_state.dart';
 import 'package:miroru_story_editor/model/use_cases/palette/palette_state.dart';
-import 'package:miroru_story_editor/model/use_cases/theme/editing_paint_theme_dart.dart';
+import 'package:miroru_story_editor/model/use_cases/theme/theme_data/painting_theme_dart.dart';
 import 'package:miroru_story_editor/util/vibration.dart';
 
 class PaintToolHeaderView extends HookConsumerWidget {
@@ -24,7 +24,7 @@ class PaintToolHeaderView extends HookConsumerWidget {
       paintPaletteStateProvider.select((value) => value.color),
     );
 
-    final editingTheme = ref.watch(editingPaintThemeProvider);
+    final editingTheme = ref.watch(paintingThemeDataProvider);
 
     return Theme(
       data: editingTheme,
