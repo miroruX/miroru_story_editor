@@ -71,8 +71,6 @@ class TextEditingView extends HookConsumerWidget {
                 ref
                     .read(editingTextItemStateProvider.notifier)
                     .changeTextAlign();
-
-                print(decorationText.textAlign);
               },
               changeFillColor: () {
                 Vibration.call();
