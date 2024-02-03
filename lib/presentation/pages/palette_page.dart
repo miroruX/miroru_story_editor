@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/l10n.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:miroru_story_editor/model/entities/decoration/decorations/background_image/background_image.dart';
@@ -50,20 +49,16 @@ class PalettePage extends HookConsumerWidget {
       canPop: false,
       child: Theme(
         data: themeData,
-        child: Localizations(
-          locale: const Locale('ja'),
-          delegates: L10n.localizationsDelegates,
-          child: Scaffold(
-            body: SafeArea(
-              child: PaletteView(
-                backgroundImageFile: backgroundImageFile,
-              ),
+        child: Scaffold(
+          body: SafeArea(
+            child: PaletteView(
+              backgroundImageFile: backgroundImageFile,
             ),
-            bottomNavigationBar: const SafeArea(
-              child: Padding(
-                padding: EdgeInsets.all(6),
-                child: FooterView(),
-              ),
+          ),
+          bottomNavigationBar: const SafeArea(
+            child: Padding(
+              padding: EdgeInsets.all(6),
+              child: FooterView(),
             ),
           ),
         ),

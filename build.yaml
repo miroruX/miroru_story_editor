@@ -4,9 +4,12 @@ targets:
       freezed:
         generate_for:
           include:
-            - lib/model/dto/*.dart
-            - lib/model/dto/**/*.dart
-            - lib/model/entities/*.dart
-            - lib/model/entities/**/*.dart
+            - lib/**/*.dart
+          exclude:
+            - example/**
+      riverpod_generator:
+        generate_for:
+          include:
+            - lib/**/*.dart
           exclude:
             - example/**
