@@ -1,6 +1,6 @@
 name: miroru_story_editor
 description: miroru story editor is built with an emphasis on ease of theme customization and a modern, extensible architecture. It adheres to Material Design guidelines using ThemeData for all theming, simplifying the process of modifying the app's look and feel.
-version: 1.0.6
+version: 1.1.1
 homepage: https://www.miroru.com/
 repository: https://github.com/miroruX/miroru_story_editor
 

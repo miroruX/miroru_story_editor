@@ -15,6 +15,20 @@ Thanks to the utilization of ThemeData, changing themes to match your preference
 ✅ **Designed for Flexibility**
 Our architecture ensures easy customization and future expansion, keeping miroru story editor at the forefront of technology advancements.
 
+✅ **Multilingual Support**
+miroru story editor supports six languages: English, Japanese, Chinese, Korean, Russian, and Hindi, catering to a diverse user base.
+
+### Support Localization
+
+| support | Language |
+| ------- | -------- |
+| ✅      | English  |
+| ✅      | 日本語   |
+| ✅      | 中文     |
+| ✅      | 한국어   |
+| ✅      | Русский  |
+| ✅      | हिन्दी   |
+
 ## Getting started
 
 ```
@@ -71,7 +85,6 @@ FilledButton(
 you can use #ThemeDataDto
 
 ```dart
-
   await showMiroruStoryEditor(
       context,
       imageFile: File(file.path),
@@ -79,5 +92,15 @@ you can use #ThemeDataDto
         themeLight: yourLightTheme,
         themeDark: yourDarkTheme,
       ),
+  );
+```
+
+## Change Localization
+
+```dart
+  await showMiroruStoryEditor(
+      context,
+      imageFile: File(file.path),
+      languageType: LanguageType.ja
   );
 ```

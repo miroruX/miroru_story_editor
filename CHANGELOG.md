@@ -1,3 +1,15 @@
+## 1.1.1 - 2024-02-03
+
+### Added
+
+- Added support for localization in the README.
+
+## 1.1.0 - 2024-02-03
+
+### Added
+
+- add localization en, hi, ja, ko, ru, zh
+
 ## 1.0.6 - 2024-02-03
 
 ### Added
