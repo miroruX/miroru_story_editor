@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:miroru_story_editor/extensions/context_extension.dart';
 import 'package:miroru_story_editor/model/entities/decoration/decorations/text/decoration_text.dart';
 import 'package:miroru_story_editor/model/entities/decoration/render_item/render_item.dart';
 import 'package:miroru_story_editor/model/use_cases/decoration/decoration_palette_state.dart';
@@ -75,7 +76,7 @@ class TextToolHeaderView extends HookConsumerWidget {
               }
               ref.read(editingTextItemStateProvider.notifier).reset();
             },
-            child: const Text('完了'),
+            child: Text(context.l10n.save),
           ),
         ],
       ),

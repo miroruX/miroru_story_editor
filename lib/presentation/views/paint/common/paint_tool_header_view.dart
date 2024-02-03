@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:miroru_story_editor/extensions/context_extension.dart';
 import 'package:miroru_story_editor/model/enums/brush_type.dart';
 import 'package:miroru_story_editor/model/use_cases/paint/paint_lines_state.dart';
 import 'package:miroru_story_editor/model/use_cases/paint/paint_palette_state.dart';
@@ -36,7 +37,7 @@ class PaintToolHeaderView extends HookConsumerWidget {
                 Vibration.call();
                 ref.read(paintLinesStateProvider.notifier).delete();
               },
-              child: const Text('元に戻す'),
+              child: Text(context.l10n.undo),
             ),
           ],
           const Spacer(flex: 4),
@@ -87,7 +88,7 @@ class PaintToolHeaderView extends HookConsumerWidget {
               Vibration.call();
               ref.read(paletteStateProvider.notifier).changePainting(false);
             },
-            child: const Text('完了'),
+            child: Text(context.l10n.save),
           ),
         ],
       ),

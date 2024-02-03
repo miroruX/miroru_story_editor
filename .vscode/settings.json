@@ -3,5 +3,8 @@
   "editor.codeActionsOnSave": {
     "source.fixAll": "explicit"
   },
+  "cSpell.ignorePaths": [
+    "**/*.arb" // .arbファイルを無視
+  ],
   "editor.stickyScroll.maxLineCount": 5
 }
