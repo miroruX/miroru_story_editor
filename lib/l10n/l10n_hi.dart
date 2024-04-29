@@ -15,4 +15,10 @@ class L10nHi extends L10n {
 
   @override
   String get undo => 'पूर्ववत करें';
+
+  @override
+  String get export_failure => 'छवि निर्यात करने में विफल रहा। कृपया पुन: प्रयास करें।';
+
+  @override
+  String get export_success => 'छवि सफलतापूर्वक निर्यात की गई।';
 }

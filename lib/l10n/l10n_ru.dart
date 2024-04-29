@@ -15,4 +15,10 @@ class L10nRu extends L10n {
 
   @override
   String get undo => 'Отменить';
+
+  @override
+  String get export_failure => 'Не удалось экспортировать изображение. Пожалуйста, попробуйте еще раз.';
+
+  @override
+  String get export_success => 'Изображение успешно экспортировано.';
 }

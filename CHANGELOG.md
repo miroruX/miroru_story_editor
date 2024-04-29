@@ -1,3 +1,12 @@
+## 1.1.5 - 2024-04-29
+
+### Update
+
+- Updated Flutter to version 3.19.6
+- Added feature to save images in device photos
+- Localization to Error Message
+- Delete unused images
+
 ## 1.1.4 - 2024-02-03
 
 ### Update

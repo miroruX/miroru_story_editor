@@ -15,4 +15,10 @@ class L10nKo extends L10n {
 
   @override
   String get undo => '취소';
+
+  @override
+  String get export_failure => '이미지 내보내기에 실패했습니다.';
+
+  @override
+  String get export_success => '이미지가 성공적으로 내보내졌습니다.';
 }

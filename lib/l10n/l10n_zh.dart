@@ -15,4 +15,10 @@ class L10nZh extends L10n {
 
   @override
   String get undo => '撤销';
+
+  @override
+  String get export_failure => '导出失败。';
+
+  @override
+  String get export_success => '导出成功。';
 }

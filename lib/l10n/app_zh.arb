@@ -15,5 +15,13 @@
   "undo": "撤销",
   "@undo": {
     "description": "撤销上一个绘图动作的按钮标签。"
+  },
+  "export_failure": "导出失败。",
+  "@export_failure": {
+    "description": "导出操作失败时显示的消息。"
+  },
+  "export_success": "导出成功。",
+  "@export_success": {
+    "description": "导出操作成功时显示的消息。"
   }
 }

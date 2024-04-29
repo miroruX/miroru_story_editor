@@ -15,5 +15,13 @@
   "undo": "Undo",
   "@undo": {
     "description": "Label for a button to revert the last drawing action."
+  },
+  "export_failure": "Failed to export image.",
+  "@export_failure": {
+    "description": "Error message displayed when the image export fails."
+  },
+  "export_success": "Image exported successfully.",
+  "@export_success": {
+    "description": "Success message displayed when the image export is successful."
   }
 }

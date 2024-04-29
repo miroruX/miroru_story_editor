@@ -15,4 +15,10 @@ class L10nJa extends L10n {
 
   @override
   String get undo => '元に戻す';
+
+  @override
+  String get export_failure => '画像の書き出しに失敗しました';
+
+  @override
+  String get export_success => '画像を書き出しました';
 }

@@ -15,4 +15,10 @@ class L10nEn extends L10n {
 
   @override
   String get undo => 'Undo';
+
+  @override
+  String get export_failure => 'Failed to export image.';
+
+  @override
+  String get export_success => 'Image exported successfully.';
 }

@@ -8,6 +8,7 @@ import 'package:miroru_story_editor/model/entities/decoration/decorations/emoji/
 import 'package:miroru_story_editor/model/entities/decoration/render_item/render_item.dart';
 import 'package:miroru_story_editor/model/enums/menu_result_type.dart';
 import 'package:miroru_story_editor/model/use_cases/decoration/decoration_palette_state.dart';
+import 'package:miroru_story_editor/model/use_cases/image/save_image.dart';
 import 'package:miroru_story_editor/model/use_cases/palette/palette_state.dart';
 import 'package:miroru_story_editor/model/use_cases/share/export_image.dart';
 import 'package:miroru_story_editor/presentation/bottom_sheets/show_select_emoji_sheet.dart';
@@ -114,16 +115,22 @@ class HeaderView extends HookConsumerWidget {
           onPressed: () async {
             await Vibration.call();
             final res = await _showPopupMenu(context, iconButtonKey);
-            if (res == MenuFeatureType.paint) {
-              ref.read(paletteStateProvider.notifier).changePainting(true);
-            } else if (res == MenuFeatureType.save) {
-              await Vibration.call();
-              final data = await ref.read(exportImageProvider.future);
-              if (data == null) {
-                context.showSnackBar('画像の書き出しに失敗しました');
-                return;
+            try {
+              if (res == MenuFeatureType.paint) {
+                ref.read(paletteStateProvider.notifier).changePainting(true);
+              } else if (res == MenuFeatureType.save) {
+                await Vibration.call();
+                final data = await ref.read(exportImageProvider.future);
+                if (data == null) {
+                  context.showSnackBar(context.l10n.export_failure);
+                  return;
+                }
+                // 端末に画像を保存
+                await ref.read(saveImageProvider(imageBytes: data).future);
+                context.showSnackBar(context.l10n.export_success);
               }
-              Navigator.of(context).pop(data);
+            } on Exception catch (e) {
+              context.showSnackBar(e.toString());
             }
           },
           icon: const Icon(

@@ -29,7 +29,7 @@ class FooterView extends ConsumerWidget {
                     await Vibration.call();
                     final data = await ref.read(exportImageProvider.future);
                     if (data == null) {
-                      context.showSnackBar('画像の書き出しに失敗しました');
+                      context.showSnackBar(context.l10n.export_failure);
                       return;
                     }
                     Navigator.of(context).pop(data);

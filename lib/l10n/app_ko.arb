@@ -15,5 +15,13 @@
   "undo": "취소",
   "@undo": {
     "description": "마지막 그림 작업을 취소하는 버튼의 라벨입니다."
+  },
+  "export_failure": "이미지 내보내기에 실패했습니다.",
+  "@export_failure": {
+    "description": "이미지 내보내기에 실패했을 때 사용자에게 보여줄 메시지입니다."
+  },
+  "export_success": "이미지가 성공적으로 내보내졌습니다.",
+  "@export_success": {
+    "description": "이미지가 성공적으로 내보내졌을 때 사용자에게 보여줄 메시지입니다."
   }
 }

@@ -15,5 +15,13 @@
   "undo": "元に戻す",
   "@undo": {
     "description": "最後の描画アクションを取り消すアクションのボタンラベル"
+  },
+  "export_failure": "画像の書き出しに失敗しました",
+  "@export_failure": {
+    "description": "画像の書き出しに失敗した際に表示されるエラーメッセージ"
+  },
+  "export_success": "画像を書き出しました",
+  "@export_success": {
+    "description": "画像の書き出しに成功した際に表示されるメッセージ"
   }
 }
