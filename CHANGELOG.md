@@ -1,4 +1,12 @@
-## [1.1.6] - 2024-05-15
+## [1.1.7] - 2024-05-15
+
+### Changed
+
+- Updated `intl` dependency to version 0.18.1 to resolve compatibility issues with `flutter_localizations`.
+
+- depenced
+
+# [1.1.6] - 2024-05-15
 
 ### Changed
 
