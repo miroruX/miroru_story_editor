@@ -28,7 +28,7 @@ ThemeData getMiroruThemeLight() {
       ),
       labelPadding: const EdgeInsets.all(8),
       splashFactory: NoSplash.splashFactory,
-      overlayColor: MaterialStateProperty.all(Colors.transparent),
+      overlayColor: WidgetStateProperty.all(Colors.transparent),
       dividerHeight: 0,
       indicatorSize: TabBarIndicatorSize.tab,
       labelStyle: base.textTheme.bodyMedium?.copyWith(
@@ -48,7 +48,7 @@ ThemeData getMiroruThemeLight() {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
       ),
-      labelTextStyle: MaterialStatePropertyAll(
+      labelTextStyle: WidgetStatePropertyAll(
         TextStyle(
           color: lightColorScheme.onPrimaryContainer,
           fontWeight: FontWeight.bold,
@@ -173,7 +173,7 @@ ThemeData getMiroruThemeDark() {
         color: darkColorScheme.scrim,
       ),
       splashFactory: NoSplash.splashFactory,
-      overlayColor: MaterialStateProperty.all(Colors.transparent),
+      overlayColor: WidgetStateProperty.all(Colors.transparent),
       dividerHeight: 0,
       labelPadding: const EdgeInsets.all(8),
       indicatorSize: TabBarIndicatorSize.tab,
@@ -194,7 +194,7 @@ ThemeData getMiroruThemeDark() {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
       ),
-      labelTextStyle: MaterialStatePropertyAll(
+      labelTextStyle: WidgetStatePropertyAll(
         TextStyle(
           color: darkColorScheme.onSurface,
           fontWeight: FontWeight.bold,
