@@ -6,6 +6,13 @@
       "request": "launch",
       "type": "dart",
       "args": ["--debug"]
+    },
+    {
+      "name": "Run Without Debugging",
+      "request": "launch",
+      "type": "dart",
+      "args": ["--debug"],
+      "noDebug": false
     }
   ]
 }
