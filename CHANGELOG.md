@@ -1,3 +1,9 @@
+## [1.1.8] - 2025-02-21
+
+### Changed
+
+- Updated dependencies
+
 ## [1.1.7] - 2024-05-15
 
 ### Changed
