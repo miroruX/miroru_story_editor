@@ -5,7 +5,7 @@ import 'package:unicode_emojis/unicode_emojis.dart';
 
 Future<String?> showSelectEmojiSheet(
   BuildContext context,
-) async {
+) {
   const emojis = UnicodeEmojis.allEmojis;
   return showSliverDragSheet(
     context,
