@@ -27,19 +27,19 @@ class PalettePage extends HookConsumerWidget {
           () => ref
               .read(decorationPaletteStateProvider.notifier)
               .initHistoryRenderItem(
-            [
-              [
-                RenderItem<DecorationBackgroundImage>(
-                  transform: Matrix4.identity(),
-                  data: DecorationBackgroundImage(
-                    backgroundImageFile: backgroundImageFile,
-                  ),
-                  uuid: const Uuid().v4(),
-                  order: 0,
-                ),
-              ]
-            ],
-          ),
+                [
+                  [
+                    RenderItem<DecorationBackgroundImage>(
+                      transform: Matrix4.identity(),
+                      data: DecorationBackgroundImage(
+                        backgroundImageFile: backgroundImageFile,
+                      ),
+                      uuid: const Uuid().v4(),
+                      order: 0,
+                    ),
+                  ],
+                ],
+              ),
         );
         return null;
       },

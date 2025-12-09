@@ -85,7 +85,9 @@ class HeaderView extends HookConsumerWidget {
               return;
             }
 
-            ref.read(decorationPaletteStateProvider.notifier).addRenderItem(
+            ref
+                .read(decorationPaletteStateProvider.notifier)
+                .addRenderItem(
                   RenderItem<DecorationEmoji>(
                     transform: Matrix4.identity(),
                     data: DecorationEmoji(
@@ -144,7 +146,7 @@ class HeaderView extends HookConsumerWidget {
   Future<MenuFeatureType?> _showPopupMenu(
     BuildContext context,
     GlobalKey iconButtonKey,
-  ) async {
+  ) {
     final renderBox =
         iconButtonKey.currentContext?.findRenderObject() as RenderBox?;
     final offset = renderBox!.localToGlobal(Offset.zero);

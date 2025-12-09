@@ -6,7 +6,7 @@ Future<T?> showSliverDragSheet<T>(
   required List<Widget> slivers,
   double initialChildSize = 0.5,
   double maxChildSize = 1,
-}) async {
+}) {
   return showModalBottomSheet<T?>(
     context: context,
     isScrollControlled: true,

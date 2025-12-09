@@ -29,16 +29,18 @@ class TextEditingView extends HookConsumerWidget {
     final isColorEditing = useState<bool>(false);
 
     // 関数の中は再度インスタンスを生成する必要がある
-    final decorationText = textItem.data as DecorationText;
+    final decorationText = textItem.data;
 
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
       onTap: () {
         context.hideKeyboard();
 
-        final data = textItem.data as DecorationText;
+        final data = textItem.data;
         if (!(data.text?.isNotEmpty ?? false)) {
-          ref.read(paletteStateProvider.notifier).changeEditingText(
+          ref
+              .read(paletteStateProvider.notifier)
+              .changeEditingText(
                 false,
               );
 
@@ -46,11 +48,15 @@ class TextEditingView extends HookConsumerWidget {
         }
 
         if (textItem.uuid == null) {
-          ref.read(decorationPaletteStateProvider.notifier).addRenderItem(
+          ref
+              .read(decorationPaletteStateProvider.notifier)
+              .addRenderItem(
                 textItem,
               );
         } else {
-          ref.read(decorationPaletteStateProvider.notifier).updateRenderItem(
+          ref
+              .read(decorationPaletteStateProvider.notifier)
+              .updateRenderItem(
                 textItem,
               );
         }
@@ -111,8 +117,9 @@ class TextEditingView extends HookConsumerWidget {
                       fillColor: decorationText.backgroundColorCode.toColor,
                       hintStyle: TextStyle(
                         fontSize: decorationText.fontSize,
-                        color:
-                            decorationText.colorCode.toColor.withOpacity(0.5),
+                        color: decorationText.colorCode.toColor.withValues(
+                          alpha: 0.5,
+                        ),
                       ),
                     ),
                     maxLines: null,

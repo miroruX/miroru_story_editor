@@ -6,7 +6,7 @@ import 'package:miroru_story_editor/model/entities/decoration/decorations/decora
 part 'background_image.freezed.dart';
 
 @freezed
-class DecorationBackgroundImage
+abstract class DecorationBackgroundImage
     with _$DecorationBackgroundImage
     implements DecorationItem {
   const factory DecorationBackgroundImage({

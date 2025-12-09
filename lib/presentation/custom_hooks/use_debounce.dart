@@ -33,7 +33,7 @@ class _DebounceHook<T> extends Hook<Debounce<T>> {
 }
 
 class _DebounceHookState<T> extends HookState<Debounce<T>, _DebounceHook<T>> {
-  late final _debounce = Debounce(
+  late final Debounce<T> _debounce = Debounce(
     debounceDelay: hook.debounceDelay,
     callback: hook.callback,
   );
@@ -52,8 +52,8 @@ class Debounce<T> {
   Debounce({
     required int debounceDelay,
     required void Function(T) callback,
-  })  : _debounceDelay = debounceDelay,
-        _callback = callback;
+  }) : _debounceDelay = debounceDelay,
+       _callback = callback;
 
   Timer? _timer;
   final int _debounceDelay;

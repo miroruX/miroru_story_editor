@@ -8,7 +8,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'export_image.g.dart';
 
 @riverpod
-FutureOr<Uint8List?> exportImage(ExportImageRef ref) async {
+FutureOr<Uint8List?> exportImage(Ref ref) async {
   final paletteKey = ref.read(paletteKeyProvider);
 
   final boundary =

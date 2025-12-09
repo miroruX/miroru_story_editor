@@ -26,6 +26,6 @@ extension ColorExtension on Color? {
     if (this == null) {
       return '00000000';
     }
-    return this!.value.toRadixString(16).padLeft(8, '0');
+    return this!.toARGB32().toRadixString(16).padLeft(8, '0');
   }
 }

@@ -8,7 +8,7 @@ part 'paint_line.freezed.dart';
 typedef Stroke = List<PointVector>;
 
 @freezed
-class PaintLine with _$PaintLine {
+abstract class PaintLine with _$PaintLine {
   const factory PaintLine({
     @Default([]) Stroke points,
     required StrokeOptions strokeOptions,

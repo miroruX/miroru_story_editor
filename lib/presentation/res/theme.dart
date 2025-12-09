@@ -19,9 +19,9 @@ ThemeData getMiroruThemeLight() {
         ),
       ),
     ),
-    tabBarTheme: TabBarTheme(
+    tabBarTheme: TabBarThemeData(
       labelColor: lightColorScheme.primary,
-      unselectedLabelColor: lightColorScheme.onSurface.withOpacity(0.5),
+      unselectedLabelColor: lightColorScheme.onSurface.withValues(alpha: 0.5),
       indicator: BoxDecoration(
         shape: BoxShape.circle,
         color: lightColorScheme.primaryContainer,
@@ -78,9 +78,9 @@ ThemeData getMiroruThemeLight() {
     ),
     sliderTheme: SliderThemeData(
       activeTrackColor: lightColorScheme.primary,
-      inactiveTrackColor: lightColorScheme.onSurface.withOpacity(0.5),
+      inactiveTrackColor: lightColorScheme.onSurface.withValues(alpha: 0.5),
       thumbColor: lightColorScheme.primary,
-      overlayColor: lightColorScheme.primary.withOpacity(0.5),
+      overlayColor: lightColorScheme.primary.withValues(alpha: 0.5),
       trackHeight: 2,
       thumbShape: const RoundSliderThumbShape(
         enabledThumbRadius: 8,
@@ -165,9 +165,9 @@ ThemeData getMiroruThemeDark() {
         ),
       ),
     ),
-    tabBarTheme: TabBarTheme(
+    tabBarTheme: TabBarThemeData(
       labelColor: lightColorScheme.primary,
-      unselectedLabelColor: darkColorScheme.onSurface.withOpacity(0.5),
+      unselectedLabelColor: darkColorScheme.onSurface.withValues(alpha: 0.5),
       indicator: BoxDecoration(
         shape: BoxShape.circle,
         color: darkColorScheme.scrim,
@@ -216,9 +216,9 @@ ThemeData getMiroruThemeDark() {
     ),
     sliderTheme: SliderThemeData(
       activeTrackColor: Colors.white,
-      inactiveTrackColor: darkColorScheme.onSurface.withOpacity(0.5),
+      inactiveTrackColor: darkColorScheme.onSurface.withValues(alpha: 0.5),
       thumbColor: Colors.white,
-      overlayColor: darkColorScheme.onSurface.withOpacity(0.5),
+      overlayColor: darkColorScheme.onSurface.withValues(alpha: 0.5),
       trackHeight: 2,
       thumbShape: const RoundSliderThumbShape(
         enabledThumbRadius: 8,

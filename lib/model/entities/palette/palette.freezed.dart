@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,168 +9,269 @@ part of 'palette.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
 /// @nodoc
 mixin _$Palette {
-  bool get isPainting => throw _privateConstructorUsedError;
-  bool get isEditingText => throw _privateConstructorUsedError;
-  bool get isMovingItem => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
-  $PaletteCopyWith<Palette> get copyWith => throw _privateConstructorUsedError;
+ bool get isPainting; bool get isEditingText; bool get isMovingItem;
+/// Create a copy of Palette
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$PaletteCopyWith<Palette> get copyWith => _$PaletteCopyWithImpl<Palette>(this as Palette, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Palette&&(identical(other.isPainting, isPainting) || other.isPainting == isPainting)&&(identical(other.isEditingText, isEditingText) || other.isEditingText == isEditingText)&&(identical(other.isMovingItem, isMovingItem) || other.isMovingItem == isMovingItem));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,isPainting,isEditingText,isMovingItem);
+
+@override
+String toString() {
+  return 'Palette(isPainting: $isPainting, isEditingText: $isEditingText, isMovingItem: $isMovingItem)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $PaletteCopyWith<$Res> {
-  factory $PaletteCopyWith(Palette value, $Res Function(Palette) then) =
-      _$PaletteCopyWithImpl<$Res, Palette>;
-  @useResult
-  $Res call({bool isPainting, bool isEditingText, bool isMovingItem});
-}
+abstract mixin class $PaletteCopyWith<$Res>  {
+  factory $PaletteCopyWith(Palette value, $Res Function(Palette) _then) = _$PaletteCopyWithImpl;
+@useResult
+$Res call({
+ bool isPainting, bool isEditingText, bool isMovingItem
+});
 
+
+
+
+}
 /// @nodoc
-class _$PaletteCopyWithImpl<$Res, $Val extends Palette>
+class _$PaletteCopyWithImpl<$Res>
     implements $PaletteCopyWith<$Res> {
-  _$PaletteCopyWithImpl(this._value, this._then);
+  _$PaletteCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final Palette _self;
+  final $Res Function(Palette) _then;
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? isPainting = null,
-    Object? isEditingText = null,
-    Object? isMovingItem = null,
-  }) {
-    return _then(_value.copyWith(
-      isPainting: null == isPainting
-          ? _value.isPainting
-          : isPainting // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isEditingText: null == isEditingText
-          ? _value.isEditingText
-          : isEditingText // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isMovingItem: null == isMovingItem
-          ? _value.isMovingItem
-          : isMovingItem // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ) as $Val);
-  }
+/// Create a copy of Palette
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? isPainting = null,Object? isEditingText = null,Object? isMovingItem = null,}) {
+  return _then(_self.copyWith(
+isPainting: null == isPainting ? _self.isPainting : isPainting // ignore: cast_nullable_to_non_nullable
+as bool,isEditingText: null == isEditingText ? _self.isEditingText : isEditingText // ignore: cast_nullable_to_non_nullable
+as bool,isMovingItem: null == isMovingItem ? _self.isMovingItem : isMovingItem // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [Palette].
+extension PalettePatterns on Palette {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _Palette value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _Palette() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _Palette value)  $default,){
+final _that = this;
+switch (_that) {
+case _Palette():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _Palette value)?  $default,){
+final _that = this;
+switch (_that) {
+case _Palette() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool isPainting,  bool isEditingText,  bool isMovingItem)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _Palette() when $default != null:
+return $default(_that.isPainting,_that.isEditingText,_that.isMovingItem);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool isPainting,  bool isEditingText,  bool isMovingItem)  $default,) {final _that = this;
+switch (_that) {
+case _Palette():
+return $default(_that.isPainting,_that.isEditingText,_that.isMovingItem);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool isPainting,  bool isEditingText,  bool isMovingItem)?  $default,) {final _that = this;
+switch (_that) {
+case _Palette() when $default != null:
+return $default(_that.isPainting,_that.isEditingText,_that.isMovingItem);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
-abstract class _$$PaletteImplCopyWith<$Res> implements $PaletteCopyWith<$Res> {
-  factory _$$PaletteImplCopyWith(
-          _$PaletteImpl value, $Res Function(_$PaletteImpl) then) =
-      __$$PaletteImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({bool isPainting, bool isEditingText, bool isMovingItem});
+
+
+class _Palette extends Palette {
+  const _Palette({this.isPainting = false, this.isEditingText = false, this.isMovingItem = false}): super._();
+  
+
+@override@JsonKey() final  bool isPainting;
+@override@JsonKey() final  bool isEditingText;
+@override@JsonKey() final  bool isMovingItem;
+
+/// Create a copy of Palette
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$PaletteCopyWith<_Palette> get copyWith => __$PaletteCopyWithImpl<_Palette>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Palette&&(identical(other.isPainting, isPainting) || other.isPainting == isPainting)&&(identical(other.isEditingText, isEditingText) || other.isEditingText == isEditingText)&&(identical(other.isMovingItem, isMovingItem) || other.isMovingItem == isMovingItem));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,isPainting,isEditingText,isMovingItem);
+
+@override
+String toString() {
+  return 'Palette(isPainting: $isPainting, isEditingText: $isEditingText, isMovingItem: $isMovingItem)';
+}
+
+
 }
 
 /// @nodoc
-class __$$PaletteImplCopyWithImpl<$Res>
-    extends _$PaletteCopyWithImpl<$Res, _$PaletteImpl>
-    implements _$$PaletteImplCopyWith<$Res> {
-  __$$PaletteImplCopyWithImpl(
-      _$PaletteImpl _value, $Res Function(_$PaletteImpl) _then)
-      : super(_value, _then);
+abstract mixin class _$PaletteCopyWith<$Res> implements $PaletteCopyWith<$Res> {
+  factory _$PaletteCopyWith(_Palette value, $Res Function(_Palette) _then) = __$PaletteCopyWithImpl;
+@override @useResult
+$Res call({
+ bool isPainting, bool isEditingText, bool isMovingItem
+});
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? isPainting = null,
-    Object? isEditingText = null,
-    Object? isMovingItem = null,
-  }) {
-    return _then(_$PaletteImpl(
-      isPainting: null == isPainting
-          ? _value.isPainting
-          : isPainting // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isEditingText: null == isEditingText
-          ? _value.isEditingText
-          : isEditingText // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isMovingItem: null == isMovingItem
-          ? _value.isMovingItem
-          : isMovingItem // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
+
+
+
 }
-
 /// @nodoc
+class __$PaletteCopyWithImpl<$Res>
+    implements _$PaletteCopyWith<$Res> {
+  __$PaletteCopyWithImpl(this._self, this._then);
 
-class _$PaletteImpl extends _Palette {
-  const _$PaletteImpl(
-      {this.isPainting = false,
-      this.isEditingText = false,
-      this.isMovingItem = false})
-      : super._();
+  final _Palette _self;
+  final $Res Function(_Palette) _then;
 
-  @override
-  @JsonKey()
-  final bool isPainting;
-  @override
-  @JsonKey()
-  final bool isEditingText;
-  @override
-  @JsonKey()
-  final bool isMovingItem;
-
-  @override
-  String toString() {
-    return 'Palette(isPainting: $isPainting, isEditingText: $isEditingText, isMovingItem: $isMovingItem)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$PaletteImpl &&
-            (identical(other.isPainting, isPainting) ||
-                other.isPainting == isPainting) &&
-            (identical(other.isEditingText, isEditingText) ||
-                other.isEditingText == isEditingText) &&
-            (identical(other.isMovingItem, isMovingItem) ||
-                other.isMovingItem == isMovingItem));
-  }
-
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, isPainting, isEditingText, isMovingItem);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$PaletteImplCopyWith<_$PaletteImpl> get copyWith =>
-      __$$PaletteImplCopyWithImpl<_$PaletteImpl>(this, _$identity);
+/// Create a copy of Palette
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? isPainting = null,Object? isEditingText = null,Object? isMovingItem = null,}) {
+  return _then(_Palette(
+isPainting: null == isPainting ? _self.isPainting : isPainting // ignore: cast_nullable_to_non_nullable
+as bool,isEditingText: null == isEditingText ? _self.isEditingText : isEditingText // ignore: cast_nullable_to_non_nullable
+as bool,isMovingItem: null == isMovingItem ? _self.isMovingItem : isMovingItem // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
 }
 
-abstract class _Palette extends Palette {
-  const factory _Palette(
-      {final bool isPainting,
-      final bool isEditingText,
-      final bool isMovingItem}) = _$PaletteImpl;
-  const _Palette._() : super._();
 
-  @override
-  bool get isPainting;
-  @override
-  bool get isEditingText;
-  @override
-  bool get isMovingItem;
-  @override
-  @JsonKey(ignore: true)
-  _$$PaletteImplCopyWith<_$PaletteImpl> get copyWith =>
-      throw _privateConstructorUsedError;
 }
+
+// dart format on

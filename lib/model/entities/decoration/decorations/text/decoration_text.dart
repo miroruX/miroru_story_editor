@@ -4,7 +4,7 @@ import 'package:miroru_story_editor/model/entities/decoration/decorations/decora
 part 'decoration_text.freezed.dart';
 
 @freezed
-class DecorationText with _$DecorationText implements DecorationItem {
+abstract class DecorationText with _$DecorationText implements DecorationItem {
   const factory DecorationText({
     String? text,
     double? fontSize,

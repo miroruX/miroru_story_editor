@@ -6,22 +6,66 @@ part of 'editing_text_item_state.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$editingTextItemStateHash() =>
-    r'a70de6b1959541c5539a8f62c0d361e998e33105';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 
-/// See also [EditingTextItemState].
 @ProviderFor(EditingTextItemState)
-final editingTextItemStateProvider =
-    NotifierProvider<EditingTextItemState, RenderItem<DecorationText>>.internal(
-  EditingTextItemState.new,
-  name: r'editingTextItemStateProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$editingTextItemStateHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+const editingTextItemStateProvider = EditingTextItemStateProvider._();
 
-typedef _$EditingTextItemState = Notifier<RenderItem<DecorationText>>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+final class EditingTextItemStateProvider
+    extends
+        $NotifierProvider<EditingTextItemState, RenderItem<DecorationText>> {
+  const EditingTextItemStateProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'editingTextItemStateProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$editingTextItemStateHash();
+
+  @$internal
+  @override
+  EditingTextItemState create() => EditingTextItemState();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(RenderItem<DecorationText> value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<RenderItem<DecorationText>>(value),
+    );
+  }
+}
+
+String _$editingTextItemStateHash() =>
+    r'3fec478652d48ca8fffca632f073a512b07099b6';
+
+abstract class _$EditingTextItemState
+    extends $Notifier<RenderItem<DecorationText>> {
+  RenderItem<DecorationText> build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final created = build();
+    final ref =
+        this.ref
+            as $Ref<RenderItem<DecorationText>, RenderItem<DecorationText>>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<
+                RenderItem<DecorationText>,
+                RenderItem<DecorationText>
+              >,
+              RenderItem<DecorationText>,
+              Object?,
+              Object?
+            >;
+    element.handleValue(ref, created);
+  }
+}

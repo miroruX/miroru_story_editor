@@ -27,7 +27,7 @@ class _CenterLinePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = Colors.blueAccent.withOpacity(0.5)
+      ..color = Colors.blueAccent.withValues(alpha: 0.5)
       ..strokeWidth = strokeWidth
       ..style = PaintingStyle.stroke;
 

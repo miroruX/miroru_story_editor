@@ -6,19 +6,46 @@ part of 'theme_data_dto.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$themeDataDtoHash() => r'99d854c51c5c1f25de64c2160cea6b07eb66f3a1';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 
-/// See also [themeDataDto].
 @ProviderFor(themeDataDto)
-final themeDataDtoProvider = Provider<ThemeDataDto>.internal(
-  themeDataDto,
-  name: r'themeDataDtoProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$themeDataDtoHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+const themeDataDtoProvider = ThemeDataDtoProvider._();
 
-typedef ThemeDataDtoRef = ProviderRef<ThemeDataDto>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+final class ThemeDataDtoProvider
+    extends $FunctionalProvider<ThemeDataDto, ThemeDataDto, ThemeDataDto>
+    with $Provider<ThemeDataDto> {
+  const ThemeDataDtoProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'themeDataDtoProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$themeDataDtoHash();
+
+  @$internal
+  @override
+  $ProviderElement<ThemeDataDto> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  ThemeDataDto create(Ref ref) {
+    return themeDataDto(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(ThemeDataDto value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<ThemeDataDto>(value),
+    );
+  }
+}
+
+String _$themeDataDtoHash() => r'c0bfb93edded77750605b20e6996bc1339347140';

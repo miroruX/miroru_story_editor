@@ -28,7 +28,7 @@ class TextToolHeaderView extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final editingTheme = ref.watch(decoratingThemeDataProvider);
 
-    final decorationText = renderItem.data as DecorationText;
+    final decorationText = renderItem.data;
     return Theme(
       data: editingTheme,
       child: Row(
@@ -55,16 +55,20 @@ class TextToolHeaderView extends HookConsumerWidget {
           const Spacer(),
           TextButton(
             onPressed: () {
-              final data = renderItem.data as DecorationText;
+              final data = renderItem.data;
               if (!(data.text?.isNotEmpty ?? false)) {
-                ref.read(paletteStateProvider.notifier).changeEditingText(
+                ref
+                    .read(paletteStateProvider.notifier)
+                    .changeEditingText(
                       false,
                     );
 
                 return;
               }
               if (renderItem.uuid == null) {
-                ref.read(decorationPaletteStateProvider.notifier).addRenderItem(
+                ref
+                    .read(decorationPaletteStateProvider.notifier)
+                    .addRenderItem(
                       renderItem,
                     );
               } else {

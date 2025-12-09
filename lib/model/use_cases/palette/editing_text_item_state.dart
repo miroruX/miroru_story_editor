@@ -26,19 +26,13 @@ class EditingTextItemState extends _$EditingTextItemState {
     );
   }
 
-  DecorationText get _decorationText => state.data as DecorationText;
+  DecorationText get _decorationText => state.data;
 
   void setItem(RenderItem<DecorationText> renderItem) {
     state = renderItem;
   }
 
   void changeTextAlign() {
-    if (state.data is! DecorationText) {
-      throw Exception(
-        'state.data is not DecorationText.',
-      );
-    }
-
     late final TextAlign newAlignment;
 
     if (_decorationText.textAlign == TextAlign.left.name) {
@@ -60,12 +54,6 @@ class EditingTextItemState extends _$EditingTextItemState {
   }
 
   void changeFillColor() {
-    if (state.data is! DecorationText) {
-      throw Exception(
-        'state.data is not DecorationText.',
-      );
-    }
-
     late final Color newBackgroundColor;
 
     if (_decorationText.backgroundColorCode.toColor == Colors.black) {
@@ -85,12 +73,6 @@ class EditingTextItemState extends _$EditingTextItemState {
   }
 
   void changeFontSize(double fontSize) {
-    if (state.data is! DecorationText) {
-      throw Exception(
-        'state.data is not DecorationText.',
-      );
-    }
-
     state = RenderItem<DecorationText>(
       transform: state.transform,
       data: _decorationText.copyWith(
@@ -102,12 +84,6 @@ class EditingTextItemState extends _$EditingTextItemState {
   }
 
   void changeText(String text) {
-    if (state.data is! DecorationText) {
-      throw Exception(
-        'state.data is not DecorationText.',
-      );
-    }
-
     state = RenderItem<DecorationText>(
       transform: state.transform,
       data: _decorationText.copyWith(
@@ -119,12 +95,6 @@ class EditingTextItemState extends _$EditingTextItemState {
   }
 
   void changeTextColor(Color color) {
-    if (state.data is! DecorationText) {
-      throw Exception(
-        'state.data is not DecorationText.',
-      );
-    }
-
     state = RenderItem<DecorationText>(
       transform: state.transform,
       data: _decorationText.copyWith(
@@ -136,12 +106,6 @@ class EditingTextItemState extends _$EditingTextItemState {
   }
 
   void changeFontFamily(String fontFamily) {
-    if (state.data is! DecorationText) {
-      throw Exception(
-        'state.data is not DecorationText.',
-      );
-    }
-
     state = RenderItem<DecorationText>(
       transform: state.transform,
       data: _decorationText.copyWith(

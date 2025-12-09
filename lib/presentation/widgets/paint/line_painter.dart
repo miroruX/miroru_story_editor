@@ -30,7 +30,7 @@ class StrokePainter extends CustomPainter {
     List<Offset> drawMarker(PaintLine line) {
       paint = Paint()
         ..strokeWidth = 3
-        ..color = line.color.withOpacity(0.7)
+        ..color = line.color.withValues(alpha: 0.7)
         ..maskFilter = const MaskFilter.blur(BlurStyle.solid, 2)
         ..strokeCap = StrokeCap.square
         ..filterQuality = FilterQuality.high
@@ -71,7 +71,7 @@ class StrokePainter extends CustomPainter {
       final stroke = switch (line.brushType) {
         BrushType.pen => drawPen(line),
         BrushType.marker => drawMarker(line),
-        BrushType.neon => drawNeon(line)
+        BrushType.neon => drawNeon(line),
       };
 
       if (stroke.isEmpty) {

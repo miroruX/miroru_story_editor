@@ -6,19 +6,43 @@ part of 'export_image.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$exportImageHash() => r'024fb1a32dcfab46df958ab3e16cad1c50f4c3fb';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 
-/// See also [exportImage].
 @ProviderFor(exportImage)
-final exportImageProvider = AutoDisposeFutureProvider<Uint8List?>.internal(
-  exportImage,
-  name: r'exportImageProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$exportImageHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+const exportImageProvider = ExportImageProvider._();
 
-typedef ExportImageRef = AutoDisposeFutureProviderRef<Uint8List?>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+final class ExportImageProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<Uint8List?>,
+          Uint8List?,
+          FutureOr<Uint8List?>
+        >
+    with $FutureModifier<Uint8List?>, $FutureProvider<Uint8List?> {
+  const ExportImageProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'exportImageProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$exportImageHash();
+
+  @$internal
+  @override
+  $FutureProviderElement<Uint8List?> $createElement($ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<Uint8List?> create(Ref ref) {
+    return exportImage(ref);
+  }
+}
+
+String _$exportImageHash() => r'0e74a273da6ebdade34d38cf2a9e5e3db2586069';

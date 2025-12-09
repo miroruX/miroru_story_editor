@@ -6,19 +6,54 @@ part of 'palette_key.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$paletteKeyHash() => r'502f423cb0cb049861d4308172d9b482cec97820';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 
-/// See also [paletteKey].
 @ProviderFor(paletteKey)
-final paletteKeyProvider = Provider<GlobalKey>.internal(
-  paletteKey,
-  name: r'paletteKeyProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$paletteKeyHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+const paletteKeyProvider = PaletteKeyProvider._();
 
-typedef PaletteKeyRef = ProviderRef<GlobalKey>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+final class PaletteKeyProvider
+    extends
+        $FunctionalProvider<
+          GlobalKey<State<StatefulWidget>>,
+          GlobalKey<State<StatefulWidget>>,
+          GlobalKey<State<StatefulWidget>>
+        >
+    with $Provider<GlobalKey<State<StatefulWidget>>> {
+  const PaletteKeyProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'paletteKeyProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$paletteKeyHash();
+
+  @$internal
+  @override
+  $ProviderElement<GlobalKey<State<StatefulWidget>>> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  GlobalKey<State<StatefulWidget>> create(Ref ref) {
+    return paletteKey(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(GlobalKey<State<StatefulWidget>> value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<GlobalKey<State<StatefulWidget>>>(
+        value,
+      ),
+    );
+  }
+}
+
+String _$paletteKeyHash() => r'799ec3838e531cff5ee956888aea486032c731ee';

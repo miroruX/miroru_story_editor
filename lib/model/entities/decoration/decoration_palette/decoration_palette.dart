@@ -6,7 +6,7 @@ import 'package:miroru_story_editor/model/entities/decoration/render_item/render
 part 'decoration_palette.freezed.dart';
 
 @freezed
-class DecorationPalette with _$DecorationPalette {
+abstract class DecorationPalette with _$DecorationPalette {
   const factory DecorationPalette({
     required List<List<RenderItem<DecorationItem>>> historyRenderItems,
     @Default(0) int currentHistoryIndex,

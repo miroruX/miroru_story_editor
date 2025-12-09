@@ -7,14 +7,14 @@ import 'package:miroru_story_editor/model/entities/decoration/decorations/text/d
 part 'render_item.freezed.dart';
 
 @freezed
-class RenderItem<T extends DecorationItem> with _$RenderItem {
+sealed class RenderItem<T extends DecorationItem> with _$RenderItem<T> {
   const factory RenderItem({
     required String? uuid,
     required Matrix4 transform,
     required T data,
     required int order,
     @Default(false) bool deletePosition,
-  }) = _RenderItem;
+  }) = _RenderItem<T>;
   const RenderItem._();
 
   bool get isText => data is DecorationText;

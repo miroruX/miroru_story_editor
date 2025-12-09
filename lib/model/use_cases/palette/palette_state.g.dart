@@ -6,19 +6,58 @@ part of 'palette_state.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+
+@ProviderFor(PaletteState)
+const paletteStateProvider = PaletteStateProvider._();
+
+final class PaletteStateProvider
+    extends $NotifierProvider<PaletteState, Palette> {
+  const PaletteStateProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'paletteStateProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$paletteStateHash();
+
+  @$internal
+  @override
+  PaletteState create() => PaletteState();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(Palette value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<Palette>(value),
+    );
+  }
+}
+
 String _$paletteStateHash() => r'b7b7546bb5f79c84e1bfd296e1fc4739ff4646f6';
 
-/// See also [PaletteState].
-@ProviderFor(PaletteState)
-final paletteStateProvider = NotifierProvider<PaletteState, Palette>.internal(
-  PaletteState.new,
-  name: r'paletteStateProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$paletteStateHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef _$PaletteState = Notifier<Palette>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+abstract class _$PaletteState extends $Notifier<Palette> {
+  Palette build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final created = build();
+    final ref = this.ref as $Ref<Palette, Palette>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<Palette, Palette>,
+              Palette,
+              Object?,
+              Object?
+            >;
+    element.handleValue(ref, created);
+  }
+}

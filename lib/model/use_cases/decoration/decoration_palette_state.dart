@@ -22,7 +22,7 @@ class DecorationPaletteState extends _$DecorationPaletteState {
             uuid: 'init-background-image',
             order: 0,
           ),
-        ]
+        ],
       ],
     );
   }

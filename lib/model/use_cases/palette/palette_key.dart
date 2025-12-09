@@ -3,6 +3,6 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'palette_key.g.dart';
 
 @Riverpod(keepAlive: true)
-GlobalKey paletteKey(PaletteKeyRef ref) {
+GlobalKey paletteKey(Ref ref) {
   return GlobalKey();
 }

@@ -4,7 +4,9 @@ import 'package:miroru_story_editor/model/entities/decoration/decorations/decora
 part 'decoration_emoji.freezed.dart';
 
 @freezed
-class DecorationEmoji with _$DecorationEmoji implements DecorationItem {
+abstract class DecorationEmoji
+    with _$DecorationEmoji
+    implements DecorationItem {
   const factory DecorationEmoji({
     String? emoji,
   }) = _DecorationEmoji;

@@ -23,15 +23,16 @@ class PaintPaletteView extends HookConsumerWidget {
     final painedLines = useState<List<PaintLine>>([]);
     final paintingLine = useState<PaintLine?>(null);
 
-    ref.listen(paintLinesStateProvider, (previous, next) async {
+    ref.listen(paintLinesStateProvider, (previous, next) {
       painedLines.value = next;
     });
 
     void onPointerDown(PointerDownEvent details) {
       final paintPalette = ref.read(paintPaletteStateProvider);
       final supportsPressure = details.kind == PointerDeviceKind.stylus;
-      final options = paintPalette.strokeOptions!
-          .copyWith(simulatePressure: !supportsPressure);
+      final options = paintPalette.strokeOptions!.copyWith(
+        simulatePressure: !supportsPressure,
+      );
 
       ref.read(paintPaletteStateProvider.notifier).changeStrokeOptions(options);
 
@@ -71,7 +72,9 @@ class PaintPaletteView extends HookConsumerWidget {
       if (paintingLine.value == null) {
         return;
       }
-      ref.read(paintLinesStateProvider.notifier).addLine(
+      ref
+          .read(paintLinesStateProvider.notifier)
+          .addLine(
             paintingLine.value!,
           );
       paintingLine.value = null;

@@ -6,7 +6,7 @@ import 'package:perfect_freehand/perfect_freehand.dart';
 part 'paint_palette.freezed.dart';
 
 @freezed
-class PaintPalette with _$PaintPalette {
+abstract class PaintPalette with _$PaintPalette {
   const factory PaintPalette({
     @Default(BrushType.pen) BrushType brushType,
     @Default(Colors.black) Color color,

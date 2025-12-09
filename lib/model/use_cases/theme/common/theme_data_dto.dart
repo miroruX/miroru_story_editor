@@ -4,4 +4,4 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'theme_data_dto.g.dart';
 
 @Riverpod(keepAlive: true)
-ThemeDataDto themeDataDto(ThemeDataDtoRef ref) => ThemeDataDto();
+ThemeDataDto themeDataDto(Ref ref) => ThemeDataDto();

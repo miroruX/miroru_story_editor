@@ -8,7 +8,7 @@ part 'fetch_blur_hash.g.dart';
 
 @riverpod
 FutureOr<BlurHash> fetchBlurHash(
-  FetchBlurHashRef ref, {
+  Ref ref, {
   required File file,
 }) {
   final fileData = file.readAsBytesSync();

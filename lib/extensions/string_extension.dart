@@ -14,6 +14,6 @@ extension StringExtension on String? {
     if (this == null) {
       return Colors.transparent;
     }
-    return Color(int.parse(this!, radix: 16)).withOpacity(1);
+    return Color(int.parse(this!, radix: 16)).withValues(alpha: 1);
   }
 }
