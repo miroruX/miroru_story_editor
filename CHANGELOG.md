@@ -1,3 +1,10 @@
+## [1.1.11] - 2025-12-14
+
+### Fixed
+
+- Added `rootNavigator: true` to Navigator for improved compatibility with routing packages (go_router, auto_route, beamer, etc.)
+- Ensures proper fullscreen display when using nested navigators
+
 ## [1.1.10] - 2025-12-14
 
 ### Fixed

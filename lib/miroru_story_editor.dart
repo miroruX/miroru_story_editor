@@ -15,7 +15,7 @@ Future<Uint8List?> showMiroruStoryEditor(
   ThemeDataDto? themeDataDto,
   LanguageType languageType = LanguageType.en,
 }) {
-  return Navigator.of(context).push<Uint8List?>(
+  return Navigator.of(context, rootNavigator: true).push<Uint8List?>(
     MaterialPageRoute(
       fullscreenDialog: true,
       builder: (context) {
