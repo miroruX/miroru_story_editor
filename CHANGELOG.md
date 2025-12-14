@@ -1,8 +1,14 @@
+## [1.1.10] - 2025-12-14
+
+### Fixed
+
+- Fixed issue where BottomNavigationBar and other UI elements from the calling page remained visible in the background by adding `fullscreenDialog: true` to MaterialPageRoute
+
 ## [1.1.9] - 2025-12-12
 
 ### Changed
 
-- ライブラリの更新など
+- Updated dependencies
 
 ## [1.1.8] - 2025-02-21
 

@@ -17,6 +17,7 @@ Future<Uint8List?> showMiroruStoryEditor(
 }) {
   return Navigator.of(context).push<Uint8List?>(
     MaterialPageRoute(
+      fullscreenDialog: true,
       builder: (context) {
         return ProviderScope(
           overrides: [
