@@ -11,28 +11,31 @@ Future<String?> showSelectEmojiSheet(
     context,
     initialChildSize: 0.6,
     slivers: [
-      SliverGrid.count(
-        crossAxisCount: 6,
-        crossAxisSpacing: 12,
-        mainAxisSpacing: 12,
-        children: emojis
-            .map(
-              (e) => GestureDetector(
-                onTap: () {
-                  Vibration.call();
-                  Navigator.of(context).pop(e.emoji);
-                },
-                child: Center(
-                  child: Text(
-                    e.emoji,
-                    style: const TextStyle(
-                      fontSize: 40,
-                    ),
-                  ),
+      // SliverGrid.builderで遅延構築（1000個以上の絵文字を効率的に表示）
+      SliverGrid.builder(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 6,
+          crossAxisSpacing: 12,
+          mainAxisSpacing: 12,
+        ),
+        itemCount: emojis.length,
+        itemBuilder: (context, index) {
+          final e = emojis[index];
+          return GestureDetector(
+            onTap: () {
+              Vibration.call();
+              Navigator.of(context).pop(e.emoji);
+            },
+            child: Center(
+              child: Text(
+                e.emoji,
+                style: const TextStyle(
+                  fontSize: 40,
                 ),
               ),
-            )
-            .toList(),
+            ),
+          );
+        },
       ),
     ],
   );

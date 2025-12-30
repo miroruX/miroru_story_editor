@@ -59,7 +59,7 @@ final class FetchBlurHashProvider
   }
 }
 
-String _$fetchBlurHashHash() => r'3138156dc7bb4a2cb3678790398b489db0f62717';
+String _$fetchBlurHashHash() => r'143adaa14c67d0d02a832e806b80384dd12032ea';
 
 final class FetchBlurHashFamily extends $Family
     with $FunctionalFamilyOverride<FutureOr<BlurHash>, File> {

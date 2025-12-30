@@ -1,3 +1,14 @@
+## [1.1.12] - 2025-12-30
+
+### Improved
+
+- Optimized `CustomPainter.shouldRepaint` to only redraw when lines actually change
+- Moved BlurHash calculation to Isolate to prevent UI freezing
+- Added `RepaintBoundary` to cache completed paint strokes
+- Changed emoji grid to use `SliverGrid.builder` for lazy loading (1000+ emojis)
+- Applied Riverpod `select` to reduce unnecessary widget rebuilds
+- Fixed memory leak by adding cleanup to `useEffect` listeners
+
 ## [1.1.11] - 2025-12-14
 
 ### Fixed

@@ -51,13 +51,23 @@ class ColorListSelectorWidget extends HookWidget {
 
     useEffect(
       () {
-        colorTabController.addListener(() {
+        // リスナー関数を変数に保持してcleanup時に削除できるようにする
+        void colorListener() {
           onChangeColor(colors[colorTabController.index]);
-        });
-        accentColorTabController.addListener(() {
+        }
+
+        void accentColorListener() {
           onChangeColor(accentColors[accentColorTabController.index]);
-        });
-        return null;
+        }
+
+        colorTabController.addListener(colorListener);
+        accentColorTabController.addListener(accentColorListener);
+
+        // cleanup: ウィジェット破棄時にリスナーを削除
+        return () {
+          colorTabController.removeListener(colorListener);
+          accentColorTabController.removeListener(accentColorListener);
+        };
       },
       [],
     );

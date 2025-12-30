@@ -20,12 +20,9 @@ class PaintPaletteView extends HookConsumerWidget {
       paletteStateProvider.select((value) => value.isPainting),
     );
 
-    final painedLines = useState<List<PaintLine>>([]);
+    // 完成した線はRiverpodから直接取得（不要なuseStateを削除）
+    final paintedLines = ref.watch(paintLinesStateProvider);
     final paintingLine = useState<PaintLine?>(null);
-
-    ref.listen(paintLinesStateProvider, (previous, next) {
-      painedLines.value = next;
-    });
 
     void onPointerDown(PointerDownEvent details) {
       final paintPalette = ref.read(paintPaletteStateProvider);
@@ -92,18 +89,15 @@ class PaintPaletteView extends HookConsumerWidget {
             child: SizedBox.expand(
               child: Stack(
                 children: [
+                  // 完成した線をRepaintBoundaryでキャッシュ
                   Positioned.fill(
-                    child: ValueListenableBuilder(
-                      valueListenable: paintingLine,
-                      builder: (context, line, _) {
-                        return CustomPaint(
-                          painter: StrokePainter(
-                            lines: painedLines.value.map((e) => e).toList(),
-                          ),
-                        );
-                      },
+                    child: RepaintBoundary(
+                      child: CustomPaint(
+                        painter: StrokePainter(lines: paintedLines),
+                      ),
                     ),
                   ),
+                  // 描画中の線のみ別レイヤーで描画
                   Positioned.fill(
                     child: ValueListenableBuilder(
                       valueListenable: paintingLine,

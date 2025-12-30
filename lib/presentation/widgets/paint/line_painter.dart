@@ -100,5 +100,22 @@ class StrokePainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(CustomPainter oldDelegate) => true;
+  bool shouldRepaint(covariant StrokePainter oldDelegate) {
+    // 線の数が変わった場合、または最後の線のポイント数が変わった場合のみ再描画
+    if (oldDelegate.lines.length != lines.length) {
+      return true;
+    }
+    if (lines.isEmpty) {
+      return false;
+    }
+    // 最後の線のポイント数が変わった場合（描画中）
+    final lastOld = oldDelegate.lines.lastOrNull;
+    final lastNew = lines.lastOrNull;
+    if (lastOld == null || lastNew == null) {
+      return lastOld != lastNew;
+    }
+    return lastOld.points.length != lastNew.points.length ||
+        lastOld.color != lastNew.color ||
+        lastOld.brushType != lastNew.brushType;
+  }
 }
