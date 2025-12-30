@@ -1,3 +1,11 @@
+## [1.1.13] - 2025-12-30
+
+### Added
+
+- Clear all state when editor is closed (invalidate all providers on dispose)
+- Japanese font support with 6 distinct fonts (Noto Sans JP, Noto Serif JP, Zen Maru Gothic, Zen Kaku Gothic New, M PLUS Rounded 1c, Sawarabi Mincho)
+- Bold font weight as default for text input
+
 ## [1.1.12] - 2025-12-30
 
 ### Improved
