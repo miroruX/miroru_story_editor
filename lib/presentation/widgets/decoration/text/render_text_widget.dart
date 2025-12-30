@@ -16,12 +16,13 @@ class RenderTextWidget extends StatelessWidget {
       child: ColoredBox(
         color: decorationText.backgroundColorCode.toColor,
         child: Padding(
-          padding: const EdgeInsets.all(12),
+          padding: const EdgeInsets.all(6),
           child: Text(
             decorationText.text ?? '',
             style: decorationText.fontFamily!.fontStyle.copyWith(
               fontSize: decorationText.fontSize,
               color: decorationText.colorCode.toColor,
+              fontWeight: FontWeight.bold,
             ),
           ),
         ),

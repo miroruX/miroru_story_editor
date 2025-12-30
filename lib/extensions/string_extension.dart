@@ -6,7 +6,7 @@ extension StringExtension on String? {
     try {
       return FontType.values.firstWhere((font) => font.name == this).fontStyle;
     } on Exception catch (_) {
-      return FontType.roboto.fontStyle;
+      return FontType.notoSansJp.fontStyle;
     }
   }
 

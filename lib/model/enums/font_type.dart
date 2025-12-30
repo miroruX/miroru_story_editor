@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 enum FontType {
-  roboto._('roboto'),
-  oswald._('oswald'),
-  pacifico._('pacifico'),
-  dancingScript._('dancingScript'),
-  poppins._('poppins'),
-  notoSans._('notoSans');
+  // 日本語対応フォント（変化が分かりやすいもの）
+  notoSansJp._('notoSansJp'),           // ゴシック体（標準）
+  notoSerifJp._('notoSerifJp'),         // 明朝体
+  zenMaruGothic._('zenMaruGothic'),     // 丸ゴシック
+  zenKakuGothicNew._('zenKakuGothicNew'), // 角ゴシック
+  mPlusRounded1c._('mPlusRounded1c'),   // 丸みのあるゴシック
+  sawarabiMincho._('sawarabiMincho');   // さわらび明朝
 
   const FontType._(this.value);
   final String value;
@@ -18,18 +19,18 @@ enum FontType {
 
   TextStyle get fontStyle {
     switch (this) {
-      case FontType.roboto:
-        return GoogleFonts.roboto();
-      case FontType.oswald:
-        return GoogleFonts.oswald();
-      case FontType.pacifico:
-        return GoogleFonts.pacifico();
-      case FontType.dancingScript:
-        return GoogleFonts.dancingScript();
-      case FontType.poppins:
-        return GoogleFonts.poppins();
-      case FontType.notoSans:
-        return GoogleFonts.notoSans();
+      case FontType.notoSansJp:
+        return GoogleFonts.notoSansJp(fontWeight: FontWeight.bold);
+      case FontType.notoSerifJp:
+        return GoogleFonts.notoSerifJp(fontWeight: FontWeight.bold);
+      case FontType.zenMaruGothic:
+        return GoogleFonts.zenMaruGothic(fontWeight: FontWeight.bold);
+      case FontType.zenKakuGothicNew:
+        return GoogleFonts.zenKakuGothicNew(fontWeight: FontWeight.bold);
+      case FontType.mPlusRounded1c:
+        return GoogleFonts.mPlusRounded1c(fontWeight: FontWeight.bold);
+      case FontType.sawarabiMincho:
+        return GoogleFonts.sawarabiMincho();
     }
   }
 }

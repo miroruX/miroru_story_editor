@@ -15,9 +15,9 @@ class EditingTextItemState extends _$EditingTextItemState {
     return RenderItem<DecorationText>(
       transform: Matrix4.identity(),
       data: DecorationText(
-        fontFamily: FontType.roboto.name,
+        fontFamily: FontType.notoSansJp.name,
         backgroundColorCode: Colors.black.hex,
-        fontSize: 20,
+        fontSize: 34,
         colorCode: Colors.white.hex,
         textAlign: TextAlign.left.name,
       ),

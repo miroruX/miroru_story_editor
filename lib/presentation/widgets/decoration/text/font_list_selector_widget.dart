@@ -18,10 +18,14 @@ class FontListSelectorWidget extends HookWidget {
 
     useEffect(
       () {
-        tabController.addListener(() {
+        void listener() {
           onChangeFontName(FontType.values[tabController.index].name);
-        });
-        return null;
+        }
+
+        tabController.addListener(listener);
+        return () {
+          tabController.removeListener(listener);
+        };
       },
       [],
     );
@@ -36,7 +40,7 @@ class FontListSelectorWidget extends HookWidget {
             .map(
               (font) => Tab(
                 child: Text(
-                  'Aa',
+                  'あア',
                   style: font.fontStyle,
                 ),
               ),
