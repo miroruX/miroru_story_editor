@@ -1,3 +1,15 @@
+## [1.1.14] - 2026-01-01
+
+### Improved
+
+- Separated paint stroke painters into `CompletedStrokePainter` and `ActiveStrokePainter` for optimized rendering
+- Added Path caching with `useMemoized` to avoid recalculating completed strokes every frame
+- Changed `Paint` objects to static final for sharing across painter instances
+- Reduced `filterQuality` to `FilterQuality.low` for faster GPU rendering
+- Added `RepaintBoundary` to active stroke layer for better layer isolation
+- Improved `shouldRepaint` with `identical()` reference comparison for faster repaint decisions
+- Fixed type preservation issue in decoration state updates using `copyWith`
+
 ## [1.1.13] - 2025-12-30
 
 ### Added
