@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:miroru_story_editor/presentation/custom_hooks/use_debounce.dart';
 
 class TextSizeSliderWidget extends HookWidget {
   const TextSizeSliderWidget({
@@ -14,6 +15,13 @@ class TextSizeSliderWidget extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final sliderValue = useState<double>(fontSize);
+
+    // debounceで高頻度のonChange呼び出しを抑制（パフォーマンス向上）
+    final debounce = useDebounce<double>(
+      debounceDelay: 50,
+      callback: onChangeFontSize,
+    );
+
     return ConstrainedBox(
       constraints: const BoxConstraints(
         maxWidth: 50,
@@ -34,8 +42,10 @@ class TextSizeSliderWidget extends HookWidget {
             value: sliderValue.value,
             onChanged: (value) {
               sliderValue.value = value;
-              onChangeFontSize(value);
+              debounce.onChanged(value);
             },
+            // スライダー操作終了時に確実に最終値を反映
+            onChangeEnd: onChangeFontSize,
           ),
         ),
       ),

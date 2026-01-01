@@ -4,19 +4,37 @@ import 'package:miroru_story_editor/model/enums/brush_type.dart';
 import 'package:perfect_freehand/perfect_freehand.dart';
 
 class StrokePainter extends CustomPainter {
-  const StrokePainter({
+  StrokePainter({
     required this.lines,
   });
 
   final List<PaintLine> lines;
 
+  // Paintオブジェクトをキャッシュして再利用（毎フレーム生成を回避）
+  final Paint _penPaint = Paint();
+  final Paint _markerPaint = Paint()
+    ..strokeWidth = 3
+    ..maskFilter = const MaskFilter.blur(BlurStyle.solid, 2)
+    ..strokeCap = StrokeCap.square
+    ..filterQuality = FilterQuality.high
+    ..style = PaintingStyle.fill;
+  final Paint _neonPaint = Paint()
+    ..strokeWidth = 3
+    ..maskFilter = const MaskFilter.blur(BlurStyle.solid, 3)
+    ..strokeJoin = StrokeJoin.round
+    ..strokeCap = StrokeCap.round
+    ..strokeMiterLimit = 5
+    ..filterQuality = FilterQuality.high
+    ..style = PaintingStyle.stroke;
+
+  // Pathオブジェクトを再利用（毎フレーム生成を回避）
+  final Path _path = Path();
+
   @override
   void paint(Canvas canvas, Size size) {
-    var paint = Paint();
-
     // それぞれのブラシタイプに応じて描画する
     List<Offset> drawPen(PaintLine line) {
-      paint = Paint()..color = line.color;
+      _penPaint.color = line.color;
       return getStroke(
         line.points,
         options: line.strokeOptions.copyWith(
@@ -28,13 +46,7 @@ class StrokePainter extends CustomPainter {
     }
 
     List<Offset> drawMarker(PaintLine line) {
-      paint = Paint()
-        ..strokeWidth = 3
-        ..color = line.color.withValues(alpha: 0.7)
-        ..maskFilter = const MaskFilter.blur(BlurStyle.solid, 2)
-        ..strokeCap = StrokeCap.square
-        ..filterQuality = FilterQuality.high
-        ..style = PaintingStyle.fill;
+      _markerPaint.color = line.color.withValues(alpha: 0.7);
       return getStroke(
         line.points,
         options: line.strokeOptions.copyWith(
@@ -47,15 +59,7 @@ class StrokePainter extends CustomPainter {
     }
 
     List<Offset> drawNeon(PaintLine line) {
-      paint = Paint()
-        ..strokeWidth = 3
-        ..color = line.color
-        ..maskFilter = const MaskFilter.blur(BlurStyle.solid, 3)
-        ..strokeJoin = StrokeJoin.round
-        ..strokeCap = StrokeCap.round
-        ..strokeMiterLimit = 5
-        ..filterQuality = FilterQuality.high
-        ..style = PaintingStyle.stroke;
+      _neonPaint.color = line.color;
       return getStroke(
         line.points,
         options: line.strokeOptions.copyWith(
@@ -68,10 +72,10 @@ class StrokePainter extends CustomPainter {
 
     // 描画開始
     for (final line in lines) {
-      final stroke = switch (line.brushType) {
-        BrushType.pen => drawPen(line),
-        BrushType.marker => drawMarker(line),
-        BrushType.neon => drawNeon(line),
+      final (stroke, currentPaint) = switch (line.brushType) {
+        BrushType.pen => (drawPen(line), _penPaint),
+        BrushType.marker => (drawMarker(line), _markerPaint),
+        BrushType.neon => (drawNeon(line), _neonPaint),
       };
 
       if (stroke.isEmpty) {
@@ -80,21 +84,24 @@ class StrokePainter extends CustomPainter {
         canvas.drawCircle(
           stroke.first,
           line.strokeOptions.size / 2,
-          paint,
+          currentPaint,
         );
       } else {
-        final path = Path()..moveTo(stroke.first.dx, stroke.first.dy);
+        // Pathをリセットして再利用
+        _path
+          ..reset()
+          ..moveTo(stroke.first.dx, stroke.first.dy);
         for (var i = 0; i < stroke.length - 1; ++i) {
           final p0 = stroke[i];
           final p1 = stroke[i + 1];
-          path.quadraticBezierTo(
+          _path.quadraticBezierTo(
             p0.dx,
             p0.dy,
             (p0.dx + p1.dx) / 2,
             (p0.dy + p1.dy) / 2,
           );
         }
-        canvas.drawPath(path, paint);
+        canvas.drawPath(_path, currentPaint);
       }
     }
   }

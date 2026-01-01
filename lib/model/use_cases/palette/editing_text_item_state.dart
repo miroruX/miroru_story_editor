@@ -32,88 +32,43 @@ class EditingTextItemState extends _$EditingTextItemState {
     state = renderItem;
   }
 
+  // 共通のstate更新ヘルパー（copyWithを活用して冗長なコードを削減）
+  void _updateData(DecorationText Function(DecorationText current) updater) {
+    state = state.copyWith(data: updater(_decorationText));
+  }
+
   void changeTextAlign() {
-    late final TextAlign newAlignment;
-
-    if (_decorationText.textAlign == TextAlign.left.name) {
-      newAlignment = TextAlign.right;
-    } else if (_decorationText.textAlign == TextAlign.right.name) {
-      newAlignment = TextAlign.left;
-    } else {
-      newAlignment = TextAlign.left;
-    }
-
-    state = RenderItem<DecorationText>(
-      transform: state.transform,
-      data: _decorationText.copyWith(
-        textAlign: newAlignment.name,
-      ),
-      uuid: state.uuid,
-      order: state.order,
-    );
+    final newAlignment =
+        _decorationText.textAlign == TextAlign.left.name
+            ? TextAlign.right
+            : TextAlign.left;
+    _updateData((data) => data.copyWith(textAlign: newAlignment.name));
   }
 
   void changeFillColor() {
-    late final Color newBackgroundColor;
-
-    if (_decorationText.backgroundColorCode.toColor == Colors.black) {
-      newBackgroundColor = Colors.white;
-    } else {
-      newBackgroundColor = Colors.black;
-    }
-
-    state = RenderItem<DecorationText>(
-      transform: state.transform,
-      data: _decorationText.copyWith(
-        backgroundColorCode: newBackgroundColor.hex,
-      ),
-      uuid: state.uuid,
-      order: state.order,
+    final newBackgroundColor =
+        _decorationText.backgroundColorCode.toColor == Colors.black
+            ? Colors.white
+            : Colors.black;
+    _updateData(
+      (data) => data.copyWith(backgroundColorCode: newBackgroundColor.hex),
     );
   }
 
   void changeFontSize(double fontSize) {
-    state = RenderItem<DecorationText>(
-      transform: state.transform,
-      data: _decorationText.copyWith(
-        fontSize: fontSize,
-      ),
-      uuid: state.uuid,
-      order: state.order,
-    );
+    _updateData((data) => data.copyWith(fontSize: fontSize));
   }
 
   void changeText(String text) {
-    state = RenderItem<DecorationText>(
-      transform: state.transform,
-      data: _decorationText.copyWith(
-        text: text,
-      ),
-      uuid: state.uuid,
-      order: state.order,
-    );
+    _updateData((data) => data.copyWith(text: text));
   }
 
   void changeTextColor(Color color) {
-    state = RenderItem<DecorationText>(
-      transform: state.transform,
-      data: _decorationText.copyWith(
-        colorCode: color.hex,
-      ),
-      uuid: state.uuid,
-      order: state.order,
-    );
+    _updateData((data) => data.copyWith(colorCode: color.hex));
   }
 
   void changeFontFamily(String fontFamily) {
-    state = RenderItem<DecorationText>(
-      transform: state.transform,
-      data: _decorationText.copyWith(
-        fontFamily: fontFamily,
-      ),
-      uuid: state.uuid,
-      order: state.order,
-    );
+    _updateData((data) => data.copyWith(fontFamily: fontFamily));
   }
 
   void reset() {

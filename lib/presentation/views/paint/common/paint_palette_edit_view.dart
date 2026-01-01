@@ -20,9 +20,9 @@ class PaintPaletteEditView extends ConsumerWidget {
         Padding(
           padding: const EdgeInsets.only(bottom: 8),
           child: ColorListSelectorWidget(
-            selectedColor: ref
-                .watch(paintPaletteStateProvider.select((value) => value))
-                .color,
+            selectedColor: ref.watch(
+              paintPaletteStateProvider.select((value) => value.color),
+            ),
             onChangeColor: (color) {
               Vibration.call();
               ref.read(paintPaletteStateProvider.notifier).changeColor(color);

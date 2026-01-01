@@ -15,20 +15,29 @@ class BackgroundImageView extends HookConsumerWidget {
     final isPainting = ref.watch(
       paletteStateProvider.select((value) => value.isPainting),
     );
-    final image = ref.watch(decorationPaletteStateProvider).backgroundImage;
-    final data = image.data;
+    // selectで必要な部分のみ監視（不要な再ビルドを回避）
+    final backgroundImageFile = ref.watch(
+      decorationPaletteStateProvider
+          .select((state) => state.backgroundImage.data.backgroundImageFile),
+    );
+    final imageTransform = ref.watch(
+      decorationPaletteStateProvider
+          .select((state) => state.backgroundImage.transform),
+    );
+    final imageUuid = ref.watch(
+      decorationPaletteStateProvider
+          .select((state) => state.backgroundImage.uuid),
+    );
 
-    if (data.backgroundImageFile == null) {
+    if (backgroundImageFile == null) {
       //初期値が設定されていない場合がある為、初期値が設定されるまで表示しない
       return const SizedBox.shrink();
     }
 
-    final matrixNotifier = useState<Matrix4>(
-      image.transform,
-    );
+    final matrixNotifier = useState<Matrix4>(imageTransform);
 
     final debounce = useDebounce<VoidCallback>(
-      debounceDelay: 100,
+      debounceDelay: 50, // 100ms→50msに短縮（レスポンス向上）
       callback: (VoidCallback func) {
         func();
       },
@@ -36,10 +45,10 @@ class BackgroundImageView extends HookConsumerWidget {
 
     useEffect(
       () {
-        matrixNotifier.value = image.transform;
+        matrixNotifier.value = imageTransform;
         return null;
       },
-      [image.transform],
+      [imageTransform],
     );
 
     return IgnorePointer(
@@ -54,10 +63,9 @@ class BackgroundImageView extends HookConsumerWidget {
               () {
                 ref
                     .read(decorationPaletteStateProvider.notifier)
-                    .moveRenderItem(
-                      image.copyWith(
-                        transform: matrixNotifier.value,
-                      ),
+                    .moveBackgroundImage(
+                      transform: matrixNotifier.value,
+                      uuid: imageUuid,
                     );
               },
             );
@@ -67,14 +75,17 @@ class BackgroundImageView extends HookConsumerWidget {
             builder: (context, child) {
               return Transform(
                 transform: matrixNotifier.value,
-                child: Image.file(
-                  data.backgroundImageFile!,
-                  height: double.infinity,
-                  width: double.infinity,
-                  cacheWidth: 2000,
-                ),
+                child: child,
               );
             },
+            // childを外出しして、Transform変更時にImageを再ビルドしない
+            child: Image.file(
+              backgroundImageFile,
+              height: double.infinity,
+              width: double.infinity,
+              cacheWidth: 2000,
+              cacheHeight: 2000,
+            ),
           ),
         ),
       ),

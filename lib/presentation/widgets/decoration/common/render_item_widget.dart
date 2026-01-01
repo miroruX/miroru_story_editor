@@ -32,8 +32,10 @@ class RenderItemWidget extends HookConsumerWidget {
       item.transform,
     );
 
-    final editingItem = ref.watch(editingTextItemStateProvider);
-    final isEditing = editingItem.uuid == item.uuid;
+    // selectでuuidのみ監視し、他のアイテム編集時の再ビルドを回避
+    final isEditing = ref.watch(
+      editingTextItemStateProvider.select((state) => state.uuid == item.uuid),
+    );
 
     useEffect(
       () {

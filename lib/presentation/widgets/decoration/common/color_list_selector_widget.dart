@@ -11,53 +11,54 @@ class ColorListSelectorWidget extends HookWidget {
     required this.onChangeColor,
   });
 
+  // static constでクラスレベルに定義（毎ビルド時の再生成を回避）
+  static const List<Color> _colors = [
+    Colors.red,
+    Colors.orange,
+    Colors.yellow,
+    Colors.green,
+    Colors.blue,
+    Colors.indigo,
+    Colors.purple,
+    Colors.white,
+    Colors.black,
+  ];
+
+  static const List<Color> _accentColors = [
+    Colors.redAccent,
+    Colors.orangeAccent,
+    Colors.yellowAccent,
+    Colors.greenAccent,
+    Colors.blueAccent,
+    Colors.indigoAccent,
+    Colors.purpleAccent,
+    Colors.white,
+    Colors.black,
+  ];
+
   final Color selectedColor;
   final void Function(Color color) onChangeColor;
 
   @override
   Widget build(BuildContext context) {
-    const colors = [
-      Colors.red,
-      Colors.orange,
-      Colors.yellow,
-      Colors.green,
-      Colors.blue,
-      Colors.indigo,
-      Colors.purple,
-      Colors.white,
-      Colors.black,
-    ];
-
-    const accentColors = [
-      Colors.redAccent,
-      Colors.orangeAccent,
-      Colors.yellowAccent,
-      Colors.greenAccent,
-      Colors.blueAccent,
-      Colors.indigoAccent,
-      Colors.purpleAccent,
-      Colors.white,
-      Colors.black,
-    ];
-
     final pageController = usePageController();
 
     final colorTabController = useTabController(
-      initialLength: colors.length,
-      initialIndex: colors.indexOf(selectedColor),
+      initialLength: _colors.length,
+      initialIndex: _colors.indexOf(selectedColor),
     );
     final accentColorTabController =
-        useTabController(initialLength: accentColors.length);
+        useTabController(initialLength: _accentColors.length);
 
     useEffect(
       () {
         // リスナー関数を変数に保持してcleanup時に削除できるようにする
         void colorListener() {
-          onChangeColor(colors[colorTabController.index]);
+          onChangeColor(_colors[colorTabController.index]);
         }
 
         void accentColorListener() {
-          onChangeColor(accentColors[accentColorTabController.index]);
+          onChangeColor(_accentColors[accentColorTabController.index]);
         }
 
         colorTabController.addListener(colorListener);
@@ -85,9 +86,9 @@ class ColorListSelectorWidget extends HookWidget {
                 width: context.deviceWidth,
                 child: TabBar(
                   controller: colorTabController,
-                  tabs: colors
+                  tabs: _colors
                       .map(
-                        (color) => ColorCircle(
+                        (Color color) => ColorCircle(
                           color: color,
                           isSelected: color == selectedColor,
                         ),
@@ -99,9 +100,9 @@ class ColorListSelectorWidget extends HookWidget {
                 width: context.deviceWidth,
                 child: TabBar(
                   controller: accentColorTabController,
-                  tabs: accentColors
+                  tabs: _accentColors
                       .map(
-                        (color) => ColorCircle(
+                        (Color color) => ColorCircle(
                           color: color,
                           isSelected: color == selectedColor,
                         ),

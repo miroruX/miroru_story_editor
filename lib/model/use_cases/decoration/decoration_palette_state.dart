@@ -71,6 +71,56 @@ class DecorationPaletteState extends _$DecorationPaletteState {
     _paletteState.changeEditingText(false);
   }
 
+  /// 背景画像の移動（最適化版：copyWithを避けて直接transformを更新）
+  void moveBackgroundImage({
+    required Matrix4 transform,
+    required String? uuid,
+  }) {
+    if (state.isShowingHistory) {
+      final updatedRenderItems = state.renderItems.map((item) {
+        if (item.uuid == uuid) {
+          return RenderItem<DecorationItem>(
+            transform: transform,
+            data: item.data,
+            uuid: item.uuid,
+            order: item.order,
+          );
+        }
+        return item;
+      }).toList();
+
+      state = state.copyWith(
+        historyRenderItems: [
+          updatedRenderItems,
+          ...state.historyRenderItems.sublist(
+            state.currentHistoryIndex,
+            state.historyRenderItems.length,
+          ),
+        ],
+        currentHistoryIndex: 0,
+      );
+    } else {
+      state = state.copyWith(
+        historyRenderItems: [
+          state.historyRenderItems[state.currentHistoryIndex].map((item) {
+            if (item.uuid == uuid) {
+              return RenderItem<DecorationItem>(
+                transform: transform,
+                data: item.data,
+                uuid: item.uuid,
+                order: item.order,
+              );
+            }
+            return item;
+          }).toList(),
+          ...state.historyRenderItems,
+        ],
+        currentHistoryIndex: 0,
+      );
+    }
+    _paletteState.changeMovingItem(false);
+  }
+
   /// RenderItemの移動
   void moveRenderItem(RenderItem<DecorationItem> renderItem) {
     if (state.isShowingHistory) {

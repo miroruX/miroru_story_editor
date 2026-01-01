@@ -10,16 +10,19 @@ class BackgroundBlurImageView extends HookConsumerWidget {
   });
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final image = ref.watch(decorationPaletteStateProvider).backgroundImage;
-    final data = image.data;
+    // selectで必要な部分のみ監視（不要な再ビルドを回避）
+    final backgroundImageFile = ref.watch(
+      decorationPaletteStateProvider
+          .select((state) => state.backgroundImage.data.backgroundImageFile),
+    );
 
-    if (data.backgroundImageFile == null) {
+    if (backgroundImageFile == null) {
       //初期値が設定されていない場合がある為、初期値が設定されるまで表示しない
       return const SizedBox.shrink();
     }
 
     final blurHashAsync = ref.watch(
-      fetchBlurHashProvider(file: data.backgroundImageFile!),
+      fetchBlurHashProvider(file: backgroundImageFile),
     );
 
     return blurHashAsync.maybeWhen(

@@ -44,7 +44,7 @@ class DecorationWidget extends HookConsumerWidget {
     final pointer = useState<Offset?>(null);
 
     final debounce = useDebounce<VoidCallback>(
-      debounceDelay: 100,
+      debounceDelay: 50, // 100ms→50msに短縮（レスポンス向上）
       callback: (VoidCallback func) {
         func();
       },
@@ -122,6 +122,7 @@ class DecorationWidget extends HookConsumerWidget {
                     final isMovingItem = movingItem.value?.uuid == e.uuid;
 
                     return RenderItemWidget(
+                      key: ValueKey(e.uuid),
                       item: e,
                       deletePosition: isNearDeleteArea.value && isMovingItem,
 
@@ -144,7 +145,7 @@ class DecorationWidget extends HookConsumerWidget {
                                   e as RenderItem<DecorationText>,
                                 );
                             ref
-                                .watch(paletteStateProvider.notifier)
+                                .read(paletteStateProvider.notifier)
                                 .changeEditingText(true);
                           } else if (e.isEmoji) {}
                         }

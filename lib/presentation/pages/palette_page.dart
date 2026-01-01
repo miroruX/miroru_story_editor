@@ -26,6 +26,10 @@ class PalettePage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final themeData = ref.watch(editorThemeDataProvider);
+
+    // ProviderContainerへの参照を保持（dispose時に安全にinvalidateするため）
+    final container = ProviderScope.containerOf(context);
+
     useEffect(
       () {
         Future.microtask(
@@ -47,8 +51,9 @@ class PalettePage extends HookConsumerWidget {
               ),
         );
         // cleanup: エディターを閉じる時に全stateをリセット
+        // refではなくcontainerを使用（dispose後も安全にアクセス可能）
         return () {
-          ref
+          container
             ..invalidate(decorationPaletteStateProvider)
             ..invalidate(paletteStateProvider)
             ..invalidate(paletteKeyProvider)
