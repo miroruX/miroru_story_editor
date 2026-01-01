@@ -13,9 +13,9 @@ class PaintPaletteState extends _$PaintPaletteState {
     return PaintPalette(
       strokeOptions: StrokeOptions(
         size: 16,
-        thinning: 0.7,
-        smoothing: 0.5,
-        streamline: 0.5,
+        thinning: 0.4,
+        smoothing: 0.2,
+        streamline: 0.2,
         start: StrokeEndOptions.start(
           taperEnabled: true,
           customTaper: 0,
