@@ -1,128 +1,220 @@
+import 'dart:ui' as ui;
+
 import 'package:flutter/material.dart';
 import 'package:miroru_story_editor/model/entities/paint/paint_line/paint_line.dart';
 import 'package:miroru_story_editor/model/enums/brush_type.dart';
 import 'package:perfect_freehand/perfect_freehand.dart';
 
-class StrokePainter extends CustomPainter {
-  StrokePainter({
+/// 完成した線専用のPainter（キャッシュ済みPathを使用）
+class CompletedStrokePainter extends CustomPainter {
+  CompletedStrokePainter({
     required this.lines,
+    required this.cachedPaths,
   });
 
   final List<PaintLine> lines;
+  final List<ui.Path> cachedPaths;
 
-  // Paintオブジェクトをキャッシュして再利用（毎フレーム生成を回避）
-  final Paint _penPaint = Paint();
-  final Paint _markerPaint = Paint()
+  // 静的Paintオブジェクト（インスタンス間で共有）
+  static final Paint _penPaint = Paint()..style = PaintingStyle.fill;
+  static final Paint _markerPaint = Paint()
     ..strokeWidth = 3
     ..maskFilter = const MaskFilter.blur(BlurStyle.solid, 2)
     ..strokeCap = StrokeCap.square
-    ..filterQuality = FilterQuality.high
+    ..filterQuality = FilterQuality.low
     ..style = PaintingStyle.fill;
-  final Paint _neonPaint = Paint()
+  static final Paint _neonPaint = Paint()
     ..strokeWidth = 3
     ..maskFilter = const MaskFilter.blur(BlurStyle.solid, 3)
     ..strokeJoin = StrokeJoin.round
     ..strokeCap = StrokeCap.round
     ..strokeMiterLimit = 5
-    ..filterQuality = FilterQuality.high
+    ..filterQuality = FilterQuality.low
     ..style = PaintingStyle.stroke;
-
-  // Pathオブジェクトを再利用（毎フレーム生成を回避）
-  final Path _path = Path();
 
   @override
   void paint(Canvas canvas, Size size) {
-    // それぞれのブラシタイプに応じて描画する
-    List<Offset> drawPen(PaintLine line) {
-      _penPaint.color = line.color;
-      return getStroke(
-        line.points,
-        options: line.strokeOptions.copyWith(
-          thinning: 0.5,
-          smoothing: 0.5,
-          streamline: 0.5,
-        ),
-      );
-    }
+    for (var i = 0; i < lines.length; i++) {
+      final line = lines[i];
+      final path = cachedPaths[i];
 
-    List<Offset> drawMarker(PaintLine line) {
-      _markerPaint.color = line.color.withValues(alpha: 0.7);
-      return getStroke(
-        line.points,
-        options: line.strokeOptions.copyWith(
-          thinning: 0,
-          smoothing: 0,
-          streamline: 1,
-          simulatePressure: false,
-        ),
-      );
-    }
-
-    List<Offset> drawNeon(PaintLine line) {
-      _neonPaint.color = line.color;
-      return getStroke(
-        line.points,
-        options: line.strokeOptions.copyWith(
-          thinning: -0.10,
-          smoothing: 1,
-          streamline: 1,
-        ),
-      );
-    }
-
-    // 描画開始
-    for (final line in lines) {
-      final (stroke, currentPaint) = switch (line.brushType) {
-        BrushType.pen => (drawPen(line), _penPaint),
-        BrushType.marker => (drawMarker(line), _markerPaint),
-        BrushType.neon => (drawNeon(line), _neonPaint),
+      final paint = switch (line.brushType) {
+        BrushType.pen => _penPaint..color = line.color,
+        BrushType.marker =>
+          _markerPaint..color = line.color.withValues(alpha: 0.7),
+        BrushType.neon => _neonPaint..color = line.color,
       };
 
-      if (stroke.isEmpty) {
-        continue;
-      } else if (stroke.length < 2) {
-        canvas.drawCircle(
-          stroke.first,
-          line.strokeOptions.size / 2,
-          currentPaint,
-        );
-      } else {
-        // Pathをリセットして再利用
-        _path
-          ..reset()
-          ..moveTo(stroke.first.dx, stroke.first.dy);
-        for (var i = 0; i < stroke.length - 1; ++i) {
-          final p0 = stroke[i];
-          final p1 = stroke[i + 1];
-          _path.quadraticBezierTo(
-            p0.dx,
-            p0.dy,
-            (p0.dx + p1.dx) / 2,
-            (p0.dy + p1.dy) / 2,
-          );
-        }
-        canvas.drawPath(_path, currentPaint);
-      }
+      canvas.drawPath(path, paint);
     }
   }
 
   @override
-  bool shouldRepaint(covariant StrokePainter oldDelegate) {
-    // 線の数が変わった場合、または最後の線のポイント数が変わった場合のみ再描画
-    if (oldDelegate.lines.length != lines.length) {
-      return true;
+  bool shouldRepaint(covariant CompletedStrokePainter oldDelegate) {
+    // 完成した線は変わらないので、参照が同じなら再描画不要
+    return !identical(oldDelegate.lines, lines) ||
+        !identical(oldDelegate.cachedPaths, cachedPaths);
+  }
+}
+
+/// 描画中の線専用のPainter（リアルタイム描画最適化）
+class ActiveStrokePainter extends CustomPainter {
+  ActiveStrokePainter({
+    required this.line,
+  });
+
+  final PaintLine? line;
+
+  static final Paint _penPaint = Paint()..style = PaintingStyle.fill;
+  static final Paint _markerPaint = Paint()
+    ..strokeWidth = 3
+    ..maskFilter = const MaskFilter.blur(BlurStyle.solid, 2)
+    ..strokeCap = StrokeCap.square
+    ..filterQuality = FilterQuality.low
+    ..style = PaintingStyle.fill;
+  static final Paint _neonPaint = Paint()
+    ..strokeWidth = 3
+    ..maskFilter = const MaskFilter.blur(BlurStyle.solid, 3)
+    ..strokeJoin = StrokeJoin.round
+    ..strokeCap = StrokeCap.round
+    ..strokeMiterLimit = 5
+    ..filterQuality = FilterQuality.low
+    ..style = PaintingStyle.stroke;
+
+  // Pathを再利用
+  static final Path _path = Path();
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final currentLine = line;
+    if (currentLine == null || currentLine.points.isEmpty) {
+      return;
     }
-    if (lines.isEmpty) {
+
+    final stroke = _computeStroke(currentLine);
+    if (stroke.isEmpty) {
+      return;
+    }
+
+    final paint = switch (currentLine.brushType) {
+      BrushType.pen => _penPaint..color = currentLine.color,
+      BrushType.marker =>
+        _markerPaint..color = currentLine.color.withValues(alpha: 0.7),
+      BrushType.neon => _neonPaint..color = currentLine.color,
+    };
+
+    if (stroke.length < 2) {
+      canvas.drawCircle(
+        stroke.first,
+        currentLine.strokeOptions.size / 2,
+        paint,
+      );
+    } else {
+      _path
+        ..reset()
+        ..moveTo(stroke.first.dx, stroke.first.dy);
+
+      // 描画中は最新ポイントのみ追加処理（増分描画）
+      for (var i = 0; i < stroke.length - 1; ++i) {
+        final p0 = stroke[i];
+        final p1 = stroke[i + 1];
+        _path.quadraticBezierTo(
+          p0.dx,
+          p0.dy,
+          (p0.dx + p1.dx) / 2,
+          (p0.dy + p1.dy) / 2,
+        );
+      }
+      canvas.drawPath(_path, paint);
+    }
+  }
+
+  List<Offset> _computeStroke(PaintLine line) {
+    final options = switch (line.brushType) {
+      BrushType.pen => line.strokeOptions.copyWith(
+        thinning: 0.5,
+        smoothing: 0.5,
+        streamline: 0.5,
+      ),
+      BrushType.marker => line.strokeOptions.copyWith(
+        thinning: 0,
+        smoothing: 0,
+        streamline: 1,
+        simulatePressure: false,
+      ),
+      BrushType.neon => line.strokeOptions.copyWith(
+        thinning: -0.10,
+        smoothing: 1,
+        streamline: 1,
+      ),
+    };
+    return getStroke(line.points, options: options);
+  }
+
+  @override
+  bool shouldRepaint(covariant ActiveStrokePainter oldDelegate) {
+    final oldLine = oldDelegate.line;
+    final newLine = line;
+
+    if (oldLine == null && newLine == null) {
       return false;
     }
-    // 最後の線のポイント数が変わった場合（描画中）
-    final lastOld = oldDelegate.lines.lastOrNull;
-    final lastNew = lines.lastOrNull;
-    if (lastOld == null || lastNew == null) {
-      return lastOld != lastNew;
+    if (oldLine == null || newLine == null) {
+      return true;
     }
-    return lastOld.points.length != lastNew.points.length ||
-        lastOld.color != lastNew.color ||
-        lastOld.brushType != lastNew.brushType;
+
+    // ポイント数の変化のみ検知（描画中の高速更新用）
+    return oldLine.points.length != newLine.points.length;
   }
+}
+
+/// ストロークをPathに変換するユーティリティ
+ui.Path computePathFromLine(PaintLine line) {
+  final options = switch (line.brushType) {
+    BrushType.pen => line.strokeOptions.copyWith(
+      thinning: 0.5,
+      smoothing: 0.5,
+      streamline: 0.5,
+    ),
+    BrushType.marker => line.strokeOptions.copyWith(
+      thinning: 0,
+      smoothing: 0,
+      streamline: 1,
+      simulatePressure: false,
+    ),
+    BrushType.neon => line.strokeOptions.copyWith(
+      thinning: -0.10,
+      smoothing: 1,
+      streamline: 1,
+    ),
+  };
+  final stroke = getStroke(line.points, options: options);
+
+  final path = ui.Path();
+  if (stroke.isEmpty) {
+    return path;
+  }
+
+  if (stroke.length < 2) {
+    // 単一点は円として描画（後でdrawCircleで処理するが、Pathとして返す）
+    path.addOval(
+      Rect.fromCircle(
+        center: stroke.first,
+        radius: line.strokeOptions.size / 2,
+      ),
+    );
+  } else {
+    path.moveTo(stroke.first.dx, stroke.first.dy);
+    for (var i = 0; i < stroke.length - 1; ++i) {
+      final p0 = stroke[i];
+      final p1 = stroke[i + 1];
+      path.quadraticBezierTo(
+        p0.dx,
+        p0.dy,
+        (p0.dx + p1.dx) / 2,
+        (p0.dy + p1.dy) / 2,
+      );
+    }
+  }
+  return path;
 }

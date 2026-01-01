@@ -42,7 +42,7 @@ final class DecorationPaletteStateProvider
 }
 
 String _$decorationPaletteStateHash() =>
-    r'5fc7a34e37a9d1f48b844fb1eeaddfdcddce19a2';
+    r'b33d6912983364ae6599122e94cf935cade7dd1a';
 
 abstract class _$DecorationPaletteState extends $Notifier<DecorationPalette> {
   DecorationPalette build();

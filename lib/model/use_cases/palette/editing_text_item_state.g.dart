@@ -43,7 +43,7 @@ final class EditingTextItemStateProvider
 }
 
 String _$editingTextItemStateHash() =>
-    r'3fec478652d48ca8fffca632f073a512b07099b6';
+    r'29b1f8cc7d9b147121a70c5f7cea09d51391ab0c';
 
 abstract class _$EditingTextItemState
     extends $Notifier<RenderItem<DecorationText>> {

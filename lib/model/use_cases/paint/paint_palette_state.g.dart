@@ -41,7 +41,7 @@ final class PaintPaletteStateProvider
   }
 }
 
-String _$paintPaletteStateHash() => r'732f16eed88e472d28e8d2527172543660c91fe4';
+String _$paintPaletteStateHash() => r'04f5c30bc75df78614945976fbeea578c2b9b964';
 
 abstract class _$PaintPaletteState extends $Notifier<PaintPalette> {
   PaintPalette build();

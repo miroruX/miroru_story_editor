@@ -23,12 +23,10 @@ abstract class DecorationPalette with _$DecorationPalette {
     )..sort((a, b) => a.order.compareTo(b.order));
   }
 
-  /// 背景画像
-  RenderItem<DecorationBackgroundImage> get backgroundImage {
+  /// 背景画像（存在しない場合はnull）
+  RenderItem<DecorationBackgroundImage>? get backgroundImage {
     if (historyRenderItems.isEmpty) {
-      throw Exception(
-        'backgroundImage is not found: historyRenderItems is empty.',
-      );
+      return null;
     }
 
     final backgroundImageItems = historyRenderItems[currentHistoryIndex]
@@ -37,11 +35,8 @@ abstract class DecorationPalette with _$DecorationPalette {
 
     if (backgroundImageItems.isNotEmpty) {
       return backgroundImageItems.first;
-    } else {
-      throw Exception(
-        'backgroundImage is not found: No backgroundImage in the latest history.',
-      );
     }
+    return null;
   }
 
   /// 背景画像を除く全てのレンダリングされるアイテム

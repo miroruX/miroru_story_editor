@@ -56,12 +56,11 @@ class DecorationPaletteState extends _$DecorationPaletteState {
 
   /// DecorationItemの更新
   void updateRenderItem(RenderItem<DecorationItem> renderItem) {
+    final currentItems = state.historyRenderItems[state.currentHistoryIndex];
     state = state.copyWith(
       historyRenderItems: [
-        state.renderItems
-            .map(
-              (item) => item.uuid == renderItem.uuid ? renderItem : item,
-            )
+        currentItems
+            .map((item) => item.uuid == renderItem.uuid ? renderItem : item)
             .toList(),
         ...state.historyRenderItems,
       ],
@@ -71,48 +70,34 @@ class DecorationPaletteState extends _$DecorationPaletteState {
     _paletteState.changeEditingText(false);
   }
 
-  /// 背景画像の移動（最適化版：copyWithを避けて直接transformを更新）
+  /// 背景画像の移動
   void moveBackgroundImage({
     required Matrix4 transform,
     required String? uuid,
   }) {
-    if (state.isShowingHistory) {
-      final updatedRenderItems = state.renderItems.map((item) {
-        if (item.uuid == uuid) {
-          return RenderItem<DecorationItem>(
-            transform: transform,
-            data: item.data,
-            uuid: item.uuid,
-            order: item.order,
-          );
-        }
-        return item;
-      }).toList();
+    // 現在の履歴からアイテムを更新（copyWithで型を保持）
+    final currentItems = state.historyRenderItems[state.currentHistoryIndex];
+    final updatedRenderItems = currentItems.map((item) {
+      if (item.uuid == uuid) {
+        return item.copyWith(transform: transform);
+      }
+      return item;
+    }).toList();
 
+    if (state.isShowingHistory) {
+      // 履歴を表示中の場合は、現在位置以降の履歴を保持
       state = state.copyWith(
         historyRenderItems: [
           updatedRenderItems,
-          ...state.historyRenderItems.sublist(
-            state.currentHistoryIndex,
-            state.historyRenderItems.length,
-          ),
+          ...state.historyRenderItems.sublist(state.currentHistoryIndex),
         ],
         currentHistoryIndex: 0,
       );
     } else {
+      // 通常時は新しい履歴を先頭に追加
       state = state.copyWith(
         historyRenderItems: [
-          state.historyRenderItems[state.currentHistoryIndex].map((item) {
-            if (item.uuid == uuid) {
-              return RenderItem<DecorationItem>(
-                transform: transform,
-                data: item.data,
-                uuid: item.uuid,
-                order: item.order,
-              );
-            }
-            return item;
-          }).toList(),
+          updatedRenderItems,
           ...state.historyRenderItems,
         ],
         currentHistoryIndex: 0,
@@ -123,31 +108,23 @@ class DecorationPaletteState extends _$DecorationPaletteState {
 
   /// RenderItemの移動
   void moveRenderItem(RenderItem<DecorationItem> renderItem) {
-    if (state.isShowingHistory) {
-      final updatedRenderItems = state.renderItems
-          .map(
-            (item) => item.uuid == renderItem.uuid ? renderItem : item,
-          )
-          .toList();
+    final currentItems = state.historyRenderItems[state.currentHistoryIndex];
+    final updatedRenderItems = currentItems
+        .map((item) => item.uuid == renderItem.uuid ? renderItem : item)
+        .toList();
 
+    if (state.isShowingHistory) {
       state = state.copyWith(
         historyRenderItems: [
           updatedRenderItems,
-          ...state.historyRenderItems.sublist(
-            state.currentHistoryIndex,
-            state.historyRenderItems.length,
-          ),
+          ...state.historyRenderItems.sublist(state.currentHistoryIndex),
         ],
         currentHistoryIndex: 0,
       );
     } else {
       state = state.copyWith(
         historyRenderItems: [
-          state.historyRenderItems[state.currentHistoryIndex]
-              .map(
-                (item) => item.uuid == renderItem.uuid ? renderItem : item,
-              )
-              .toList(),
+          updatedRenderItems,
           ...state.historyRenderItems,
         ],
         currentHistoryIndex: 0,
@@ -157,9 +134,10 @@ class DecorationPaletteState extends _$DecorationPaletteState {
   }
 
   void removeRenderItem(String renderItemId) {
+    final currentItems = state.historyRenderItems[state.currentHistoryIndex];
     state = state.copyWith(
       historyRenderItems: [
-        state.renderItems.where((item) => item.uuid != renderItemId).toList(),
+        currentItems.where((item) => item.uuid != renderItemId).toList(),
         ...state.historyRenderItems,
       ],
       currentHistoryIndex: 0,
@@ -184,9 +162,10 @@ class DecorationPaletteState extends _$DecorationPaletteState {
   }
 
   void changeDeletePosition(String uuid, bool isDeletePosition) {
+    final currentItems = state.historyRenderItems[state.currentHistoryIndex];
     state = state.copyWith(
       historyRenderItems: [
-        state.renderItems
+        currentItems
             .map(
               (item) => item.uuid == uuid
                   ? item.copyWith(deletePosition: isDeletePosition)

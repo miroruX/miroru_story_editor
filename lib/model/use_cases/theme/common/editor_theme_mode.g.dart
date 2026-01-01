@@ -41,7 +41,7 @@ final class EditorThemeModeProvider
   }
 }
 
-String _$editorThemeModeHash() => r'6031f33be5cfa58f234d7cc1ce1b201f80f58f77';
+String _$editorThemeModeHash() => r'f62729106b83522fb9f77ce13da992d61a12e1a4';
 
 abstract class _$EditorThemeMode extends $Notifier<ThemeMode> {
   ThemeMode build();

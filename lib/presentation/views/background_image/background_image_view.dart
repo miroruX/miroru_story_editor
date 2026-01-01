@@ -16,21 +16,20 @@ class BackgroundImageView extends HookConsumerWidget {
       paletteStateProvider.select((value) => value.isPainting),
     );
     // selectで必要な部分のみ監視（不要な再ビルドを回避）
-    final backgroundImageFile = ref.watch(
-      decorationPaletteStateProvider
-          .select((state) => state.backgroundImage.data.backgroundImageFile),
-    );
-    final imageTransform = ref.watch(
-      decorationPaletteStateProvider
-          .select((state) => state.backgroundImage.transform),
-    );
-    final imageUuid = ref.watch(
-      decorationPaletteStateProvider
-          .select((state) => state.backgroundImage.uuid),
+    final backgroundImage = ref.watch(
+      decorationPaletteStateProvider.select((state) => state.backgroundImage),
     );
 
-    if (backgroundImageFile == null) {
+    if (backgroundImage == null) {
       //初期値が設定されていない場合がある為、初期値が設定されるまで表示しない
+      return const SizedBox.shrink();
+    }
+
+    final backgroundImageFile = backgroundImage.data.backgroundImageFile;
+    final imageTransform = backgroundImage.transform;
+    final imageUuid = backgroundImage.uuid;
+
+    if (backgroundImageFile == null) {
       return const SizedBox.shrink();
     }
 

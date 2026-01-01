@@ -13,6 +13,10 @@ class EditorThemeMode extends _$EditorThemeMode {
         .watch(decorationPaletteStateProvider)
         .backgroundImage;
 
+    if (backgroundImageObject == null) {
+      return ThemeMode.dark;
+    }
+
     final backgroundImageFile = backgroundImageObject.data.backgroundImageFile;
 
     if (backgroundImageFile == null) {

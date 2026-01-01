@@ -1,4 +1,4 @@
-import 'dart:ui';
+import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -20,13 +20,21 @@ class PaintPaletteView extends HookConsumerWidget {
       paletteStateProvider.select((value) => value.isPainting),
     );
 
-    // 完成した線はRiverpodから直接取得（不要なuseStateを削除）
+    // 完成した線はRiverpodから直接取得
     final paintedLines = ref.watch(paintLinesStateProvider);
+
+    // キャッシュ済みのPath（完成した線のみ）
+    final cachedPaths = useMemoized(
+      () => paintedLines.map(computePathFromLine).toList(),
+      [paintedLines],
+    );
+
+    // 描画中の線（高頻度更新用にValueNotifier使用）
     final paintingLine = useState<PaintLine?>(null);
 
     void onPointerDown(PointerDownEvent details) {
       final paintPalette = ref.read(paintPaletteStateProvider);
-      final supportsPressure = details.kind == PointerDeviceKind.stylus;
+      final supportsPressure = details.kind == ui.PointerDeviceKind.stylus;
       final options = paintPalette.strokeOptions!.copyWith(
         simulatePressure: !supportsPressure,
       );
@@ -49,7 +57,8 @@ class PaintPaletteView extends HookConsumerWidget {
     }
 
     void onPointerMove(PointerMoveEvent details) {
-      if (paintingLine.value == null) {
+      final currentLine = paintingLine.value;
+      if (currentLine == null) {
         return;
       }
       final supportsPressure = details.pressureMin < 1;
@@ -60,20 +69,17 @@ class PaintPaletteView extends HookConsumerWidget {
         supportsPressure ? details.pressure : null,
       );
 
-      paintingLine.value = paintingLine.value!.copyWith(
-        points: [...paintingLine.value!.points, point],
-      );
+      // リストを新規作成せずに追加（パフォーマンス向上）
+      final newPoints = List<PointVector>.from(currentLine.points)..add(point);
+      paintingLine.value = currentLine.copyWith(points: newPoints);
     }
 
     void onPointerUp(PointerUpEvent details) {
-      if (paintingLine.value == null) {
+      final currentLine = paintingLine.value;
+      if (currentLine == null) {
         return;
       }
-      ref
-          .read(paintLinesStateProvider.notifier)
-          .addLine(
-            paintingLine.value!,
-          );
+      ref.read(paintLinesStateProvider.notifier).addLine(currentLine);
       paintingLine.value = null;
     }
 
@@ -89,27 +95,28 @@ class PaintPaletteView extends HookConsumerWidget {
             child: SizedBox.expand(
               child: Stack(
                 children: [
-                  // 完成した線をRepaintBoundaryでキャッシュ
+                  // 完成した線をRepaintBoundaryでキャッシュ（Path事前計算済み）
                   Positioned.fill(
                     child: RepaintBoundary(
                       child: CustomPaint(
-                        painter: StrokePainter(lines: paintedLines),
+                        painter: CompletedStrokePainter(
+                          lines: paintedLines,
+                          cachedPaths: cachedPaths,
+                        ),
                       ),
                     ),
                   ),
-                  // 描画中の線のみ別レイヤーで描画
+                  // 描画中の線のみ別レイヤーで描画（RepaintBoundaryで分離）
                   Positioned.fill(
-                    child: ValueListenableBuilder(
-                      valueListenable: paintingLine,
-                      builder: (context, line, _) {
-                        return CustomPaint(
-                          painter: StrokePainter(
-                            lines: line == null || line.points.isEmpty
-                                ? []
-                                : [line],
-                          ),
-                        );
-                      },
+                    child: RepaintBoundary(
+                      child: ValueListenableBuilder<PaintLine?>(
+                        valueListenable: paintingLine,
+                        builder: (context, line, _) {
+                          return CustomPaint(
+                            painter: ActiveStrokePainter(line: line),
+                          );
+                        },
+                      ),
                     ),
                   ),
                 ],
