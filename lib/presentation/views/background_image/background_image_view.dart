@@ -83,7 +83,6 @@ class BackgroundImageView extends HookConsumerWidget {
               height: double.infinity,
               width: double.infinity,
               cacheWidth: 2000,
-              cacheHeight: 2000,
             ),
           ),
         ),

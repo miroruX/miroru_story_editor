@@ -1,3 +1,9 @@
+## [1.1.16] - 2026-01-02
+
+### Fixed
+
+- Fixed background image aspect ratio distortion by removing `cacheHeight` parameter to preserve original proportions
+
 ## [1.1.15] - 2026-01-XX
 
 ### Improved
