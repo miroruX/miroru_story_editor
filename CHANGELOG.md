@@ -1,3 +1,10 @@
+## [1.1.15] - 2026-01-XX
+
+### Improved
+
+- Improved exported image quality by specifying `pixelRatio` parameter in `toImage()` method to match device pixel density
+- Exported images now render at high resolution on Retina displays and other high-DPI devices
+
 ## [1.1.14] - 2026-01-01
 
 ### Improved
