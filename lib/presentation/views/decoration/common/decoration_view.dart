@@ -25,8 +25,9 @@ class DecorationWidget extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     // selectを使って必要な部分だけ監視（renderItemsの参照が変わった時のみリビルド）
     final renderItems = ref.watch(
-      decorationPaletteStateProvider
-          .select((state) => state.renderItemsWithoutBackgroundImage),
+      decorationPaletteStateProvider.select(
+        (state) => state.renderItemsWithoutBackgroundImage,
+      ),
     );
 
     final isPainting = ref.watch(

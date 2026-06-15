@@ -10,7 +10,7 @@ part of 'palette_key.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(paletteKey)
-const paletteKeyProvider = PaletteKeyProvider._();
+final paletteKeyProvider = PaletteKeyProvider._();
 
 final class PaletteKeyProvider
     extends
@@ -20,7 +20,7 @@ final class PaletteKeyProvider
           GlobalKey<State<StatefulWidget>>
         >
     with $Provider<GlobalKey<State<StatefulWidget>>> {
-  const PaletteKeyProvider._()
+  PaletteKeyProvider._()
     : super(
         from: null,
         argument: null,

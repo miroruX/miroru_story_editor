@@ -10,11 +10,11 @@ part of 'decoration_palette_state.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(DecorationPaletteState)
-const decorationPaletteStateProvider = DecorationPaletteStateProvider._();
+final decorationPaletteStateProvider = DecorationPaletteStateProvider._();
 
 final class DecorationPaletteStateProvider
     extends $NotifierProvider<DecorationPaletteState, DecorationPalette> {
-  const DecorationPaletteStateProvider._()
+  DecorationPaletteStateProvider._()
     : super(
         from: null,
         argument: null,
@@ -49,7 +49,6 @@ abstract class _$DecorationPaletteState extends $Notifier<DecorationPalette> {
   @$mustCallSuper
   @override
   void runBuild() {
-    final created = build();
     final ref = this.ref as $Ref<DecorationPalette, DecorationPalette>;
     final element =
         ref.element
@@ -59,6 +58,6 @@ abstract class _$DecorationPaletteState extends $Notifier<DecorationPalette> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    element.handleCreate(ref, build);
   }
 }

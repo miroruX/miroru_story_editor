@@ -10,11 +10,11 @@ part of 'editor_theme_mode.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(EditorThemeMode)
-const editorThemeModeProvider = EditorThemeModeProvider._();
+final editorThemeModeProvider = EditorThemeModeProvider._();
 
 final class EditorThemeModeProvider
     extends $NotifierProvider<EditorThemeMode, ThemeMode> {
-  const EditorThemeModeProvider._()
+  EditorThemeModeProvider._()
     : super(
         from: null,
         argument: null,
@@ -48,7 +48,6 @@ abstract class _$EditorThemeMode extends $Notifier<ThemeMode> {
   @$mustCallSuper
   @override
   void runBuild() {
-    final created = build();
     final ref = this.ref as $Ref<ThemeMode, ThemeMode>;
     final element =
         ref.element
@@ -58,6 +57,6 @@ abstract class _$EditorThemeMode extends $Notifier<ThemeMode> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    element.handleCreate(ref, build);
   }
 }

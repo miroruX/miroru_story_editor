@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ionicons/ionicons.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class DecorationDeleteWidget extends StatelessWidget {
   const DecorationDeleteWidget({
@@ -29,8 +29,8 @@ class DecorationDeleteWidget extends StatelessWidget {
             ),
           ),
         ),
-        child: Icon(
-          Ionicons.trash,
+        child: FaIcon(
+          FontAwesomeIcons.trash,
           color: nearDeleteArea ? Colors.red : Colors.grey,
           size: 20,
         ),

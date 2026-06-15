@@ -10,11 +10,11 @@ part of 'palette_state.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(PaletteState)
-const paletteStateProvider = PaletteStateProvider._();
+final paletteStateProvider = PaletteStateProvider._();
 
 final class PaletteStateProvider
     extends $NotifierProvider<PaletteState, Palette> {
-  const PaletteStateProvider._()
+  PaletteStateProvider._()
     : super(
         from: null,
         argument: null,
@@ -48,7 +48,6 @@ abstract class _$PaletteState extends $Notifier<Palette> {
   @$mustCallSuper
   @override
   void runBuild() {
-    final created = build();
     final ref = this.ref as $Ref<Palette, Palette>;
     final element =
         ref.element
@@ -58,6 +57,6 @@ abstract class _$PaletteState extends $Notifier<Palette> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    element.handleCreate(ref, build);
   }
 }

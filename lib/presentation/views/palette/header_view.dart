@@ -2,7 +2,6 @@ import 'package:animated_emoji/animated_emoji.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:ionicons/ionicons.dart';
 import 'package:miroru_story_editor/extensions/context_extension.dart';
 import 'package:miroru_story_editor/model/entities/decoration/decorations/emoji/decoration_emoji.dart';
 import 'package:miroru_story_editor/model/entities/decoration/render_item/render_item.dart';
@@ -38,8 +37,8 @@ class HeaderView extends HookConsumerWidget {
             Vibration.call();
             Navigator.of(context).pop();
           },
-          icon: const Icon(
-            Ionicons.close,
+          icon: const FaIcon(
+            FontAwesomeIcons.xmark,
           ),
         ),
         const SizedBox(
@@ -55,8 +54,8 @@ class HeaderView extends HookConsumerWidget {
                 }
               : null,
           // style: actionIconButton.style,
-          icon: const Icon(
-            Ionicons.arrow_back,
+          icon: const FaIcon(
+            FontAwesomeIcons.arrowLeft,
           ),
         ),
         IconButton(
@@ -69,8 +68,8 @@ class HeaderView extends HookConsumerWidget {
                 }
               : null,
           // style: actionIconButton.style,
-          icon: const Icon(
-            Ionicons.arrow_forward,
+          icon: const FaIcon(
+            FontAwesomeIcons.arrowRight,
           ),
         ),
         const Spacer(),
@@ -108,7 +107,7 @@ class HeaderView extends HookConsumerWidget {
             Vibration.call();
             ref.read(paletteStateProvider.notifier).changeEditingText(true);
           },
-          icon: const Icon(
+          icon: const FaIcon(
             FontAwesomeIcons.a,
           ),
         ),
@@ -135,8 +134,8 @@ class HeaderView extends HookConsumerWidget {
               context.showSnackBar(e.toString());
             }
           },
-          icon: const Icon(
-            Ionicons.ellipsis_horizontal,
+          icon: const FaIcon(
+            FontAwesomeIcons.ellipsis,
           ),
         ),
       ],
@@ -167,8 +166,8 @@ class HeaderView extends HookConsumerWidget {
           children: [
             Text(context.l10n.draw),
             const Spacer(),
-            const Icon(
-              Ionicons.color_palette_outline,
+            const FaIcon(
+              FontAwesomeIcons.palette,
             ),
           ],
         ),
@@ -180,7 +179,7 @@ class HeaderView extends HookConsumerWidget {
           children: [
             Text(context.l10n.save),
             const Spacer(),
-            const Icon(Ionicons.download_outline),
+            const FaIcon(FontAwesomeIcons.download),
           ],
         ),
       ),

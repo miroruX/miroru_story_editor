@@ -10,12 +10,12 @@ part of 'save_image.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(saveImage)
-const saveImageProvider = SaveImageFamily._();
+final saveImageProvider = SaveImageFamily._();
 
 final class SaveImageProvider
     extends $FunctionalProvider<AsyncValue<void>, void, FutureOr<void>>
     with $FutureModifier<void>, $FutureProvider<void> {
-  const SaveImageProvider._({
+  SaveImageProvider._({
     required SaveImageFamily super.from,
     required Uint8List super.argument,
   }) : super(
@@ -62,7 +62,7 @@ String _$saveImageHash() => r'cae76ce8d1a827eaec48369c1b8e3e53d5d1c414';
 
 final class SaveImageFamily extends $Family
     with $FunctionalFamilyOverride<FutureOr<void>, Uint8List> {
-  const SaveImageFamily._()
+  SaveImageFamily._()
     : super(
         retry: null,
         name: r'saveImageProvider',

@@ -15,23 +15,17 @@ class BuildDecorationHandler extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (item is DecorationBackgroundImage) {
-      return const SizedBox();
-    } else if (item is DecorationEmoji) {
-      final data = item as DecorationEmoji;
-      return Padding(
+    return switch (item) {
+      DecorationBackgroundImage() => const SizedBox(),
+      DecorationEmoji(:final emoji) => Padding(
         padding: const EdgeInsets.all(25),
         child: Text(
-          data.emoji ?? '',
+          emoji ?? '',
           style: const TextStyle(fontSize: 80),
         ),
-      );
-    } else if (item is DecorationText) {
-      return RenderTextWidget(
-        decorationText: item as DecorationText,
-      );
-    } else {
-      throw Exception('not found DecorationItem type.');
-    }
+      ),
+      final DecorationText text => RenderTextWidget(decorationText: text),
+      _ => throw Exception('not found DecorationItem type.'),
+    };
   }
 }

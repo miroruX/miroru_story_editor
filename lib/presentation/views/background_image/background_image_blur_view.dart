@@ -12,8 +12,9 @@ class BackgroundBlurImageView extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     // selectで必要な部分のみ監視（不要な再ビルドを回避）
     final backgroundImageFile = ref.watch(
-      decorationPaletteStateProvider
-          .select((state) => state.backgroundImage?.data.backgroundImageFile),
+      decorationPaletteStateProvider.select(
+        (state) => state.backgroundImage?.data.backgroundImageFile,
+      ),
     );
 
     if (backgroundImageFile == null) {

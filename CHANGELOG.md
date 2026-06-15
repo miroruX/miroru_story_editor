@@ -1,3 +1,24 @@
+## [1.2.0] - 2026-06-15
+
+### Changed
+
+- Updated all in-use dependencies to their latest compatible versions
+  - `font_awesome_flutter` 10 → 11 (icons are now `FaIconData`; migrated affected `Icon` widgets to `FaIcon`)
+  - `google_fonts` 6 → 8
+  - `image_gallery_saver_plus` 4 → 5
+  - `image` 4.8 → 4.9
+  - `flutter_blurhash` 0.8 → 0.9
+  - `unicode_emojis` 0.4 → 0.5
+  - `riverpod_annotation` / `riverpod_generator` 3 → 4, with `hooks_riverpod`, `riverpod_lint`, `build_runner`, `freezed`, `pedantic_mono` bumped to their latest versions resolvable alongside `custom_lint`
+- Unified all icons on `font_awesome_flutter`, replacing the unmaintained `ionicons` (close → `xmark`, back/forward → `arrowLeft`/`arrowRight`, ellipsis, palette, download, trash)
+- Modernized syntax: converted remaining `switch` statements to switch expressions and replaced `is` type-check chains with switch pattern matching
+- Removed the deprecated `synthetic-package` flag from `l10n.yaml`
+
+### Removed
+
+- Dropped the unmaintained `ionicons` dependency (icons migrated to `font_awesome_flutter`)
+- Removed unused dependencies to slim the dependency graph: `pro_image_editor`, `image_cropper`, `flutter_image_compress`, `extended_image`, `flutter_svg`, `cached_network_image`, `insta_image_viewer`, `photo_view`, `package_info_plus`, `device_info_plus`, `animated_text_kit`, `gap`, `super_sliver_list`, `flutter_staggered_grid_view`, `avatar_stack`, `flutter_tabler_icons`, `cupertino_icons`, `equatable`, `rxdart`, `quiver`, `collection`, `path`, `json_annotation`, `json_serializable`, `flutter_gen_runner`
+
 ## [1.1.16] - 2026-01-02
 
 ### Fixed

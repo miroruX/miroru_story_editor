@@ -44,13 +44,15 @@ class PaintToolHeaderView extends HookConsumerWidget {
           IconButton(
             onPressed: () {
               Vibration.call();
-              ref.read(paintPaletteStateProvider.notifier).changeBrushType(
+              ref
+                  .read(paintPaletteStateProvider.notifier)
+                  .changeBrushType(
                     BrushType.pen,
                   );
             },
             isSelected: selectedBrushType == BrushType.pen,
-            icon: const Icon(FontAwesomeIcons.penClip),
-            selectedIcon: Icon(
+            icon: const FaIcon(FontAwesomeIcons.penClip),
+            selectedIcon: FaIcon(
               FontAwesomeIcons.penClip,
               color: selectedColor,
             ),
@@ -58,13 +60,15 @@ class PaintToolHeaderView extends HookConsumerWidget {
           IconButton(
             onPressed: () {
               Vibration.call();
-              ref.read(paintPaletteStateProvider.notifier).changeBrushType(
+              ref
+                  .read(paintPaletteStateProvider.notifier)
+                  .changeBrushType(
                     BrushType.marker,
                   );
             },
             isSelected: selectedBrushType == BrushType.marker,
-            icon: const Icon(FontAwesomeIcons.highlighter),
-            selectedIcon: Icon(
+            icon: const FaIcon(FontAwesomeIcons.highlighter),
+            selectedIcon: FaIcon(
               FontAwesomeIcons.highlighter,
               color: selectedColor,
             ),
@@ -72,13 +76,15 @@ class PaintToolHeaderView extends HookConsumerWidget {
           IconButton(
             onPressed: () {
               Vibration.call();
-              ref.read(paintPaletteStateProvider.notifier).changeBrushType(
+              ref
+                  .read(paintPaletteStateProvider.notifier)
+                  .changeBrushType(
                     BrushType.neon,
                   );
             },
             isSelected: selectedBrushType == BrushType.neon,
-            icon: const Icon(FontAwesomeIcons.wandMagicSparkles),
-            selectedIcon: Icon(
+            icon: const FaIcon(FontAwesomeIcons.wandMagicSparkles),
+            selectedIcon: FaIcon(
               FontAwesomeIcons.wandMagicSparkles,
               color: selectedColor,
             ),

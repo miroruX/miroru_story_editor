@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:ionicons/ionicons.dart';
 import 'package:miroru_story_editor/extensions/context_extension.dart';
 import 'package:miroru_story_editor/model/use_cases/palette/palette_state.dart';
 import 'package:miroru_story_editor/model/use_cases/share/export_image.dart';
@@ -35,7 +35,7 @@ class FooterView extends ConsumerWidget {
                     Navigator.of(context).pop(data);
                   }
                 : null,
-            icon: const Icon(Ionicons.arrow_forward),
+            icon: const FaIcon(FontAwesomeIcons.arrowRight),
           ),
         ],
       ),

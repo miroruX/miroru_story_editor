@@ -5,4 +5,3 @@ output-localization-file: l10n.dart
 output-class: L10n
 nullable-getter: false
 use-escaping: true
-synthetic-package: false

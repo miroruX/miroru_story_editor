@@ -10,11 +10,11 @@ part of 'footer_theme_data.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(FooterThemeData)
-const footerThemeDataProvider = FooterThemeDataProvider._();
+final footerThemeDataProvider = FooterThemeDataProvider._();
 
 final class FooterThemeDataProvider
     extends $NotifierProvider<FooterThemeData, ThemeData> {
-  const FooterThemeDataProvider._()
+  FooterThemeDataProvider._()
     : super(
         from: null,
         argument: null,
@@ -48,7 +48,6 @@ abstract class _$FooterThemeData extends $Notifier<ThemeData> {
   @$mustCallSuper
   @override
   void runBuild() {
-    final created = build();
     final ref = this.ref as $Ref<ThemeData, ThemeData>;
     final element =
         ref.element
@@ -58,6 +57,6 @@ abstract class _$FooterThemeData extends $Notifier<ThemeData> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    element.handleCreate(ref, build);
   }
 }

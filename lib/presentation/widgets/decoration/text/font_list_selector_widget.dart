@@ -13,8 +13,9 @@ class FontListSelectorWidget extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final tabController =
-        useTabController(initialLength: FontType.values.length);
+    final tabController = useTabController(
+      initialLength: FontType.values.length,
+    );
 
     useEffect(
       () {

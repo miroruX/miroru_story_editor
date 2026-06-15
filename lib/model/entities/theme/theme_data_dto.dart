@@ -14,14 +14,14 @@ class ThemeDataDto {
     ThemeData? decoratingThemeDark,
     ThemeData? footerThemeLight,
     ThemeData? footerThemeDark,
-  })  : themeLight = themeLight ?? getMiroruThemeLight(),
-        themeDark = themeDark ?? getMiroruThemeDark(),
-        paintThemeLight = paintingThemeLight ?? getPaintingThemeLight(),
-        paintThemeDark = paintingThemeDark ?? getPaintingThemeDark(),
-        paletteThemeLight = decoratingThemeLight ?? getDecoratingThemeLight(),
-        paletteThemeDark = decoratingThemeDark ?? getDecoratingThemeDark(),
-        footerThemeLight = footerThemeLight ?? getFooterThemeLight(),
-        footerThemeDark = footerThemeDark ?? getFooterThemeDark();
+  }) : themeLight = themeLight ?? getMiroruThemeLight(),
+       themeDark = themeDark ?? getMiroruThemeDark(),
+       paintThemeLight = paintingThemeLight ?? getPaintingThemeLight(),
+       paintThemeDark = paintingThemeDark ?? getPaintingThemeDark(),
+       paletteThemeLight = decoratingThemeLight ?? getDecoratingThemeLight(),
+       paletteThemeDark = decoratingThemeDark ?? getDecoratingThemeDark(),
+       footerThemeLight = footerThemeLight ?? getFooterThemeLight(),
+       footerThemeDark = footerThemeDark ?? getFooterThemeDark();
 
   final ThemeData themeLight;
   final ThemeData themeDark;

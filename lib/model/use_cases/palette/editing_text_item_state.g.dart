@@ -10,12 +10,12 @@ part of 'editing_text_item_state.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(EditingTextItemState)
-const editingTextItemStateProvider = EditingTextItemStateProvider._();
+final editingTextItemStateProvider = EditingTextItemStateProvider._();
 
 final class EditingTextItemStateProvider
     extends
         $NotifierProvider<EditingTextItemState, RenderItem<DecorationText>> {
-  const EditingTextItemStateProvider._()
+  EditingTextItemStateProvider._()
     : super(
         from: null,
         argument: null,
@@ -51,7 +51,6 @@ abstract class _$EditingTextItemState
   @$mustCallSuper
   @override
   void runBuild() {
-    final created = build();
     final ref =
         this.ref
             as $Ref<RenderItem<DecorationText>, RenderItem<DecorationText>>;
@@ -66,6 +65,6 @@ abstract class _$EditingTextItemState
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    element.handleCreate(ref, build);
   }
 }

@@ -10,11 +10,11 @@ part of 'painting_theme_dart.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(PaintingThemeData)
-const paintingThemeDataProvider = PaintingThemeDataProvider._();
+final paintingThemeDataProvider = PaintingThemeDataProvider._();
 
 final class PaintingThemeDataProvider
     extends $NotifierProvider<PaintingThemeData, ThemeData> {
-  const PaintingThemeDataProvider._()
+  PaintingThemeDataProvider._()
     : super(
         from: null,
         argument: null,
@@ -48,7 +48,6 @@ abstract class _$PaintingThemeData extends $Notifier<ThemeData> {
   @$mustCallSuper
   @override
   void runBuild() {
-    final created = build();
     final ref = this.ref as $Ref<ThemeData, ThemeData>;
     final element =
         ref.element
@@ -58,6 +57,6 @@ abstract class _$PaintingThemeData extends $Notifier<ThemeData> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    element.handleCreate(ref, build);
   }
 }

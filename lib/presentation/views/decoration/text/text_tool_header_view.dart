@@ -36,7 +36,7 @@ class TextToolHeaderView extends HookConsumerWidget {
           const Spacer(flex: 4),
           IconButton(
             onPressed: changeTextAlign,
-            icon: Icon(
+            icon: FaIcon(
               decorationText.textAlign == TextAlign.left.name
                   ? FontAwesomeIcons.alignLeft
                   : FontAwesomeIcons.alignRight,
@@ -48,7 +48,7 @@ class TextToolHeaderView extends HookConsumerWidget {
           ),
           IconButton(
             onPressed: changeFillColor,
-            icon: const Icon(
+            icon: const FaIcon(
               FontAwesomeIcons.fill,
             ),
           ),

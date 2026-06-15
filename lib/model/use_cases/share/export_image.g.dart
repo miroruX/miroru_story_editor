@@ -10,7 +10,7 @@ part of 'export_image.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(exportImage)
-const exportImageProvider = ExportImageProvider._();
+final exportImageProvider = ExportImageProvider._();
 
 final class ExportImageProvider
     extends
@@ -20,7 +20,7 @@ final class ExportImageProvider
           FutureOr<Uint8List?>
         >
     with $FutureModifier<Uint8List?>, $FutureProvider<Uint8List?> {
-  const ExportImageProvider._()
+  ExportImageProvider._()
     : super(
         from: null,
         argument: null,

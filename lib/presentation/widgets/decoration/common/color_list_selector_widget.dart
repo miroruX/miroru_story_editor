@@ -47,8 +47,9 @@ class ColorListSelectorWidget extends HookWidget {
       initialLength: _colors.length,
       initialIndex: _colors.indexOf(selectedColor),
     );
-    final accentColorTabController =
-        useTabController(initialLength: _accentColors.length);
+    final accentColorTabController = useTabController(
+      initialLength: _accentColors.length,
+    );
 
     useEffect(
       () {

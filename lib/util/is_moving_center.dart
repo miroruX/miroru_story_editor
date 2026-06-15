@@ -13,10 +13,8 @@ bool isMovingCenter({
   final translation = transform.getTranslation();
   final itemOffset = Offset(translation.x, translation.y);
 
-  switch (axis) {
-    case Axis.horizontal:
-      return itemOffset.dx.abs() < threshold;
-    case Axis.vertical:
-      return itemOffset.dy.abs() < threshold;
-  }
+  return switch (axis) {
+    Axis.horizontal => itemOffset.dx.abs() < threshold,
+    Axis.vertical => itemOffset.dy.abs() < threshold,
+  };
 }

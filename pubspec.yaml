@@ -1,6 +1,6 @@
 name: miroru_story_editor
 description: miroru story editor is designed in accordance with the Material Theme, offering ease of customization through its succinctly written code.
-version: 1.1.16
+version: 1.2.0
 homepage: https://www.miroru.com/
 repository: https://github.com/miroruX/miroru_story_editor
 
@@ -15,71 +15,39 @@ dependencies:
     sdk: flutter
 
   # Icon
-  flutter_tabler_icons: ^1.43.0
-  cupertino_icons: ^1.0.8
-  ionicons: ^0.2.2
-  font_awesome_flutter: ^10.12.0
+  font_awesome_flutter: ^11.0.0
 
   # Riverpod
-  hooks_riverpod: ^3.0.3
-  riverpod_annotation: ^3.0.3
+  hooks_riverpod: ^3.1.0
+  riverpod_annotation: ^4.0.0
 
   # Hooks
   flutter_hooks: ^0.21.3+1
 
   # Entity
   freezed_annotation: ^3.1.0
-  json_annotation: ^4.9.0
-  equatable: ^2.0.7
 
   # Date
   intl: ^0.20.2
 
-  # Reactive
-  rxdart: ^0.28.0
-
   # Image
-  image: ^4.1.4
+  image: ^4.9.1
   blurhash_dart: ^1.2.1
-  flutter_blurhash: ^0.8.2
-  image_gallery_saver_plus: ^4.0.1
-  image_cropper: ^11.0.0
-  flutter_image_compress: ^2.4.0
-  extended_image: ^10.0.1
-  flutter_svg: ^2.2.2
-  cached_network_image: ^3.4.1
-  pro_image_editor: ^11.12.2
-  insta_image_viewer: ^1.0.4
-  photo_view: ^0.15.0
-
-  # Info
-  package_info_plus: ^9.0.0
-  device_info_plus: ^12.2.0
-
-  # Text
-  animated_text_kit: ^4.3.0
-
-  # Widget
-  gap: ^3.0.1
-  super_sliver_list: ^0.4.1
-  flutter_staggered_grid_view: ^0.7.0
-  avatar_stack: ^3.0.0
+  flutter_blurhash: ^0.9.1
+  image_gallery_saver_plus: ^5.0.0
 
   # Font
-  google_fonts: ^6.3.2
+  google_fonts: ^8.1.0
 
   # Other
   uuid: ^4.5.2
-  collection: ^1.19.1
-  quiver: ^3.2.2
-  path: ^1.9.1
 
   # Sliver
   sliver_tools: ^0.2.12
 
   # Emoji
   animated_emoji: ^3.0.0
-  unicode_emojis: ^0.4.0
+  unicode_emojis: ^0.5.1
 
   # Animation
   align_positioned: ^5.0.1
@@ -94,21 +62,14 @@ dev_dependencies:
     sdk: flutter
 
   # Static analysis
-  pedantic_mono: 1.35.0
+  pedantic_mono: ^1.37.0
   custom_lint:
-  riverpod_lint: 3.0.3
-
-  # Serializer
-  json_serializable: 6.11.1
+  riverpod_lint: ^3.1.0
 
   # Code generator
-  build_runner: 2.10.2
-  freezed: 3.2.3
-  flutter_gen_runner:
-  riverpod_generator: 3.0.3
-  analyzer:
-  analyzer_plugin:
-  custom_lint_visitor:
+  build_runner: ^2.15.0
+  freezed: ^3.2.3
+  riverpod_generator: ^4.0.0
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 

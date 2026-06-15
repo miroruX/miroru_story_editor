@@ -10,12 +10,12 @@ part of 'theme_data_dto.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(themeDataDto)
-const themeDataDtoProvider = ThemeDataDtoProvider._();
+final themeDataDtoProvider = ThemeDataDtoProvider._();
 
 final class ThemeDataDtoProvider
     extends $FunctionalProvider<ThemeDataDto, ThemeDataDto, ThemeDataDto>
     with $Provider<ThemeDataDto> {
-  const ThemeDataDtoProvider._()
+  ThemeDataDtoProvider._()
     : super(
         from: null,
         argument: null,

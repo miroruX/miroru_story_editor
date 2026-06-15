@@ -10,11 +10,11 @@ part of 'paint_lines_state.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(PaintLinesState)
-const paintLinesStateProvider = PaintLinesStateProvider._();
+final paintLinesStateProvider = PaintLinesStateProvider._();
 
 final class PaintLinesStateProvider
     extends $NotifierProvider<PaintLinesState, List<PaintLine>> {
-  const PaintLinesStateProvider._()
+  PaintLinesStateProvider._()
     : super(
         from: null,
         argument: null,
@@ -48,7 +48,6 @@ abstract class _$PaintLinesState extends $Notifier<List<PaintLine>> {
   @$mustCallSuper
   @override
   void runBuild() {
-    final created = build();
     final ref = this.ref as $Ref<List<PaintLine>, List<PaintLine>>;
     final element =
         ref.element
@@ -58,6 +57,6 @@ abstract class _$PaintLinesState extends $Notifier<List<PaintLine>> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    element.handleCreate(ref, build);
   }
 }

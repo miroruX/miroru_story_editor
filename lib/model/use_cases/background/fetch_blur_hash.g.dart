@@ -10,13 +10,13 @@ part of 'fetch_blur_hash.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(fetchBlurHash)
-const fetchBlurHashProvider = FetchBlurHashFamily._();
+final fetchBlurHashProvider = FetchBlurHashFamily._();
 
 final class FetchBlurHashProvider
     extends
         $FunctionalProvider<AsyncValue<BlurHash>, BlurHash, FutureOr<BlurHash>>
     with $FutureModifier<BlurHash>, $FutureProvider<BlurHash> {
-  const FetchBlurHashProvider._({
+  FetchBlurHashProvider._({
     required FetchBlurHashFamily super.from,
     required File super.argument,
   }) : super(
@@ -63,7 +63,7 @@ String _$fetchBlurHashHash() => r'143adaa14c67d0d02a832e806b80384dd12032ea';
 
 final class FetchBlurHashFamily extends $Family
     with $FunctionalFamilyOverride<FutureOr<BlurHash>, File> {
-  const FetchBlurHashFamily._()
+  FetchBlurHashFamily._()
     : super(
         retry: null,
         name: r'fetchBlurHashProvider',

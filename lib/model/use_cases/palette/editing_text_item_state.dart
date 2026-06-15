@@ -38,18 +38,17 @@ class EditingTextItemState extends _$EditingTextItemState {
   }
 
   void changeTextAlign() {
-    final newAlignment =
-        _decorationText.textAlign == TextAlign.left.name
-            ? TextAlign.right
-            : TextAlign.left;
+    final newAlignment = _decorationText.textAlign == TextAlign.left.name
+        ? TextAlign.right
+        : TextAlign.left;
     _updateData((data) => data.copyWith(textAlign: newAlignment.name));
   }
 
   void changeFillColor() {
     final newBackgroundColor =
         _decorationText.backgroundColorCode.toColor == Colors.black
-            ? Colors.white
-            : Colors.black;
+        ? Colors.white
+        : Colors.black;
     _updateData(
       (data) => data.copyWith(backgroundColorCode: newBackgroundColor.hex),
     );
