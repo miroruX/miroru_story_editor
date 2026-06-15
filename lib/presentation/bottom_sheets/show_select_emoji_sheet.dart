@@ -3,9 +3,7 @@ import 'package:miroru_story_editor/presentation/bottom_sheets/common/show_slive
 import 'package:miroru_story_editor/util/vibration.dart';
 import 'package:unicode_emojis/unicode_emojis.dart';
 
-Future<String?> showSelectEmojiSheet(
-  BuildContext context,
-) {
+Future<String?> showSelectEmojiSheet(BuildContext context) {
   const emojis = UnicodeEmojis.allEmojis;
   return showSliverDragSheet(
     context,
@@ -27,12 +25,7 @@ Future<String?> showSelectEmojiSheet(
               Navigator.of(context).pop(e.emoji);
             },
             child: Center(
-              child: Text(
-                e.emoji,
-                style: const TextStyle(
-                  fontSize: 40,
-                ),
-              ),
+              child: Text(e.emoji, style: const TextStyle(fontSize: 40)),
             ),
           );
         },

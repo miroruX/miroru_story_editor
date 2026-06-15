@@ -23,18 +23,13 @@ class TextSizeSliderWidget extends HookWidget {
     );
 
     return ConstrainedBox(
-      constraints: const BoxConstraints(
-        maxWidth: 50,
-        maxHeight: 200,
-      ),
+      constraints: const BoxConstraints(maxWidth: 50, maxHeight: 200),
       child: RotatedBox(
         quarterTurns: 3,
         child: SliderTheme(
           data: SliderTheme.of(context).copyWith(
             thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 15),
-            overlayShape: const RoundSliderOverlayShape(
-              overlayRadius: 20,
-            ),
+            overlayShape: const RoundSliderOverlayShape(overlayRadius: 20),
           ),
           child: Slider(
             max: 60,

@@ -1,5 +1,1 @@
-enum BrushType {
-  pen,
-  marker,
-  neon,
-}
+enum BrushType { pen, marker, neon }

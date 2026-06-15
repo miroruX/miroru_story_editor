@@ -9,8 +9,7 @@ part 'background_image.freezed.dart';
 abstract class DecorationBackgroundImage
     with _$DecorationBackgroundImage
     implements DecorationItem {
-  const factory DecorationBackgroundImage({
-    File? backgroundImageFile,
-  }) = _DecorationBackgroundImage;
+  const factory DecorationBackgroundImage({File? backgroundImageFile}) =
+      _DecorationBackgroundImage;
   const DecorationBackgroundImage._();
 }

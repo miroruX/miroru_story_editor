@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:miroru_story_editor/extensions/context_extension.dart';
-import 'package:miroru_story_editor/model/use_cases/theme/common/editor_theme_mode.dart';
+import 'package:miroru_story_editor/presentation/editor_scope.dart';
 
 class ColorListSelectorWidget extends HookWidget {
   const ColorListSelectorWidget({
@@ -51,28 +50,25 @@ class ColorListSelectorWidget extends HookWidget {
       initialLength: _accentColors.length,
     );
 
-    useEffect(
-      () {
-        // リスナー関数を変数に保持してcleanup時に削除できるようにする
-        void colorListener() {
-          onChangeColor(_colors[colorTabController.index]);
-        }
+    useEffect(() {
+      // リスナー関数を変数に保持してcleanup時に削除できるようにする
+      void colorListener() {
+        onChangeColor(_colors[colorTabController.index]);
+      }
 
-        void accentColorListener() {
-          onChangeColor(_accentColors[accentColorTabController.index]);
-        }
+      void accentColorListener() {
+        onChangeColor(_accentColors[accentColorTabController.index]);
+      }
 
-        colorTabController.addListener(colorListener);
-        accentColorTabController.addListener(accentColorListener);
+      colorTabController.addListener(colorListener);
+      accentColorTabController.addListener(accentColorListener);
 
-        // cleanup: ウィジェット破棄時にリスナーを削除
-        return () {
-          colorTabController.removeListener(colorListener);
-          accentColorTabController.removeListener(accentColorListener);
-        };
-      },
-      [],
-    );
+      // cleanup: ウィジェット破棄時にリスナーを削除
+      return () {
+        colorTabController.removeListener(colorListener);
+        accentColorTabController.removeListener(accentColorListener);
+      };
+    }, []);
 
     return SizedBox(
       height: 40,
@@ -119,25 +115,18 @@ class ColorListSelectorWidget extends HookWidget {
   }
 }
 
-class ColorCircle extends ConsumerWidget {
-  const ColorCircle({
-    super.key,
-    required this.color,
-    this.isSelected = false,
-  });
+class ColorCircle extends HookWidget {
+  const ColorCircle({super.key, required this.color, this.isSelected = false});
   final Color color;
   final bool isSelected;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final themeMode = ref.watch(editorThemeModeProvider);
+  Widget build(BuildContext context) {
+    final themeMode = useValueListenable(EditorScope.of(context).themeMode);
     return CircleAvatar(
       backgroundColor: themeMode == ThemeMode.dark ? Colors.white : Colors.grey,
       radius: 12,
-      child: CircleAvatar(
-        backgroundColor: color,
-        radius: 10,
-      ),
+      child: CircleAvatar(backgroundColor: color, radius: 10),
     );
   }
 }

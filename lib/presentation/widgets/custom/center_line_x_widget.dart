@@ -12,17 +12,13 @@ class CenterLineXWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomPaint(
       size: Size(strokeWidth, height),
-      painter: _CenterLinePainter(
-        strokeWidth: strokeWidth,
-      ),
+      painter: _CenterLinePainter(strokeWidth: strokeWidth),
     );
   }
 }
 
 class _CenterLinePainter extends CustomPainter {
-  const _CenterLinePainter({
-    required this.strokeWidth,
-  });
+  const _CenterLinePainter({required this.strokeWidth});
   final double strokeWidth;
   @override
   void paint(Canvas canvas, Size size) {

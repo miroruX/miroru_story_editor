@@ -7,8 +7,6 @@ part 'decoration_emoji.freezed.dart';
 abstract class DecorationEmoji
     with _$DecorationEmoji
     implements DecorationItem {
-  const factory DecorationEmoji({
-    String? emoji,
-  }) = _DecorationEmoji;
+  const factory DecorationEmoji({String? emoji}) = _DecorationEmoji;
   const DecorationEmoji._();
 }

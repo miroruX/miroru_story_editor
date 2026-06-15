@@ -1,6 +1,6 @@
 name: miroru_story_editor
 description: miroru story editor is designed in accordance with the Material Theme, offering ease of customization through its succinctly written code.
-version: 1.2.0
+version: 1.3.0
 homepage: https://www.miroru.com/
 repository: https://github.com/miroruX/miroru_story_editor
 
@@ -16,10 +16,6 @@ dependencies:
 
   # Icon
   font_awesome_flutter: ^11.0.0
-
-  # Riverpod
-  hooks_riverpod: ^3.1.0
-  riverpod_annotation: ^4.0.0
 
   # Hooks
   flutter_hooks: ^0.21.3+1
@@ -62,14 +58,11 @@ dev_dependencies:
     sdk: flutter
 
   # Static analysis
-  pedantic_mono: ^1.37.0
-  custom_lint:
-  riverpod_lint: ^3.1.0
+  flutter_lints: ^6.0.0
 
   # Code generator
   build_runner: ^2.15.0
   freezed: ^3.2.3
-  riverpod_generator: ^4.0.0
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 

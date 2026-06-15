@@ -1,30 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:miroru_story_editor/extensions/context_extension.dart';
 import 'package:miroru_story_editor/extensions/string_extension.dart';
 import 'package:miroru_story_editor/model/entities/decoration/decorations/text/decoration_text.dart';
 import 'package:miroru_story_editor/model/entities/decoration/render_item/render_item.dart';
-import 'package:miroru_story_editor/model/use_cases/decoration/decoration_palette_state.dart';
-import 'package:miroru_story_editor/model/use_cases/palette/editing_text_item_state.dart';
-import 'package:miroru_story_editor/model/use_cases/palette/palette_state.dart';
+import 'package:miroru_story_editor/presentation/editor_scope.dart';
 import 'package:miroru_story_editor/presentation/views/decoration/text/text_tool_header_view.dart';
 import 'package:miroru_story_editor/presentation/widgets/decoration/common/color_list_selector_widget.dart';
 import 'package:miroru_story_editor/presentation/widgets/decoration/text/font_list_selector_widget.dart';
 import 'package:miroru_story_editor/presentation/widgets/decoration/text/text_size_slider_widget.dart';
 import 'package:miroru_story_editor/util/vibration.dart';
 
-class TextEditingView extends HookConsumerWidget {
-  const TextEditingView({
-    super.key,
-    this.oldRenderItem,
-  });
+class TextEditingView extends HookWidget {
+  const TextEditingView({super.key, this.oldRenderItem});
 
   final RenderItem<DecorationText>? oldRenderItem;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final textItem = ref.watch(editingTextItemStateProvider);
+  Widget build(BuildContext context) {
+    final controller = EditorScope.of(context);
+    final textItem = useValueListenable(controller.editingTextItem);
 
     final isColorEditing = useState<bool>(false);
 
@@ -38,29 +33,17 @@ class TextEditingView extends HookConsumerWidget {
 
         final data = textItem.data;
         if (!(data.text?.isNotEmpty ?? false)) {
-          ref
-              .read(paletteStateProvider.notifier)
-              .changeEditingText(
-                false,
-              );
+          controller.changeEditingText(false);
 
           return;
         }
 
         if (textItem.uuid == null) {
-          ref
-              .read(decorationPaletteStateProvider.notifier)
-              .addRenderItem(
-                textItem,
-              );
+          controller.addRenderItem(textItem);
         } else {
-          ref
-              .read(decorationPaletteStateProvider.notifier)
-              .updateRenderItem(
-                textItem,
-              );
+          controller.updateRenderItem(textItem);
         }
-        ref.read(editingTextItemStateProvider.notifier).reset();
+        controller.resetEditingText();
       },
       child: Stack(
         children: [
@@ -74,15 +57,11 @@ class TextEditingView extends HookConsumerWidget {
               },
               changeTextAlign: () {
                 Vibration.call();
-                ref
-                    .read(editingTextItemStateProvider.notifier)
-                    .changeTextAlign();
+                controller.changeTextAlign();
               },
               changeFillColor: () {
                 Vibration.call();
-                ref
-                    .read(editingTextItemStateProvider.notifier)
-                    .changeFillColor();
+                controller.changeFillColor();
               },
             ),
           ),
@@ -92,9 +71,7 @@ class TextEditingView extends HookConsumerWidget {
               fontSize: decorationText.fontSize ?? 20,
               onChangeFontSize: (size) {
                 Vibration.call();
-                ref
-                    .read(editingTextItemStateProvider.notifier)
-                    .changeFontSize(size);
+                controller.changeFontSize(size);
               },
             ),
           ),
@@ -108,9 +85,7 @@ class TextEditingView extends HookConsumerWidget {
                       : TextDirection.rtl,
                   child: TextFormField(
                     autofocus: true,
-                    onChanged: ref
-                        .read(editingTextItemStateProvider.notifier)
-                        .changeText,
+                    onChanged: controller.changeText,
                     initialValue: decorationText.text,
                     decoration: InputDecoration(
                       hintText: 'Aa',
@@ -141,17 +116,13 @@ class TextEditingView extends HookConsumerWidget {
                       selectedColor: decorationText.colorCode.toColor,
                       onChangeColor: (color) {
                         Vibration.call();
-                        ref
-                            .read(editingTextItemStateProvider.notifier)
-                            .changeTextColor(color);
+                        controller.changeTextColor(color);
                       },
                     )
                   : FontListSelectorWidget(
                       onChangeFontName: (font) {
                         Vibration.call();
-                        ref
-                            .read(editingTextItemStateProvider.notifier)
-                            .changeFontFamily(font);
+                        controller.changeFontFamily(font);
                       },
                     ),
             ),

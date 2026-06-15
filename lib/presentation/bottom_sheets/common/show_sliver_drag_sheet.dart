@@ -14,9 +14,7 @@ Future<T?> showSliverDragSheet<T>(
     useRootNavigator: true,
     showDragHandle: true,
     shape: const RoundedRectangleBorder(
-      borderRadius: BorderRadius.vertical(
-        top: Radius.circular(16),
-      ),
+      borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
     ),
     builder: (context) {
       return DraggableScrollableSheet(

@@ -49,11 +49,9 @@ class _DebounceHookState<T> extends HookState<Debounce<T>, _DebounceHook<T>> {
 }
 
 class Debounce<T> {
-  Debounce({
-    required int debounceDelay,
-    required void Function(T) callback,
-  }) : _debounceDelay = debounceDelay,
-       _callback = callback;
+  Debounce({required int debounceDelay, required void Function(T) callback})
+    : _debounceDelay = debounceDelay,
+      _callback = callback;
 
   Timer? _timer;
   final int _debounceDelay;

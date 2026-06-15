@@ -1,23 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:miroru_story_editor/extensions/context_extension.dart';
-import 'package:miroru_story_editor/model/use_cases/palette/palette_state.dart';
-import 'package:miroru_story_editor/model/use_cases/share/export_image.dart';
-import 'package:miroru_story_editor/model/use_cases/theme/theme_data/footer_theme_data.dart';
+import 'package:miroru_story_editor/presentation/editor_scope.dart';
 import 'package:miroru_story_editor/util/vibration.dart';
 
-class FooterView extends ConsumerWidget {
-  const FooterView({
-    super.key,
-  });
+class FooterView extends HookWidget {
+  const FooterView({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final footerTheme = ref.watch(footerThemeDataProvider);
-    final isShowExportButton = ref.watch(
-      paletteStateProvider.select((value) => value.isShowExportButton),
-    );
+  Widget build(BuildContext context) {
+    final controller = EditorScope.of(context);
+    // themeMode が切り替わったらフッターテーマを再評価する
+    useValueListenable(controller.themeMode);
+    final footerTheme = controller.footerTheme;
+    final isShowExportButton = useValueListenable(
+      controller.palette,
+    ).isShowExportButton;
     return Theme(
       data: footerTheme,
       child: Row(
@@ -27,7 +26,10 @@ class FooterView extends ConsumerWidget {
             onPressed: isShowExportButton
                 ? () async {
                     await Vibration.call();
-                    final data = await ref.read(exportImageProvider.future);
+                    final data = await controller.exportImage();
+                    if (!context.mounted) {
+                      return;
+                    }
                     if (data == null) {
                       context.showSnackBar(context.l10n.export_failure);
                       return;

@@ -4,10 +4,7 @@ class ConeWidget extends StatelessWidget {
   const ConeWidget({super.key});
   @override
   Widget build(BuildContext context) {
-    return CustomPaint(
-      size: const Size(30, 200),
-      painter: _ConePainter(),
-    );
+    return CustomPaint(size: const Size(30, 200), painter: _ConePainter());
   }
 }
 

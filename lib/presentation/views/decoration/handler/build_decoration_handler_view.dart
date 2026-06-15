@@ -6,10 +6,7 @@ import 'package:miroru_story_editor/model/entities/decoration/decorations/text/d
 import 'package:miroru_story_editor/presentation/widgets/decoration/text/render_text_widget.dart';
 
 class BuildDecorationHandler extends StatelessWidget {
-  const BuildDecorationHandler({
-    super.key,
-    required this.item,
-  });
+  const BuildDecorationHandler({super.key, required this.item});
 
   final DecorationItem item;
 
@@ -19,10 +16,7 @@ class BuildDecorationHandler extends StatelessWidget {
       DecorationBackgroundImage() => const SizedBox(),
       DecorationEmoji(:final emoji) => Padding(
         padding: const EdgeInsets.all(25),
-        child: Text(
-          emoji ?? '',
-          style: const TextStyle(fontSize: 80),
-        ),
+        child: Text(emoji ?? '', style: const TextStyle(fontSize: 80)),
       ),
       final DecorationText text => RenderTextWidget(decorationText: text),
       _ => throw Exception('not found DecorationItem type.'),

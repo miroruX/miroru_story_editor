@@ -3,10 +3,7 @@ import 'package:miroru_story_editor/extensions/string_extension.dart';
 import 'package:miroru_story_editor/model/entities/decoration/decorations/text/decoration_text.dart';
 
 class RenderTextWidget extends StatelessWidget {
-  const RenderTextWidget({
-    super.key,
-    required this.decorationText,
-  });
+  const RenderTextWidget({super.key, required this.decorationText});
   final DecorationText decorationText;
 
   @override

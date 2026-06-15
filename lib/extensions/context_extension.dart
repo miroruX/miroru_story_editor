@@ -46,13 +46,8 @@ extension ContextExtension on BuildContext {
     Duration duration = const Duration(milliseconds: 1500),
     VoidCallback? onTap,
   }) {
-    ScaffoldMessenger.of(this).showSnackBar(
-      SnackBar(
-        content: Text(
-          text,
-        ),
-        duration: duration,
-      ),
-    );
+    ScaffoldMessenger.of(
+      this,
+    ).showSnackBar(SnackBar(content: Text(text), duration: duration));
   }
 }

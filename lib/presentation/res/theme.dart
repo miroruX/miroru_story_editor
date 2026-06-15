@@ -45,9 +45,7 @@ ThemeData getMiroruThemeLight() {
     popupMenuTheme: PopupMenuThemeData(
       color: lightColorScheme.primaryContainer,
       shadowColor: Colors.transparent,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       labelTextStyle: WidgetStatePropertyAll(
         TextStyle(
           color: lightColorScheme.onPrimaryContainer,
@@ -71,9 +69,7 @@ ThemeData getMiroruThemeLight() {
     bottomSheetTheme: BottomSheetThemeData(
       backgroundColor: lightColorScheme.surface,
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(16),
-        ),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
       ),
     ),
     sliderTheme: SliderThemeData(
@@ -82,12 +78,8 @@ ThemeData getMiroruThemeLight() {
       thumbColor: lightColorScheme.primary,
       overlayColor: lightColorScheme.primary.withValues(alpha: 0.5),
       trackHeight: 2,
-      thumbShape: const RoundSliderThumbShape(
-        enabledThumbRadius: 8,
-      ),
-      overlayShape: const RoundSliderOverlayShape(
-        overlayRadius: 16,
-      ),
+      thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 8),
+      overlayShape: const RoundSliderOverlayShape(overlayRadius: 16),
     ),
     iconButtonTheme: IconButtonThemeData(
       style: IconButton.styleFrom(
@@ -105,9 +97,7 @@ ThemeData getMiroruThemeLight() {
           fontWeight: FontWeight.bold,
           letterSpacing: 1.5,
         ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       ),
     ),
     textButtonTheme: TextButtonThemeData(
@@ -117,9 +107,7 @@ ThemeData getMiroruThemeLight() {
           fontWeight: FontWeight.bold,
           letterSpacing: 1.5,
         ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       ),
     ),
     inputDecorationTheme: const InputDecorationTheme(
@@ -149,10 +137,7 @@ ThemeData getMiroruThemeLight() {
 }
 
 ThemeData getMiroruThemeDark() {
-  final base = ThemeData.from(
-    useMaterial3: true,
-    colorScheme: darkColorScheme,
-  );
+  final base = ThemeData.from(useMaterial3: true, colorScheme: darkColorScheme);
 
   return base.copyWith(
     primaryColor: darkColorScheme.onSurface,
@@ -191,9 +176,7 @@ ThemeData getMiroruThemeDark() {
     popupMenuTheme: PopupMenuThemeData(
       color: darkColorScheme.surface,
       shadowColor: Colors.transparent,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       labelTextStyle: WidgetStatePropertyAll(
         TextStyle(
           color: darkColorScheme.onSurface,
@@ -220,12 +203,8 @@ ThemeData getMiroruThemeDark() {
       thumbColor: Colors.white,
       overlayColor: darkColorScheme.onSurface.withValues(alpha: 0.5),
       trackHeight: 2,
-      thumbShape: const RoundSliderThumbShape(
-        enabledThumbRadius: 8,
-      ),
-      overlayShape: const RoundSliderOverlayShape(
-        overlayRadius: 16,
-      ),
+      thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 8),
+      overlayShape: const RoundSliderOverlayShape(overlayRadius: 16),
     ),
     iconButtonTheme: IconButtonThemeData(
       style: IconButton.styleFrom(
@@ -243,9 +222,7 @@ ThemeData getMiroruThemeDark() {
           fontWeight: FontWeight.bold,
           letterSpacing: 1.5,
         ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       ),
     ),
     textButtonTheme: TextButtonThemeData(
@@ -255,9 +232,7 @@ ThemeData getMiroruThemeDark() {
           fontWeight: FontWeight.bold,
           letterSpacing: 1.5,
         ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       ),
     ),
     inputDecorationTheme: const InputDecorationTheme(

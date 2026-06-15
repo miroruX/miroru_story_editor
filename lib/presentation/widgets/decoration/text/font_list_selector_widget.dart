@@ -4,10 +4,7 @@ import 'package:miroru_story_editor/extensions/context_extension.dart';
 import 'package:miroru_story_editor/model/enums/font_type.dart';
 
 class FontListSelectorWidget extends HookWidget {
-  const FontListSelectorWidget({
-    super.key,
-    required this.onChangeFontName,
-  });
+  const FontListSelectorWidget({super.key, required this.onChangeFontName});
 
   final void Function(String fontName) onChangeFontName;
 
@@ -17,19 +14,16 @@ class FontListSelectorWidget extends HookWidget {
       initialLength: FontType.values.length,
     );
 
-    useEffect(
-      () {
-        void listener() {
-          onChangeFontName(FontType.values[tabController.index].name);
-        }
+    useEffect(() {
+      void listener() {
+        onChangeFontName(FontType.values[tabController.index].name);
+      }
 
-        tabController.addListener(listener);
-        return () {
-          tabController.removeListener(listener);
-        };
-      },
-      [],
-    );
+      tabController.addListener(listener);
+      return () {
+        tabController.removeListener(listener);
+      };
+    }, []);
 
     return SizedBox(
       height: 40,
@@ -38,14 +32,7 @@ class FontListSelectorWidget extends HookWidget {
         isScrollable: true,
         controller: tabController,
         tabs: FontType.values
-            .map(
-              (font) => Tab(
-                child: Text(
-                  'あア',
-                  style: font.fontStyle,
-                ),
-              ),
-            )
+            .map((font) => Tab(child: Text('あア', style: font.fontStyle)))
             .toList(),
       ),
     );

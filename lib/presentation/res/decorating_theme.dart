@@ -4,10 +4,7 @@ import 'package:miroru_story_editor/presentation/res/theme.dart';
 ThemeData getDecoratingThemeLight() {
   return getMiroruThemeLight().copyWith(
     iconButtonTheme: IconButtonThemeData(
-      style: IconButton.styleFrom(
-        elevation: 0,
-        foregroundColor: Colors.black,
-      ),
+      style: IconButton.styleFrom(elevation: 0, foregroundColor: Colors.black),
     ),
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
@@ -26,10 +23,7 @@ ThemeData getDecoratingThemeLight() {
 ThemeData getDecoratingThemeDark() {
   return getMiroruThemeDark().copyWith(
     iconButtonTheme: IconButtonThemeData(
-      style: IconButton.styleFrom(
-        elevation: 0,
-        foregroundColor: Colors.white,
-      ),
+      style: IconButton.styleFrom(elevation: 0, foregroundColor: Colors.white),
     ),
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(

@@ -1,34 +1,27 @@
 import 'package:animated_emoji/animated_emoji.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:miroru_story_editor/extensions/context_extension.dart';
 import 'package:miroru_story_editor/model/entities/decoration/decorations/emoji/decoration_emoji.dart';
 import 'package:miroru_story_editor/model/entities/decoration/render_item/render_item.dart';
 import 'package:miroru_story_editor/model/enums/menu_result_type.dart';
-import 'package:miroru_story_editor/model/use_cases/decoration/decoration_palette_state.dart';
 import 'package:miroru_story_editor/model/use_cases/image/save_image.dart';
-import 'package:miroru_story_editor/model/use_cases/palette/palette_state.dart';
-import 'package:miroru_story_editor/model/use_cases/share/export_image.dart';
 import 'package:miroru_story_editor/presentation/bottom_sheets/show_select_emoji_sheet.dart';
 import 'package:miroru_story_editor/presentation/custom_hooks/use_global_key.dart';
+import 'package:miroru_story_editor/presentation/editor_scope.dart';
 import 'package:miroru_story_editor/util/vibration.dart';
 
-class HeaderView extends HookConsumerWidget {
-  const HeaderView({
-    super.key,
-  });
+class HeaderView extends HookWidget {
+  const HeaderView({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
+    final controller = EditorScope.of(context);
     final iconButtonKey = useGlobalKey();
-    final canBack = ref.watch(
-      decorationPaletteStateProvider.select((value) => value.canBack),
-    );
-
-    final canNext = ref.watch(
-      decorationPaletteStateProvider.select((value) => value.canNext),
-    );
+    final decorationPalette = useValueListenable(controller.decorationPalette);
+    final canBack = decorationPalette.canBack;
+    final canNext = decorationPalette.canNext;
 
     return Row(
       children: [
@@ -37,106 +30,95 @@ class HeaderView extends HookConsumerWidget {
             Vibration.call();
             Navigator.of(context).pop();
           },
-          icon: const FaIcon(
-            FontAwesomeIcons.xmark,
-          ),
+          icon: const FaIcon(FontAwesomeIcons.xmark),
         ),
-        const SizedBox(
-          width: 12,
-        ),
+        const SizedBox(width: 12),
         IconButton(
           onPressed: canBack
               ? () {
                   Vibration.call();
-                  ref
-                      .read(decorationPaletteStateProvider.notifier)
-                      .backHistory();
+                  controller.backHistory();
                 }
               : null,
           // style: actionIconButton.style,
-          icon: const FaIcon(
-            FontAwesomeIcons.arrowLeft,
-          ),
+          icon: const FaIcon(FontAwesomeIcons.arrowLeft),
         ),
         IconButton(
           onPressed: canNext
               ? () {
                   Vibration.call();
-                  ref
-                      .read(decorationPaletteStateProvider.notifier)
-                      .nextHistory();
+                  controller.nextHistory();
                 }
               : null,
           // style: actionIconButton.style,
-          icon: const FaIcon(
-            FontAwesomeIcons.arrowRight,
-          ),
+          icon: const FaIcon(FontAwesomeIcons.arrowRight),
         ),
         const Spacer(),
         IconButton(
           onPressed: () async {
             await Vibration.call();
-            final emoji = await showSelectEmojiSheet(
-              context,
-            );
+            if (!context.mounted) {
+              return;
+            }
+            final emoji = await showSelectEmojiSheet(context);
 
             if (emoji == null) {
               return;
             }
 
-            ref
-                .read(decorationPaletteStateProvider.notifier)
-                .addRenderItem(
-                  RenderItem<DecorationEmoji>(
-                    transform: Matrix4.identity(),
-                    data: DecorationEmoji(
-                      emoji: emoji,
-                    ),
-                    uuid: null,
-                    order: 0,
-                  ),
-                );
+            controller.addRenderItem(
+              RenderItem<DecorationEmoji>(
+                transform: Matrix4.identity(),
+                data: DecorationEmoji(emoji: emoji),
+                uuid: null,
+                order: 0,
+              ),
+            );
           },
-          icon: const AnimatedEmoji(
-            AnimatedEmojis.smile,
-            size: 25,
-          ),
+          icon: const AnimatedEmoji(AnimatedEmojis.smile, size: 25),
         ),
         IconButton(
           onPressed: () {
             Vibration.call();
-            ref.read(paletteStateProvider.notifier).changeEditingText(true);
+            controller.changeEditingText(true);
           },
-          icon: const FaIcon(
-            FontAwesomeIcons.a,
-          ),
+          icon: const FaIcon(FontAwesomeIcons.a),
         ),
         IconButton(
           key: iconButtonKey,
           onPressed: () async {
             await Vibration.call();
+            if (!context.mounted) {
+              return;
+            }
             final res = await _showPopupMenu(context, iconButtonKey);
             try {
               if (res == MenuFeatureType.paint) {
-                ref.read(paletteStateProvider.notifier).changePainting(true);
+                controller.changePainting(true);
               } else if (res == MenuFeatureType.save) {
                 await Vibration.call();
-                final data = await ref.read(exportImageProvider.future);
+                final data = await controller.exportImage();
+                if (!context.mounted) {
+                  return;
+                }
                 if (data == null) {
                   context.showSnackBar(context.l10n.export_failure);
                   return;
                 }
                 // 端末に画像を保存
-                await ref.read(saveImageProvider(imageBytes: data).future);
+                await saveImage(data);
+                if (!context.mounted) {
+                  return;
+                }
                 context.showSnackBar(context.l10n.export_success);
               }
             } on Exception catch (e) {
-              context.showSnackBar(e.toString());
+              if (context.mounted) {
+                context.showSnackBar(e.toString());
+              }
             }
           },
-          icon: const FaIcon(
-            FontAwesomeIcons.ellipsis,
-          ),
+          icon: const FaIcon(FontAwesomeIcons.ellipsis),
         ),
       ],
     );
@@ -166,9 +148,7 @@ class HeaderView extends HookConsumerWidget {
           children: [
             Text(context.l10n.draw),
             const Spacer(),
-            const FaIcon(
-              FontAwesomeIcons.palette,
-            ),
+            const FaIcon(FontAwesomeIcons.palette),
           ],
         ),
       ),

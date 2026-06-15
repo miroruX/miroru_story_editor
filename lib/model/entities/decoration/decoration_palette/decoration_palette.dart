@@ -18,9 +18,8 @@ abstract class DecorationPalette with _$DecorationPalette {
     if (historyRenderItems.isEmpty) {
       throw Exception('backgroundImage is not found.');
     }
-    return List<RenderItem>.from(
-      historyRenderItems[currentHistoryIndex],
-    )..sort((a, b) => a.order.compareTo(b.order));
+    return List<RenderItem>.from(historyRenderItems[currentHistoryIndex])
+      ..sort((a, b) => a.order.compareTo(b.order));
   }
 
   /// 背景画像（存在しない場合はnull）

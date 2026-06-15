@@ -1,4 +1,1 @@
-enum MenuFeatureType {
-  paint,
-  save,
-}
+enum MenuFeatureType { paint, save }

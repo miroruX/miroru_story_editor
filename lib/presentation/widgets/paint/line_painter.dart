@@ -7,10 +7,7 @@ import 'package:perfect_freehand/perfect_freehand.dart';
 
 /// 完成した線専用のPainter（キャッシュ済みPathを使用）
 class CompletedStrokePainter extends CustomPainter {
-  CompletedStrokePainter({
-    required this.lines,
-    required this.cachedPaths,
-  });
+  CompletedStrokePainter({required this.lines, required this.cachedPaths});
 
   final List<PaintLine> lines;
   final List<ui.Path> cachedPaths;
@@ -59,9 +56,7 @@ class CompletedStrokePainter extends CustomPainter {
 
 /// 描画中の線専用のPainter（リアルタイム描画最適化）
 class ActiveStrokePainter extends CustomPainter {
-  ActiveStrokePainter({
-    required this.line,
-  });
+  ActiveStrokePainter({required this.line});
 
   final PaintLine? line;
 

@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:miroru_story_editor/extensions/context_extension.dart';
 import 'package:miroru_story_editor/model/entities/decoration/decorations/text/decoration_text.dart';
 import 'package:miroru_story_editor/model/entities/decoration/render_item/render_item.dart';
-import 'package:miroru_story_editor/model/use_cases/decoration/decoration_palette_state.dart';
-import 'package:miroru_story_editor/model/use_cases/palette/editing_text_item_state.dart';
-import 'package:miroru_story_editor/model/use_cases/palette/palette_state.dart';
-import 'package:miroru_story_editor/model/use_cases/theme/theme_data/decorating_theme_data.dart';
+import 'package:miroru_story_editor/presentation/editor_scope.dart';
 import 'package:miroru_story_editor/presentation/widgets/decoration/common/color_picker_icon.dart';
 
-class TextToolHeaderView extends HookConsumerWidget {
+class TextToolHeaderView extends HookWidget {
   const TextToolHeaderView({
     super.key,
     required this.renderItem,
@@ -25,8 +22,11 @@ class TextToolHeaderView extends HookConsumerWidget {
   final VoidCallback onColor;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final editingTheme = ref.watch(decoratingThemeDataProvider);
+  Widget build(BuildContext context) {
+    final controller = EditorScope.of(context);
+    // themeMode が切り替わったら装飾テーマを再評価する
+    useValueListenable(controller.themeMode);
+    final editingTheme = controller.decoratingTheme;
 
     final decorationText = renderItem.data;
     return Theme(
@@ -42,43 +42,26 @@ class TextToolHeaderView extends HookConsumerWidget {
                   : FontAwesomeIcons.alignRight,
             ),
           ),
-          IconButton(
-            onPressed: onColor,
-            icon: const ColorPickerIcon(),
-          ),
+          IconButton(onPressed: onColor, icon: const ColorPickerIcon()),
           IconButton(
             onPressed: changeFillColor,
-            icon: const FaIcon(
-              FontAwesomeIcons.fill,
-            ),
+            icon: const FaIcon(FontAwesomeIcons.fill),
           ),
           const Spacer(),
           TextButton(
             onPressed: () {
               final data = renderItem.data;
               if (!(data.text?.isNotEmpty ?? false)) {
-                ref
-                    .read(paletteStateProvider.notifier)
-                    .changeEditingText(
-                      false,
-                    );
+                controller.changeEditingText(false);
 
                 return;
               }
               if (renderItem.uuid == null) {
-                ref
-                    .read(decorationPaletteStateProvider.notifier)
-                    .addRenderItem(
-                      renderItem,
-                    );
+                controller.addRenderItem(renderItem);
               } else {
-                ref
-                    .read(decorationPaletteStateProvider.notifier)
-                    .updateRenderItem(
-                      renderItem,
-                    );
+                controller.updateRenderItem(renderItem);
               }
-              ref.read(editingTextItemStateProvider.notifier).reset();
+              controller.resetEditingText();
             },
             child: Text(context.l10n.save),
           ),

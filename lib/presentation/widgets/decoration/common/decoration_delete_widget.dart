@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class DecorationDeleteWidget extends StatelessWidget {
-  const DecorationDeleteWidget({
-    super.key,
-    required this.nearDeleteArea,
-  });
+  const DecorationDeleteWidget({super.key, required this.nearDeleteArea});
 
   final bool nearDeleteArea;
 
@@ -19,6 +16,7 @@ class DecorationDeleteWidget extends StatelessWidget {
       child: Container(
         width: 40,
         height: 40,
+        alignment: Alignment.center,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           color: Colors.transparent,

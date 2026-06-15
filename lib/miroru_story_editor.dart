@@ -2,11 +2,10 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:miroru_story_editor/l10n/l10n.dart';
 import 'package:miroru_story_editor/model/entities/theme/theme_data_dto.dart';
 import 'package:miroru_story_editor/model/enums/language_type.dart';
-import 'package:miroru_story_editor/model/use_cases/theme/common/theme_data_dto.dart';
+import 'package:miroru_story_editor/presentation/editor_scope.dart';
 import 'package:miroru_story_editor/presentation/pages/palette_page.dart';
 
 Future<Uint8List?> showMiroruStoryEditor(
@@ -19,17 +18,12 @@ Future<Uint8List?> showMiroruStoryEditor(
     MaterialPageRoute(
       fullscreenDialog: true,
       builder: (context) {
-        return ProviderScope(
-          overrides: [
-            if (themeDataDto != null)
-              themeDataDtoProvider.overrideWithValue(themeDataDto),
-          ],
+        return EditorScope(
+          themeDataDto: themeDataDto ?? ThemeDataDto(),
           child: Localizations(
             locale: Locale(languageType.name),
             delegates: L10n.localizationsDelegates,
-            child: PalettePage(
-              backgroundImageFile: imageFile,
-            ),
+            child: PalettePage(backgroundImageFile: imageFile),
           ),
         );
       },

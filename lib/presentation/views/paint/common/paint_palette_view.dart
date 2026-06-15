@@ -2,26 +2,22 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:miroru_story_editor/model/entities/paint/paint_line/paint_line.dart';
-import 'package:miroru_story_editor/model/use_cases/paint/paint_lines_state.dart';
-import 'package:miroru_story_editor/model/use_cases/paint/paint_palette_state.dart';
-import 'package:miroru_story_editor/model/use_cases/palette/palette_state.dart';
+import 'package:miroru_story_editor/presentation/editor_scope.dart';
 import 'package:miroru_story_editor/presentation/widgets/paint/line_painter.dart';
 import 'package:perfect_freehand/perfect_freehand.dart';
 
 // [参考]https://pub.dev/packages/perfect_freehand/example
-class PaintPaletteView extends HookConsumerWidget {
+class PaintPaletteView extends HookWidget {
   const PaintPaletteView({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final isPainting = ref.watch(
-      paletteStateProvider.select((value) => value.isPainting),
-    );
+  Widget build(BuildContext context) {
+    final controller = EditorScope.of(context);
+    final isPainting = useValueListenable(controller.palette).isPainting;
 
-    // 完成した線はRiverpodから直接取得
-    final paintedLines = ref.watch(paintLinesStateProvider);
+    // 完成した線はコントローラーから取得
+    final paintedLines = useValueListenable(controller.paintLines);
 
     // キャッシュ済みのPath（完成した線のみ）
     final cachedPaths = useMemoized(
@@ -33,13 +29,13 @@ class PaintPaletteView extends HookConsumerWidget {
     final paintingLine = useState<PaintLine?>(null);
 
     void onPointerDown(PointerDownEvent details) {
-      final paintPalette = ref.read(paintPaletteStateProvider);
+      final paintPalette = controller.paintPalette.value;
       final supportsPressure = details.kind == ui.PointerDeviceKind.stylus;
       final options = paintPalette.strokeOptions!.copyWith(
         simulatePressure: !supportsPressure,
       );
 
-      ref.read(paintPaletteStateProvider.notifier).changeStrokeOptions(options);
+      controller.changeStrokeOptions(options);
 
       final localPosition = details.localPosition;
       final point = PointVector(
@@ -79,7 +75,7 @@ class PaintPaletteView extends HookConsumerWidget {
       if (currentLine == null) {
         return;
       }
-      ref.read(paintLinesStateProvider.notifier).addLine(currentLine);
+      controller.addLine(currentLine);
       paintingLine.value = null;
     }
 

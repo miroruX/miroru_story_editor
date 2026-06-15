@@ -1,3 +1,15 @@
+## [1.3.0] - 2026-06-15
+
+### Changed
+
+- Removed Riverpod from the library's runtime dependencies. Internal state management was migrated to a dependency-free `EditorController` (`ChangeNotifier` / `ValueNotifier`) provided through an `EditorScope` (`InheritedWidget`). Consumers no longer inherit `hooks_riverpod` / `riverpod_annotation` or their version constraints — the public API (`showMiroruStoryEditor`) is unchanged.
+- Switched lint rules from `pedantic_mono` to the official `flutter_lints`. This also removes the Dart `^3.12.0` SDK requirement that `pedantic_mono` 1.37 imposed (the package targets `^3.10.0` again).
+- example: migrated the iOS project from CocoaPods to Swift Package Manager (all plugins are Swift Packages). Removed the `Podfile` / `Podfile.lock` and CocoaPods integration, fixing simulator launch on Apple Silicon / iOS 26 and removing the CocoaPods (`LANG` / UTF-8) requirement.
+
+### Removed
+
+- Runtime dependencies `hooks_riverpod`, `riverpod_annotation`, and dev dependencies `riverpod_generator`, `riverpod_lint`, `custom_lint`, `pedantic_mono`.
+
 ## [1.2.0] - 2026-06-15
 
 ### Changed

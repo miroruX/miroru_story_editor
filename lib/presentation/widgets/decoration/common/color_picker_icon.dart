@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:miroru_story_editor/model/use_cases/theme/common/editor_theme_mode.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:miroru_story_editor/presentation/editor_scope.dart';
 
-class ColorPickerIcon extends ConsumerWidget {
+class ColorPickerIcon extends HookWidget {
   const ColorPickerIcon({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final themeMode = ref.watch(editorThemeModeProvider);
+  Widget build(BuildContext context) {
+    final themeMode = useValueListenable(EditorScope.of(context).themeMode);
     return ClipOval(
       child: ColoredBox(
         color: themeMode == ThemeMode.dark ? Colors.white : Colors.black,
@@ -39,16 +39,7 @@ class RainbowCircleGradientPainter extends CustomPainter {
           Colors.purple,
           Colors.red,
         ],
-        stops: [
-          0.0,
-          0.17,
-          0.33,
-          0.47,
-          0.6,
-          0.73,
-          0.85,
-          1.0,
-        ],
+        stops: [0.0, 0.17, 0.33, 0.47, 0.6, 0.73, 0.85, 1.0],
       ).createShader(rect);
 
     // ここで円形または必要な形状を描画
