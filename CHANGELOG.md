@@ -1,3 +1,14 @@
+## [1.3.1] - 2026-07-07
+
+### Performance
+
+- Theme detection (`getThemeFromImage`) no longer decodes the background image and scans every pixel synchronously on the UI thread. It now runs in an isolate via `compute`, samples a 64px thumbnail instead of a half-size copy, and is only recomputed when the background image actually changes — previously it ran on every decoration move/add/delete/undo, freezing the UI for hundreds of milliseconds per operation with large photos.
+- Dragging a decoration no longer rebuilds the whole decoration layer on every pointer event. The moving item is tracked without triggering rebuilds; only the center-line / delete-area indicator flags (which change rarely) are widget state.
+- Decorations now follow the finger immediately while dragging. The implicit 50ms `AnimatedAlignPositioned` animation is skipped during an active drag, removing the constant 50ms lag behind the pointer.
+- Text editing no longer rebuilds every decoration item on each keystroke — items subscribe only to whether they are the item being edited.
+- Freehand drawing thins out pointer samples closer than 2px to the previous point, bounding `getStroke` recomputation cost on long strokes.
+- The undo history is now capped at 50 entries, preventing unbounded memory growth and increasingly expensive list copies during long editing sessions.
+
 ## [1.3.0] - 2026-06-15
 
 ### Changed

@@ -27,11 +27,15 @@ class DecorationWidget extends HookWidget {
     final isPainting = palette.isPainting;
     final isMovingItem = palette.isMovingItem;
 
-    final movingItem = useState<RenderItem?>(null);
+    // 移動中のアイテムはリビルドを伴わない参照として保持する。
+    // useStateにするとポインタイベントごとに全アイテムが再ビルドされてしまう。
+    final movingItem = useRef<RenderItem?>(null);
+
+    // 以下のフラグはしきい値をまたいだときだけ変化するので、
+    // useStateでもリビルド頻度は低い。
     final isMovingCenterX = useState(false);
     final isMovingCenterY = useState(false);
     final isNearDeleteArea = useState(false);
-    final pointer = useState<Offset?>(null);
 
     final debounce = useDebounce<VoidCallback>(
       debounceDelay: 50, // 100ms→50msに短縮（レスポンス向上）
@@ -43,55 +47,52 @@ class DecorationWidget extends HookWidget {
     final decorationAreaKey = useGlobalKey();
     final deleteIconKey = useGlobalKey();
 
-    // アイテムを動かしているときの処理
+    // 移動終了時にインジケーター類をリセットする
     useEffect(() {
       if (!isMovingItem) {
+        movingItem.value = null;
         isMovingCenterX.value = false;
         isMovingCenterY.value = false;
         isNearDeleteArea.value = false;
       }
-      final itemVector3 = movingItem.value?.transform.getTranslation();
-      if (itemVector3 != null && isMovingItem) {
-        isMovingCenterX.value = isMovingCenter(
-          transform: movingItem.value!.transform,
-          axis: Axis.horizontal,
-          threshold: 10,
-        );
-        isMovingCenterY.value = isMovingCenter(
-          transform: movingItem.value!.transform,
-          axis: Axis.vertical,
-          threshold: 10,
-        );
-
-        if (pointer.value == null) {
-          return null;
-        }
-
-        final pointerBox = Offset(pointer.value!.dx, pointer.value!.dy);
-
-        final deleteIconBox =
-            deleteIconKey.currentContext?.findRenderObject() as RenderBox?;
-
-        final deleteIconOffset = deleteIconBox?.localToGlobal(Offset.zero);
-
-        if (deleteIconBox == null || deleteIconOffset == null) {
-          return null;
-        }
-
-        final deleteIconArea = Rect.fromCenter(
-          center: deleteIconOffset,
-          width: deleteIconBox.size.width,
-          height: deleteIconBox.size.height,
-        );
-
-        isNearDeleteArea.value = isPointerNearDeleteArea(
-          pointerOffset: pointerBox,
-          deleteAreaOffset: deleteIconArea.center,
-          threshold: 50,
-        );
-      }
       return null;
-    }, [movingItem.value?.transform, isMovingItem]);
+    }, [isMovingItem]);
+
+    // ポインタ移動ごとに中心線・削除エリアの判定だけを更新する。
+    // useStateは値が変わったときのみ通知するため、リビルドは
+    // しきい値をまたいだフレームでしか発生しない。
+    void updateMovingIndicators(Offset pointerPosition, Matrix4 transform) {
+      isMovingCenterX.value = isMovingCenter(
+        transform: transform,
+        axis: Axis.horizontal,
+        threshold: 10,
+      );
+      isMovingCenterY.value = isMovingCenter(
+        transform: transform,
+        axis: Axis.vertical,
+        threshold: 10,
+      );
+
+      final deleteIconBox =
+          deleteIconKey.currentContext?.findRenderObject() as RenderBox?;
+      final deleteIconOffset = deleteIconBox?.localToGlobal(Offset.zero);
+
+      if (deleteIconBox == null || deleteIconOffset == null) {
+        return;
+      }
+
+      final deleteIconArea = Rect.fromCenter(
+        center: deleteIconOffset,
+        width: deleteIconBox.size.width,
+        height: deleteIconBox.size.height,
+      );
+
+      isNearDeleteArea.value = isPointerNearDeleteArea(
+        pointerOffset: pointerPosition,
+        deleteAreaOffset: deleteIconArea.center,
+        threshold: 50,
+      );
+    }
 
     return LayoutBuilder(
       builder: (ctx, constraints) {
@@ -105,12 +106,12 @@ class DecorationWidget extends HookWidget {
               children: [
                 /// 描画するアイテム
                 ...renderItems.map((e) {
-                  final isMovingItem = movingItem.value?.uuid == e.uuid;
+                  final isMovingThisItem = movingItem.value?.uuid == e.uuid;
 
                   return RenderItemWidget(
                     key: ValueKey(e.uuid),
                     item: e,
-                    deletePosition: isNearDeleteArea.value && isMovingItem,
+                    deletePosition: isNearDeleteArea.value && isMovingThisItem,
 
                     /// アイテムをタップしたときの処理
                     onPointerDown: (event) {
@@ -137,7 +138,6 @@ class DecorationWidget extends HookWidget {
                         // 単なる移動のとき
                         debounce.onChanged(() {
                           movingItem.value = null;
-                          pointer.value = null;
                           controller.moveRenderItem(
                             e.copyWith(transform: matrix),
                           );
@@ -147,8 +147,8 @@ class DecorationWidget extends HookWidget {
 
                     /// アイテムを動かしているときの処理
                     onPointerMove: (event, matrix) {
-                      pointer.value = event.position;
                       movingItem.value = e.copyWith(transform: matrix);
+                      updateMovingIndicators(event.position, matrix);
                     },
                   );
                 }),

@@ -107,12 +107,36 @@ class EditorController {
   /// 背景画像から導出されるテーマモード。背景画像が変わったときのみ更新される。
   ValueListenable<ThemeMode> get themeMode => _themeMode;
 
+  /// 最後にテーマ判定に使った背景画像のパス。
+  ///
+  /// [decorationPalette] はアイテムの移動・追加・削除のたびに更新されるが、
+  /// 輝度計算が必要なのは背景画像そのものが変わったときだけなので、
+  /// パスが同じ間は再計算をスキップする。
+  String? _themeSourcePath;
+
+  bool _disposed = false;
+
   void _recomputeThemeMode() {
     final backgroundImageFile =
         decorationPalette.value.backgroundImage?.data.backgroundImageFile;
-    _themeMode.value = backgroundImageFile == null
-        ? ThemeMode.dark
-        : getThemeFromImage(backgroundImageFile);
+    final path = backgroundImageFile?.path;
+    if (path == _themeSourcePath) {
+      return;
+    }
+    _themeSourcePath = path;
+
+    if (backgroundImageFile == null) {
+      _themeMode.value = ThemeMode.dark;
+      return;
+    }
+
+    getThemeFromImage(backgroundImageFile).then((mode) {
+      // 計算中に背景画像が差し替わっていたら結果を破棄する
+      if (_disposed || _themeSourcePath != path) {
+        return;
+      }
+      _themeMode.value = mode;
+    });
   }
 
   ThemeData get editorTheme => _themeMode.value == ThemeMode.dark
@@ -149,6 +173,21 @@ class EditorController {
 
   DecorationPalette get _decoration => decorationPalette.value;
 
+  /// 履歴の最大保持数。
+  ///
+  /// 履歴は操作のたびにリストのコピーを積み上げるため、無制限にすると
+  /// メモリ使用量とコピーコストが単調に増え続ける。
+  static const int _maxHistoryLength = 50;
+
+  List<List<RenderItem<DecorationItem>>> _capHistory(
+    List<List<RenderItem<DecorationItem>>> history,
+  ) {
+    if (history.length <= _maxHistoryLength) {
+      return history;
+    }
+    return history.sublist(0, _maxHistoryLength);
+  }
+
   void initHistoryRenderItem(
     List<List<RenderItem<DecorationItem>>> initHistoryRenderItem,
   ) {
@@ -161,13 +200,13 @@ class EditorController {
     final uuid = const Uuid().v4();
     final newRenderItem = renderItem.copyWith(uuid: uuid);
     decorationPalette.value = _decoration.copyWith(
-      historyRenderItems: [
+      historyRenderItems: _capHistory([
         [
           ..._decoration.historyRenderItems[_decoration.currentHistoryIndex],
           newRenderItem,
         ],
         ..._decoration.historyRenderItems,
-      ],
+      ]),
       currentHistoryIndex: 0,
     );
 
@@ -179,12 +218,12 @@ class EditorController {
     final currentItems =
         _decoration.historyRenderItems[_decoration.currentHistoryIndex];
     decorationPalette.value = _decoration.copyWith(
-      historyRenderItems: [
+      historyRenderItems: _capHistory([
         currentItems
             .map((item) => item.uuid == renderItem.uuid ? renderItem : item)
             .toList(),
         ..._decoration.historyRenderItems,
-      ],
+      ]),
       currentHistoryIndex: 0,
     );
 
@@ -207,20 +246,20 @@ class EditorController {
 
     if (_decoration.isShowingHistory) {
       decorationPalette.value = _decoration.copyWith(
-        historyRenderItems: [
+        historyRenderItems: _capHistory([
           updatedRenderItems,
           ..._decoration.historyRenderItems.sublist(
             _decoration.currentHistoryIndex,
           ),
-        ],
+        ]),
         currentHistoryIndex: 0,
       );
     } else {
       decorationPalette.value = _decoration.copyWith(
-        historyRenderItems: [
+        historyRenderItems: _capHistory([
           updatedRenderItems,
           ..._decoration.historyRenderItems,
-        ],
+        ]),
         currentHistoryIndex: 0,
       );
     }
@@ -237,20 +276,20 @@ class EditorController {
 
     if (_decoration.isShowingHistory) {
       decorationPalette.value = _decoration.copyWith(
-        historyRenderItems: [
+        historyRenderItems: _capHistory([
           updatedRenderItems,
           ..._decoration.historyRenderItems.sublist(
             _decoration.currentHistoryIndex,
           ),
-        ],
+        ]),
         currentHistoryIndex: 0,
       );
     } else {
       decorationPalette.value = _decoration.copyWith(
-        historyRenderItems: [
+        historyRenderItems: _capHistory([
           updatedRenderItems,
           ..._decoration.historyRenderItems,
-        ],
+        ]),
         currentHistoryIndex: 0,
       );
     }
@@ -261,10 +300,10 @@ class EditorController {
     final currentItems =
         _decoration.historyRenderItems[_decoration.currentHistoryIndex];
     decorationPalette.value = _decoration.copyWith(
-      historyRenderItems: [
+      historyRenderItems: _capHistory([
         currentItems.where((item) => item.uuid != renderItemId).toList(),
         ..._decoration.historyRenderItems,
-      ],
+      ]),
       currentHistoryIndex: 0,
     );
     changeMovingItem(false);
@@ -290,7 +329,7 @@ class EditorController {
     final currentItems =
         _decoration.historyRenderItems[_decoration.currentHistoryIndex];
     decorationPalette.value = _decoration.copyWith(
-      historyRenderItems: [
+      historyRenderItems: _capHistory([
         currentItems
             .map(
               (item) => item.uuid == uuid
@@ -299,7 +338,7 @@ class EditorController {
             )
             .toList(),
         ..._decoration.historyRenderItems,
-      ],
+      ]),
       currentHistoryIndex: 0,
     );
   }
@@ -420,6 +459,7 @@ class EditorController {
   }
 
   void dispose() {
+    _disposed = true;
     decorationPalette.removeListener(_recomputeThemeMode);
     palette.dispose();
     decorationPalette.dispose();
