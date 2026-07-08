@@ -11,6 +11,13 @@ import 'package:perfect_freehand/perfect_freehand.dart';
 class PaintPaletteView extends HookWidget {
   const PaintPaletteView({super.key});
 
+  /// 直前のポイントからこの距離（px）未満の移動は無視する。
+  ///
+  /// ポインタイベントはフレームより高頻度に発生するため、近接した
+  /// ポイントを間引くことで getStroke の計算量とリストコピーを抑える。
+  /// （比較は2乗距離で行う）
+  static const double _minPointDistanceSquared = 4; // 2px
+
   @override
   Widget build(BuildContext context) {
     final controller = EditorScope.of(context);
@@ -59,13 +66,21 @@ class PaintPaletteView extends HookWidget {
       }
       final supportsPressure = details.pressureMin < 1;
       final localPosition = details.localPosition;
+
+      // 直前のポイントとほぼ同じ位置ならスキップ
+      final lastPoint = currentLine.points.last;
+      final dx = localPosition.dx - lastPoint.x;
+      final dy = localPosition.dy - lastPoint.y;
+      if (dx * dx + dy * dy < _minPointDistanceSquared) {
+        return;
+      }
+
       final point = PointVector(
         localPosition.dx,
         localPosition.dy,
         supportsPressure ? details.pressure : null,
       );
 
-      // リストを新規作成せずに追加（パフォーマンス向上）
       final newPoints = List<PointVector>.from(currentLine.points)..add(point);
       paintingLine.value = currentLine.copyWith(points: newPoints);
     }

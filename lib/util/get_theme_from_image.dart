@@ -1,10 +1,15 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image/image.dart' as img;
 
-ThemeMode getThemeFromImage(File imageFile) {
-  final fileData = imageFile.readAsBytesSync();
+/// Isolateで実行する輝度計算処理。
+///
+/// 平均輝度の判定にはフル解像度は不要なため、64pxまで縮小してから
+/// ピクセルを走査する。
+ThemeMode _computeThemeFromImage(String filePath) {
+  final fileData = File(filePath).readAsBytesSync();
   final image = img.decodeImage(fileData);
 
   if (image == null) {
@@ -12,11 +17,7 @@ ThemeMode getThemeFromImage(File imageFile) {
   }
 
   // 画像を縮小
-  final resizedImage = img.copyResize(
-    image,
-    width: image.width ~/ 2,
-    height: image.height ~/ 2,
-  );
+  final resizedImage = img.copyResize(image, width: 64);
 
   var totalLuminance = 0.0;
 
@@ -34,4 +35,12 @@ ThemeMode getThemeFromImage(File imageFile) {
 
   // テーマモードを決定
   return averageLuminance > 0.5 ? ThemeMode.light : ThemeMode.dark;
+}
+
+/// 背景画像の平均輝度からテーマモードを判定する。
+///
+/// デコードとピクセル走査はUIスレッドをブロックしないよう
+/// [compute] でIsolate上で実行する。
+Future<ThemeMode> getThemeFromImage(File imageFile) {
+  return compute(_computeThemeFromImage, imageFile.path);
 }

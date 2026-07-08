@@ -28,11 +28,16 @@ class RenderItemWidget extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final matrixNotifier = useState<Matrix4>(item.transform);
+    final isDragging = useState(false);
 
-    final editingTextItem = useValueListenable(
-      EditorScope.of(context).editingTextItem,
+    // editingTextItem全体を購読すると、テキスト編集中の1文字入力ごとに
+    // 全アイテムが再ビルドされるため、自分が編集対象かどうかの
+    // bool にだけ反応するようにする。
+    final controller = EditorScope.of(context);
+    final isEditing = useListenableSelector(
+      controller.editingTextItem,
+      () => controller.editingTextItem.value.uuid == item.uuid,
     );
-    final isEditing = editingTextItem.uuid == item.uuid;
 
     useEffect(() {
       matrixNotifier.value = item.transform;
@@ -44,7 +49,11 @@ class RenderItemWidget extends HookWidget {
       duration: const Duration(milliseconds: 50),
       scale: isEditing ? 0 : 1,
       child: AnimatedAlignPositioned(
-        duration: const Duration(milliseconds: 50),
+        // ドラッグ中にアニメーションを挟むと指の動きに常に50ms遅れて
+        // 追従する「もっさり感」が出るため、ドラッグ中は即時反映する。
+        duration: isDragging.value
+            ? Duration.zero
+            : const Duration(milliseconds: 50),
         matrix4Transform: Matrix4Transform.from(
           matrixNotifier.value,
         ).scale(deletePosition ? 0.2 : 1),
@@ -53,8 +62,17 @@ class RenderItemWidget extends HookWidget {
             matrixNotifier.value = m;
           },
           child: Listener(
-            onPointerDown: onPointerDown,
-            onPointerUp: (event) => onPointerUp(event, matrixNotifier.value),
+            onPointerDown: (event) {
+              isDragging.value = true;
+              onPointerDown?.call(event);
+            },
+            onPointerUp: (event) {
+              isDragging.value = false;
+              onPointerUp(event, matrixNotifier.value);
+            },
+            onPointerCancel: (event) {
+              isDragging.value = false;
+            },
             onPointerMove: (event) =>
                 onPointerMove(event, matrixNotifier.value),
             child: BuildDecorationHandler(item: item.data),
