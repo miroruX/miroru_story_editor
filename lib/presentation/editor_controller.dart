@@ -91,7 +91,7 @@ class EditorController {
           data: DecorationText(
             fontFamily: FontType.notoSansJp.name,
             backgroundColorCode: Colors.black.hex,
-            fontSize: 34,
+            fontSize: 40,
             colorCode: Colors.white.hex,
             textAlign: TextAlign.left.name,
           ),
@@ -428,7 +428,7 @@ class EditorController {
       data: DecorationText(
         fontFamily: FontType.notoSansJp.name,
         backgroundColorCode: Colors.black.hex,
-        fontSize: 34,
+        fontSize: 40,
         colorCode: Colors.white.hex,
         textAlign: TextAlign.left.name,
       ),
