@@ -1,3 +1,9 @@
+## [1.3.2] - 2026-08-08
+
+### Changed
+
+- Raised the default text decoration font size from 34 to 40 for better readability, since story text is rasterized into the exported image at creation time and can no longer be resized afterward.
+
 ## [1.3.1] - 2026-07-07
 
 ### Performance
